@@ -1,0 +1,15 @@
+{
+    "presets": [
+        "env"
+    ],
+    "plugins": [
+        "transform-object-rest-spread",
+        [
+            "transform-runtime", 
+            {
+                "regenerator": true,
+                "moduleName": "babel-runtime"
+            }
+        ]
+    ]
+}
