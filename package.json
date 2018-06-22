@@ -1,16 +1,23 @@
 {
   "name": "vue-pswipe",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "a vue plugin for photoswipe",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-serve --config webpack.dev.config.js --open --port 8888",
     "build": "webpack --config webpack.build.config.js"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "vue",
+    "photoswipe"
+  ],
+  "author": "guoqichen",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuoQichen/vue-pswipe.git"
+  },
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
