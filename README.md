@@ -3,7 +3,7 @@ a Vue plugin for photoswipe
 
 ## install
 ```
-npm install v-pswipe
+npm install vue-pswipe
 ```
 
 ## usage
