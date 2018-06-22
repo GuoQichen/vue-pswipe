@@ -32,6 +32,7 @@ or you can use scoped-slot
 </Photoswipe>
 ```
 image property
+
 | property | type | explain |
 | --- | --- | --- |
 | src | string | image path, item of imageList |
