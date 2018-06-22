@@ -45,15 +45,18 @@ export default {
             imageListWithSize: []
         }
     },
-    async mounted() {
-        this.imageListWithSize = await Promise.all(
-            this.imageList.map(async image => {
-                const { w, h } = await getImageSize(image)
-                return {
-                    src: image,
-                    size: `${w}x${h}`
-                }
-            })
+    mounted() {
+        Promise.all(
+            this.imageList.map(image => 
+                getImageSize(image).then(
+                    ({ w, h }) => ({
+                        src: image,
+                        size: `${w}x${h}`
+                    })
+                )
+            )
+        ).then(results => 
+            this.imageListWithSize = results
         )
     },
 }

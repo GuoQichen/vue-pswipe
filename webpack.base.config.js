@@ -6,12 +6,12 @@ module.exports = {
         rules: [
             {
                 test: /\.vue$/,
-                loader: 'vue-loader',
+                use: 'vue-loader',
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader',
+                use: 'babel-loader',
             },
             {
                 test: /\.css$/,
@@ -30,7 +30,7 @@ module.exports = {
             },
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url-loader',
+                use: 'url-loader',
             },
         ],
     },
