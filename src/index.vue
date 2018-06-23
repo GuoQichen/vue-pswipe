@@ -1,17 +1,17 @@
 <template>
     <div class="photoswipe">
         <photoswipe>
-            <figure 
-                itemscope 
-                itemprop="associatedMedia" 
+            <figure
+                itemscope
+                itemprop="associatedMedia"
                 itemtype="http://schema.org/ImageObject"
 
                 v-for="(image, index) in imageListWithSize"
                 :key="index"
             >
-				<a 
-                    itemprop="contentUrl" 
-                    :href="image.src" 
+				<a
+                    itemprop="contentUrl"
+                    :href="image.src"
                     :data-size="image.size"
                 >
                     <slot :image="image">
@@ -27,37 +27,32 @@
 </template>
 <script>
 import photoswipe from './photoswipe.vue'
-import { getImageSize } from './utils.js'
+import { getImageSize } from './utils'
 
 export default {
     name: 'Photoswipe',
     components: {
-        photoswipe
+        photoswipe,
     },
     props: {
         imageList: {
             type: Array,
-            default: () => []
-        }
+            default: () => [],
+        },
     },
     data() {
         return {
-            imageListWithSize: []
+            imageListWithSize: [],
         }
     },
     mounted() {
-        Promise.all(
-            this.imageList.map(image => 
-                getImageSize(image).then(
-                    ({ w, h }) => ({
-                        src: image,
-                        size: `${w}x${h}`
-                    })
-                )
-            )
-        ).then(results => 
+        Promise.all(this.imageList.map(image =>
+            getImageSize(image).then(({ w, h }) => ({
+                src: image,
+                size: `${w}x${h}`,
+            })))).then((results) => {
             this.imageListWithSize = results
-        )
+        })
     },
 }
 </script>

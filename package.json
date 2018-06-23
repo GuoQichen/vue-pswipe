@@ -2,50 +2,38 @@
   "name": "vue-pswipe",
   "version": "0.2.0",
   "description": "a vue plugin for photoswipe",
-  "main": "index.js",
+  "main": "dist/Photoswipe.umd.min.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-serve --config webpack.dev.config.js --open --port 8888",
-    "build": "webpack --config webpack.build.config.js",
-    "analysis": "ANALYSIS=true webpack --config webpack.build.config.js"
+    "dev": "vue-cli-service serve ./example/main.js",
+    "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.js",
+    "report": "npm run build -- --report"
   },
   "keywords": [
     "vue",
     "photoswipe"
   ],
   "author": "guoqichen",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/GuoQichen/vue-pswipe.git"
   },
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.1",
-    "css-loader": "^0.28.11",
-    "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^13.0.0",
-    "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.8.0",
-    "html-webpack-plugin": "^3.2.0",
-    "less": "^3.0.4",
-    "less-loader": "^4.1.0",
-    "url-loader": "^1.0.1",
-    "vue-loader": "^15.2.4",
-    "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.12.0",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-command": "^0.2.1",
-    "webpack-merge": "^4.1.3",
-    "webpack-serve": "^1.0.4"
-  },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
     "photoswipe": "^4.1.2",
     "vue": "^2.5.16"
-  }
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.0-beta.15",
+    "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
+    "@vue/cli-service": "^3.0.0-beta.15",
+    "@vue/eslint-config-airbnb": "^3.0.0-rc.3",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }

@@ -75,8 +75,8 @@
 <script>
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
-import PhotoSwipe from 'photoswipe/dist/photoswipe.min.js'
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min.js'
+import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
+import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
 
 /* eslint-disable */
 export default {
