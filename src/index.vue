@@ -19,7 +19,7 @@ export default {
             h('imageItem', {
                 key: index,
                 props: {
-                    imagePath: image,
+                    imageItem: image,
                 },
                 scopedSlots: this.$scopedSlots,
             }),

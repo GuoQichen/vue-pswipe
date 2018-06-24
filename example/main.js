@@ -15,12 +15,20 @@ new Vue({
             ],
         }
     },
+    computed: {
+        imageItemList() {
+            return this.imageList.map(path => ({
+                src: path,
+                hello: 'world',
+            }))
+        },
+    },
     methods: {
-        getImageItemStyle(path) {
+        getImageItemStyle(image) {
             return {
                 width: '100px',
                 height: '100px',
-                backgroundImage: `url(${path})`,
+                backgroundImage: `url(${image.src})`,
                 backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
@@ -40,9 +48,9 @@ new Vue({
             </Photoswipe>
 
             <h2>use image-item class</h2>
-            <Photoswipe :imageList="imageList">
+            <Photoswipe :imageList="imageItemList">
                 <template slot-scope="{ image }">
-                    <div :style="getImageItemStyle(image.src)" class="image-item" />
+                    <div :style="getImageItemStyle(image)" class="image-item" />
                 </template>
             </Photoswipe>
         </div>

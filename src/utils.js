@@ -1,6 +1,13 @@
+import isString from 'lodash/isString'
+
+export const errorHanlde = (hint) => {
+    throw new Error(
+        `[vue-pswipe] ${hint}`,
+    )
+}
+
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable consistent-return */
-
 export const getImageSize = path => new Promise((resolve) => {
     const img = new Image()
     let timer
@@ -20,3 +27,8 @@ export const getImageSize = path => new Promise((resolve) => {
     }
     check()
 })
+
+export const getImagePath = imageItem =>
+    (isString(imageItem)
+        ? imageItem
+        : imageItem.src)

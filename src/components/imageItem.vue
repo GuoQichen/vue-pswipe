@@ -22,31 +22,52 @@
     </figure>
 </template>
 <script>
-import { getImageSize } from '../utils'
+import isPlainObject from 'lodash/isPlainObject'
+import isString from 'lodash/isString'
+
+import {
+    getImageSize,
+    getImagePath,
+} from '../utils'
 
 export default {
     name: 'ImageItem',
     props: {
-        imagePath: {
-            type: String,
-            required: true,
+        imageItem: {
+            validator(value) {
+                return isString(value) || (isPlainObject(value) && value.src)
+            },
         },
     },
     data() {
+        const path = getImagePath(this.imageItem)
         return {
             image: {
-                src: this.imagePath,
+                src: path,
                 size: '0x0',
             },
+            imagePath: path,
         }
     },
-    mounted() {
-        getImageSize(this.imagePath).then(({ w, h }) => {
-            this.image = {
-                src: this.imagePath,
-                size: `${w}x${h}`,
+    methods: {
+        handleGetSize({ w, h }) {
+            const size = `${w}x${h}`
+
+            if (isString(this.imageItem)) {
+                this.image = {
+                    src: this.imagePath,
+                    size,
+                }
+            } else {
+                this.image = {
+                    ...this.imageItem,
+                    size,
+                }
             }
-        })
+        },
+    },
+    created() {
+        getImageSize(this.imagePath).then(this.handleGetSize)
     },
 }
 </script>
