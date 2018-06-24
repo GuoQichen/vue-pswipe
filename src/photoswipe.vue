@@ -124,7 +124,8 @@ export default {
 
 						if(linkEl.children.length > 0) {
 							// <img> thumbnail element, retrieving thumbnail url
-							item.msrc = linkEl.children[0].getAttribute('src');
+							// TODO: get image-item or img instaed get a element, because a elment active problem
+							item.msrc = linkEl.getAttribute('href'); 
 						}
 
 						item.el = figureEl; // save link to element for getThumbBoundsFn

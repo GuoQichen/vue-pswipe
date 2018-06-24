@@ -10,12 +10,14 @@
                 :key="index"
             >
 				<a
+                    class="photoswipe__a"
                     itemprop="contentUrl"
                     :href="image.src"
                     :data-size="image.size"
                 >
                     <slot :image="image">
                         <img
+                            class="photoswipe__image"
                             :src="image.src"
                             alt="图片"
                         />
@@ -56,4 +58,16 @@ export default {
     },
 }
 </script>
+<style lang="less" scoped>
+.photoswipe {
+    &__a {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    &__image {
+        width: 100%;
+        vertical-align: middle;
+    }
+}
+</style>
 

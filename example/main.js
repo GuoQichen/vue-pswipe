@@ -29,6 +29,9 @@ new Vue({
     },
     template: `
         <div>
+            <h2>default </h2>
+            <Photoswipe :imageList="imageList" />
+
             <h2>use img element</h2>
             <Photoswipe :imageList="imageList">
                 <template slot-scope="{ image }">
@@ -39,7 +42,7 @@ new Vue({
             <h2>use image-item class</h2>
             <Photoswipe :imageList="imageList">
                 <template slot-scope="{ image }">
-                    <img :style="getImageItemStyle(image.src)" class="image-item" />
+                    <div :style="getImageItemStyle(image.src)" class="image-item" />
                 </template>
             </Photoswipe>
         </div>
