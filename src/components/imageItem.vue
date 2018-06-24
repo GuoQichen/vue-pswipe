@@ -35,7 +35,7 @@ export default {
     data() {
         return {
             image: {
-                src: '',
+                src: this.imagePath,
                 size: '0x0',
             },
         }
