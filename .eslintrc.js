@@ -9,8 +9,9 @@ module.exports = {
   ],
   rules: {
     indent: ['error', 4],
-    'no-tabs': 0,
     semi: ['error', 'never'],
+    'no-tabs': 0,
+    'function-paren-newline': 0,
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },

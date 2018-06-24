@@ -1,40 +1,12 @@
-<template>
-    <div class="photoswipe">
-        <photoswipe>
-            <figure
-                itemscope
-                itemprop="associatedMedia"
-                itemtype="http://schema.org/ImageObject"
-
-                v-for="(image, index) in imageListWithSize"
-                :key="index"
-            >
-				<a
-                    class="photoswipe__a"
-                    itemprop="contentUrl"
-                    :href="image.src"
-                    :data-size="image.size"
-                >
-                    <slot :image="image">
-                        <img
-                            class="photoswipe__image"
-                            :src="image.src"
-                            alt="图片"
-                        />
-                    </slot>
-				</a>
-			</figure>
-        </photoswipe>
-    </div>
-</template>
 <script>
-import photoswipe from './photoswipe.vue'
-import { getImageSize } from './utils'
+import photoswipe from './components/photoswipe.vue'
+import imageItem from './components/imageItem.vue'
 
 export default {
     name: 'Photoswipe',
     components: {
         photoswipe,
+        imageItem,
     },
     props: {
         imageList: {
@@ -42,32 +14,17 @@ export default {
             default: () => [],
         },
     },
-    data() {
-        return {
-            imageListWithSize: [],
-        }
-    },
-    mounted() {
-        Promise.all(this.imageList.map(image =>
-            getImageSize(image).then(({ w, h }) => ({
-                src: image,
-                size: `${w}x${h}`,
-            })))).then((results) => {
-            this.imageListWithSize = results
-        })
+    render(h) {
+        return h('photoswipe', {}, this.imageList.map((image, index) =>
+            h('imageItem', {
+                key: index,
+                props: {
+                    imagePath: image,
+                },
+                scopedSlots: this.$scopedSlots,
+            }),
+        ))
     },
 }
 </script>
-<style lang="less" scoped>
-.photoswipe {
-    &__a {
-        display: inline-block;
-        vertical-align: middle;
-    }
-    &__image {
-        width: 100%;
-        vertical-align: middle;
-    }
-}
-</style>
 

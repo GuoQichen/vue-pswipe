@@ -80,7 +80,7 @@ import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
 
 /* eslint-disable */
 export default {
-	name: 'photoswipe-origin',
+	name: 'PhotoswipeOrigin',
 	methods: {
 		openPswp() {
 			var initPhotoSwipeFromDOM = function(gallerySelector) {
