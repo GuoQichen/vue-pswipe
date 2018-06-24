@@ -117,6 +117,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "4qC0":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__("NykK"),
+    isArray = __webpack_require__("Z0cm"),
+    isObjectLike = __webpack_require__("ExA7");
+
+/** `Object#toString` result references. */
+var stringTag = '[object String]';
+
+/**
+ * Checks if `value` is classified as a `String` primitive or object.
+ *
+ * @static
+ * @since 0.1.0
+ * @memberOf _
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a string, else `false`.
+ * @example
+ *
+ * _.isString('abc');
+ * // => true
+ *
+ * _.isString(1);
+ * // => false
+ */
+function isString(value) {
+  return typeof value == 'string' ||
+    (!isArray(value) && isObjectLike(value) && baseGetTag(value) == stringTag);
+}
+
+module.exports = isString;
+
+
+/***/ }),
+
 /***/ "4qrl":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -141,10 +178,10 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjY0IiBoZWlnaHQ9Ijg4
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _imageItem_vue_vue_type_template_id_23ffe918_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("Sfn6");
+/* harmony import */ var _imageItem_vue_vue_type_template_id_2f688484_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("FQT7");
 /* harmony import */ var _imageItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4qrl");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _imageItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _imageItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _imageItem_vue_vue_type_style_index_0_id_23ffe918_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("s4yF");
+/* harmony import */ var _imageItem_vue_vue_type_style_index_0_id_2f688484_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("WFN3");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("KHd+");
 
 
@@ -156,16 +193,69 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"])(
   _imageItem_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  _imageItem_vue_vue_type_template_id_23ffe918_scoped_true__WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
-  _imageItem_vue_vue_type_template_id_23ffe918_scoped_true__WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
+  _imageItem_vue_vue_type_template_id_2f688484_scoped_true__WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
+  _imageItem_vue_vue_type_template_id_2f688484_scoped_true__WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
   false,
   null,
-  "23ffe918",
+  "2f688484",
   null
   
 )
 
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "AP2z":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("nmnc");
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+function getRawTag(value) {
+  var isOwn = hasOwnProperty.call(value, symToStringTag),
+      tag = value[symToStringTag];
+
+  try {
+    value[symToStringTag] = undefined;
+    var unmasked = true;
+  } catch (e) {}
+
+  var result = nativeObjectToString.call(value);
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag;
+    } else {
+      delete value[symToStringTag];
+    }
+  }
+  return result;
+}
+
+module.exports = getRawTag;
+
 
 /***/ }),
 
@@ -178,11 +268,22 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getImageSize = void 0;
+exports.getImagePath = exports.getImageSize = exports.errorHanlde = void 0;
 
+var _isString = _interopRequireDefault(__webpack_require__("4qC0"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var errorHanlde = function errorHanlde(hint) {
+  throw new Error("[vue-pswipe] ".concat(hint));
+};
 /* eslint-disable import/prefer-default-export */
 
 /* eslint-disable consistent-return */
+
+
+exports.errorHanlde = errorHanlde;
+
 var getImageSize = function getImageSize(path) {
   return new Promise(function (resolve) {
     var img = new Image();
@@ -209,6 +310,12 @@ var getImageSize = function getImageSize(path) {
 };
 
 exports.getImageSize = getImageSize;
+
+var getImagePath = function getImagePath(imageItem) {
+  return (0, _isString.default)(imageItem) ? imageItem : imageItem.src;
+};
+
+exports.getImagePath = getImagePath;
 
 /***/ }),
 
@@ -244,10 +351,63 @@ exports.push([module.i, "/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.
 
 /***/ }),
 
+/***/ "ExA7":
+/***/ (function(module, exports) {
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && typeof value == 'object';
+}
+
+module.exports = isObjectLike;
+
+
+/***/ }),
+
 /***/ "F400":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAABYCAQAAACjBqE3AAAB6klEQVR4Ae3bsWpUQRTG8YkkanwCa7GzVotsI/gEgk9h4Vu4ySLYmMYgbJrc3lrwZbJwC0FMt4j7F6Y4oIZrsXtgxvx/1c0ufEX4cnbmLCmSJEmSJEmSJEmSJP3XCBPvbJU+8doWmDFwyZpLBmYlNJebz0KwzykwsuSYJSNwykEJreV2BaBMaLIQZ2xYcFgqDlmw4ayE/FwL0dDk4Qh4W37DAjgqIT+3HRbigjH+iikVdxgZStgyN0Su2sXIeTwTT+esdpcbIlfNAuZ/TxresG4zV8kYWSZNiKUTokMMSWeIwTNEn4fK2TW3gRNgVkJLuVksROA9G+bEvoATNlBCa7nZXEwdxEZxzpKRKFh+bsv8LmPFmhX1OwfIz81jIRJQ5eeqG9B+riRJkiRJkiRJkiRJkiRJkiRJUkvA/8RQoEpKlJWINFkJ62AlrEP/mNBibnv2yz/A3t7Uq3LcpoxP8COjC1T5vxoAD5VdoEqdDrd5QuW1swtUSaueh3zkiuBiqgtA2OlkeMcP/uDqugsJdbjHF65VdPMKwS0+WQc/MgKvrIOHysB9vgPwk8+85hmPbnQdvHZyDMAFD7L3EOpgMcVdvnHFS0/vlatrXvCVx0U9gt3fxvnA0/hB4nmRJEmSJEmSJEmSJGmHfgFLaDPoMu5xWwAAAABJRU5ErkJggg=="
+
+/***/ }),
+
+/***/ "FQT7":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"c30763ac-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/imageItem.vue?vue&type=template&id=2f688484&scoped=true
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('figure',{attrs:{"itemscope":"","itemprop":"associatedMedia","itemtype":"http://schema.org/ImageObject"}},[_c('a',{staticClass:"photoswipe__a",attrs:{"itemprop":"contentUrl","href":_vm.image.src,"data-size":_vm.image.size}},[_vm._t("default",[_c('img',{staticClass:"photoswipe__image",attrs:{"itemprop":"thumbnail","src":_vm.image.src,"alt":"图片"}})],{image:_vm.image})],2)])}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/imageItem.vue?vue&type=template&id=2f688484&scoped=true
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+
 
 /***/ }),
 
@@ -360,61 +520,75 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _isPlainObject = _interopRequireDefault(__webpack_require__("YO3V"));
+
+var _isString = _interopRequireDefault(__webpack_require__("4qC0"));
+
 var _utils = __webpack_require__("Al62");
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _default = {
   name: 'ImageItem',
   props: {
-    imagePath: {
-      type: String,
-      required: true
+    imageItem: {
+      validator: function validator(value) {
+        return (0, _isString.default)(value) || (0, _isPlainObject.default)(value) && value.src;
+      }
     }
   },
   data: function data() {
+    var path = (0, _utils.getImagePath)(this.imageItem);
     return {
       image: {
-        src: this.imagePath,
+        src: path,
         size: '0x0'
-      }
+      },
+      imagePath: path
     };
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    (0, _utils.getImageSize)(this.imagePath).then(function (_ref) {
+  methods: {
+    handleGetSize: function handleGetSize(_ref) {
       var w = _ref.w,
           h = _ref.h;
-      _this.image = {
-        src: _this.imagePath,
-        size: "".concat(w, "x").concat(h)
-      };
-    });
+      var size = "".concat(w, "x").concat(h);
+
+      if ((0, _isString.default)(this.imageItem)) {
+        this.image = {
+          src: this.imagePath,
+          size: size
+        };
+      } else {
+        this.image = _objectSpread({}, this.imageItem, {
+          size: size
+        });
+      }
+    }
+  },
+  created: function created() {
+    (0, _utils.getImageSize)(this.imagePath).then(this.handleGetSize);
   }
 };
 exports.default = _default;
+
+/***/ }),
+
+/***/ "IhzH":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("I1BE")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".photoswipe__a[data-v-2f688484]{display:inline-block;vertical-align:middle}.photoswipe__image[data-v-2f688484]{width:100%;vertical-align:middle}", ""]);
+
+// exports
+
 
 /***/ }),
 
@@ -520,6 +694,64 @@ function normalizeComponent (
 
 /***/ }),
 
+/***/ "KfNM":
+/***/ (function(module, exports) {
+
+/** Used for built-in method references. */
+var objectProto = Object.prototype;
+
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+var nativeObjectToString = objectProto.toString;
+
+/**
+ * Converts `value` to a string using `Object.prototype.toString`.
+ *
+ * @private
+ * @param {*} value The value to convert.
+ * @returns {string} Returns the converted string.
+ */
+function objectToString(value) {
+  return nativeObjectToString.call(value);
+}
+
+module.exports = objectToString;
+
+
+/***/ }),
+
+/***/ "Kz5y":
+/***/ (function(module, exports, __webpack_require__) {
+
+var freeGlobal = __webpack_require__("WFqU");
+
+/** Detect free variable `self`. */
+var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || Function('return this')();
+
+module.exports = root;
+
+
+/***/ }),
+
+/***/ "LcsW":
+/***/ (function(module, exports, __webpack_require__) {
+
+var overArg = __webpack_require__("kekF");
+
+/** Built-in value references. */
+var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+module.exports = getPrototype;
+
+
+/***/ }),
+
 /***/ "Lwcx":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -544,6 +776,41 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__("SZ7m").default
 var update = add("21c2c836", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "NykK":
+/***/ (function(module, exports, __webpack_require__) {
+
+var Symbol = __webpack_require__("nmnc"),
+    getRawTag = __webpack_require__("AP2z"),
+    objectToString = __webpack_require__("KfNM");
+
+/** `Object#toString` result references. */
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+
+/** Built-in value references. */
+var symToStringTag = Symbol ? Symbol.toStringTag : undefined;
+
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+  return (symToStringTag && symToStringTag in Object(value))
+    ? getRawTag(value)
+    : objectToString(value);
+}
+
+module.exports = baseGetTag;
+
 
 /***/ }),
 
@@ -825,23 +1092,6 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ "Sfn6":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"c30763ac-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/imageItem.vue?vue&type=template&id=23ffe918&scoped=true
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('figure',{attrs:{"itemscope":"","itemprop":"associatedMedia","itemtype":"http://schema.org/ImageObject"}},[_c('a',{staticClass:"photoswipe__a",attrs:{"itemprop":"contentUrl","href":_vm.image.src,"data-size":_vm.image.size}},[_vm._t("default",[_c('img',{staticClass:"photoswipe__image",attrs:{"itemprop":"thumbnail","src":_vm.image.src,"alt":"图片"}})],{image:_vm.image})],2)])}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/imageItem.vue?vue&type=template&id=23ffe918&scoped=true
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-
-
-/***/ }),
-
 /***/ "UjYt":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -880,6 +1130,98 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "WFN3":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_2f688484_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("nqj4");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_2f688484_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_2f688484_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_2f688484_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "WFqU":
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(global) {/** Detect free variable `global` from Node.js. */
+var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+module.exports = freeGlobal;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__("yLpj")))
+
+/***/ }),
+
+/***/ "YO3V":
+/***/ (function(module, exports, __webpack_require__) {
+
+var baseGetTag = __webpack_require__("NykK"),
+    getPrototype = __webpack_require__("LcsW"),
+    isObjectLike = __webpack_require__("ExA7");
+
+/** `Object#toString` result references. */
+var objectTag = '[object Object]';
+
+/** Used for built-in method references. */
+var funcProto = Function.prototype,
+    objectProto = Object.prototype;
+
+/** Used to resolve the decompiled source of functions. */
+var funcToString = funcProto.toString;
+
+/** Used to check objects for own properties. */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
+/** Used to infer the `Object` constructor. */
+var objectCtorString = funcToString.call(Object);
+
+/**
+ * Checks if `value` is a plain object, that is, an object created by the
+ * `Object` constructor or one with a `[[Prototype]]` of `null`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.8.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ * }
+ *
+ * _.isPlainObject(new Foo);
+ * // => false
+ *
+ * _.isPlainObject([1, 2, 3]);
+ * // => false
+ *
+ * _.isPlainObject({ 'x': 0, 'y': 0 });
+ * // => true
+ *
+ * _.isPlainObject(Object.create(null));
+ * // => true
+ */
+function isPlainObject(value) {
+  if (!isObjectLike(value) || baseGetTag(value) != objectTag) {
+    return false;
+  }
+  var proto = getPrototype(value);
+  if (proto === null) {
+    return true;
+  }
+  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+  return typeof Ctor == 'function' && Ctor instanceof Ctor &&
+    funcToString.call(Ctor) == objectCtorString;
+}
+
+module.exports = isPlainObject;
+
+
+/***/ }),
+
 /***/ "YgTI":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -896,18 +1238,36 @@ exports.push([module.i, "/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photo
 
 /***/ }),
 
-/***/ "b6Wp":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "Z0cm":
+/***/ (function(module, exports) {
 
-// style-loader: Adds some css to the DOM by adding a <style> tag
+/**
+ * Checks if `value` is classified as an `Array` object.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @example
+ *
+ * _.isArray([1, 2, 3]);
+ * // => true
+ *
+ * _.isArray(document.body.children);
+ * // => false
+ *
+ * _.isArray('abc');
+ * // => false
+ *
+ * _.isArray(_.noop);
+ * // => false
+ */
+var isArray = Array.isArray;
 
-// load the styles
-var content = __webpack_require__("zCxF");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("SZ7m").default
-var update = add("4b5b1bb8", content, true, {"sourceMap":false,"shadowMode":false});
+module.exports = isArray;
+
 
 /***/ }),
 
@@ -1234,6 +1594,28 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "kekF":
+/***/ (function(module, exports) {
+
+/**
+ * Creates a unary function that invokes `func` with its argument transformed.
+ *
+ * @private
+ * @param {Function} func The function to wrap.
+ * @param {Function} transform The argument transform.
+ * @returns {Function} Returns the new function.
+ */
+function overArg(func, transform) {
+  return function(arg) {
+    return func(transform(arg));
+  };
+}
+
+module.exports = overArg;
+
+
+/***/ }),
+
 /***/ "luxp":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1295,6 +1677,34 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /***/ }),
 
+/***/ "nmnc":
+/***/ (function(module, exports, __webpack_require__) {
+
+var root = __webpack_require__("Kz5y");
+
+/** Built-in value references. */
+var Symbol = root.Symbol;
+
+module.exports = Symbol;
+
+
+/***/ }),
+
+/***/ "nqj4":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("IhzH");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("SZ7m").default
+var update = add("16096a12", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "q0M/":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1333,7 +1743,7 @@ var _default2 = {
       return h('imageItem', {
         key: index,
         props: {
-          imagePath: image
+          imageItem: image
         },
         scopedSlots: _this.$scopedSlots
       });
@@ -1341,17 +1751,6 @@ var _default2 = {
   }
 };
 exports.default = _default2;
-
-/***/ }),
-
-/***/ "s4yF":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_23ffe918_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("b6Wp");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_23ffe918_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_23ffe918_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_23ffe918_lang_less_scoped_true__WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -1392,17 +1791,29 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe
 
 /***/ }),
 
-/***/ "zCxF":
-/***/ (function(module, exports, __webpack_require__) {
+/***/ "yLpj":
+/***/ (function(module, exports) {
 
-exports = module.exports = __webpack_require__("I1BE")(false);
-// imports
+var g;
 
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
 
-// module
-exports.push([module.i, ".photoswipe__a[data-v-23ffe918]{display:inline-block;vertical-align:middle}.photoswipe__image[data-v-23ffe918]{width:100%;vertical-align:middle}", ""]);
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1, eval)("this");
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
 
-// exports
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ })
