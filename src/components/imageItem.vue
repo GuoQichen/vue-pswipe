@@ -28,6 +28,7 @@ import isString from 'lodash/isString'
 import {
     getImageSize,
     getImagePath,
+    getInitialImage,
 } from '../utils'
 
 export default {
@@ -41,33 +42,21 @@ export default {
     },
     data() {
         const path = getImagePath(this.imageItem)
+        const initialImage = getInitialImage(this.imageItem)
         return {
-            image: {
-                src: path,
-                size: '0x0',
-            },
+            image: initialImage,
             imagePath: path,
         }
     },
-    methods: {
-        handleGetSize({ w, h }) {
-            const size = `${w}x${h}`
-
-            if (isString(this.imageItem)) {
-                this.image = {
-                    src: this.imagePath,
-                    size,
-                }
-            } else {
-                this.image = {
-                    ...this.imageItem,
-                    size,
-                }
-            }
-        },
-    },
     created() {
-        getImageSize(this.imagePath).then(this.handleGetSize)
+        getImageSize(this.imagePath).then(
+            ({ w, h }) => {
+                this.image = {
+                    ...this.image,
+                    size: `${w}x${h}`,
+                }
+            },
+        )
     },
 }
 </script>
