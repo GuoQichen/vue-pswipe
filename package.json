@@ -1,6 +1,6 @@
 {
   "name": "vue-pswipe",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "a vue plugin for photoswipe",
   "main": "dist/Photoswipe.umd.min.js",
   "scripts": {
