@@ -135,6 +135,9 @@ export default {
 
 					var eTarget = e.target
 
+					// prevent uncessary click event be handle 
+					if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return
+
 					// find root element of slide
 					var clickedListItem = closest(eTarget, function(el) {
 						return el.classList.contains('image-wrapper')
