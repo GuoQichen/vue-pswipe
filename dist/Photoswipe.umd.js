@@ -192,23 +192,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "6thz":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"c30763ac-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=1792f1cc
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"my-gallery",attrs:{"data-type":"parent"}},[_vm._t("default")],2),_vm._m(0)])}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
-
-
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=1792f1cc
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
-
-
-/***/ }),
-
 /***/ "8wEU":
 /***/ (function(module, exports) {
 
@@ -1161,6 +1144,23 @@ module.exports = freeGlobal;
 
 /***/ }),
 
+/***/ "Y+ks":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"c30763ac-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=2c639279
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"my-gallery",attrs:{"data-type":"parent"}},[_vm._t("default")],2),_vm._m(0)])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
+
+
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=2c639279
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+
+
+/***/ }),
+
 /***/ "YO3V":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1435,7 +1435,6 @@ var _default = {
 
 
         var onThumbnailsClick = function onThumbnailsClick(e) {
-          e.preventDefault();
           var eTarget = e.target; // prevent uncessary click event be handle 
 
           if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return; // find root element of slide
@@ -1453,8 +1452,7 @@ var _default = {
           var clickedGallery = closest(clickedListItem.parentNode, function (el) {
             return el.dataset.type === 'parent';
           }),
-              // childNodes = clickedGallery.querySelectorAll('figure'),
-          childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
+              childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
               numChildNodes = childNodes.length,
               nodeIndex = 0,
               index;
@@ -1528,7 +1526,7 @@ var _default = {
             galleryUID: galleryElement.getAttribute('data-pswp-uid'),
             getThumbBoundsFn: function getThumbBoundsFn(index) {
               // See Options -> getThumbBoundsFn section of documentation for more info
-              var thumbnail = items[index].el.getElementsByTagName('img')[0] || items[index].el.getElementsByClassName('image-item')[0],
+              var thumbnail = items[index].el.querySelector('img') || items[index].el.querySelector('.image-item'),
                   // find thumbnail
               pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
                   rect = thumbnail.getBoundingClientRect();
@@ -1632,7 +1630,7 @@ module.exports = overArg;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _photoswipe_vue_vue_type_template_id_1792f1cc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6thz");
+/* harmony import */ var _photoswipe_vue_vue_type_template_id_2c639279__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("Y+ks");
 /* harmony import */ var _photoswipe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Lwcx");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _photoswipe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _photoswipe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("KHd+");
@@ -1645,8 +1643,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(
   _photoswipe_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"],
-  _photoswipe_vue_vue_type_template_id_1792f1cc__WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
-  _photoswipe_vue_vue_type_template_id_1792f1cc__WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
+  _photoswipe_vue_vue_type_template_id_2c639279__WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
+  _photoswipe_vue_vue_type_template_id_2c639279__WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
   false,
   null,
   null,
