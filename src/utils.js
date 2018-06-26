@@ -32,17 +32,3 @@ export const getImagePath = imageItem =>
     (isString(imageItem)
         ? imageItem
         : imageItem.src)
-
-export const getInitialImage = (imageItem) => {
-    const initialSize = '0x0'
-    if (isString(imageItem)) {
-        return {
-            src: imageItem,
-            size: initialSize,
-        }
-    }
-    return {
-        ...imageItem,
-        size: initialSize,
-    }
-}

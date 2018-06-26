@@ -13,17 +13,24 @@ export default {
             type: Array,
             default: () => [],
         },
+        options: Object, // original photoswipe
     },
     render(h) {
-        return h('photoswipe', {}, this.imageList.map((image, index) =>
+        return h('photoswipe', {
+            props: {
+                options: this.options,
+            },
+        }, this.imageList.map((item, index) =>
             h('imageItem', {
                 key: index,
                 props: {
-                    imageItem: image,
+                    item,
+                    index,
                 },
+                attrs: { ...this.$attrs }, // prevent only first imageItem get props
                 scopedSlots: this.$scopedSlots,
-            }),
-        ))
+            })).concat(this.$slots.default),
+        )
     },
 }
 </script>

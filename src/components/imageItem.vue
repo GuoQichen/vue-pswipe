@@ -1,25 +1,23 @@
 <template>
-     <figure
-        itemscope
-        itemprop="associatedMedia"
-        itemtype="http://schema.org/ImageObject"
+    <div
+        class="image-wrapper"
+        :class="{ inline }"
+        :data-src="src"
+        :data-size="size"
     >
-        <a
-            class="photoswipe__a"
-            itemprop="contentUrl"
-            :href="image.src"
-            :data-size="image.size"
+        <slot
+            :item="item"
+            :index="index"
+            :src="src"
+            :size="size"
         >
-            <slot :image="image">
-                <img
-                    class="photoswipe__image"
-                    itemprop="thumbnail"
-                    :src="image.src"
-                    alt="图片"
-                />
-            </slot>
-        </a>
-    </figure>
+            <img
+                class="photoswipe__image"
+                :src="src"
+                alt="图片"
+            />
+        </slot>
+    </div>
 </template>
 <script>
 import isPlainObject from 'lodash/isPlainObject'
@@ -28,44 +26,48 @@ import isString from 'lodash/isString'
 import {
     getImageSize,
     getImagePath,
-    getInitialImage,
 } from '../utils'
 
 export default {
     name: 'ImageItem',
     props: {
-        imageItem: {
+        item: {
             validator(value) {
                 return isString(value) || (isPlainObject(value) && value.src)
             },
         },
+        index: {
+            type: Number,
+            required: true,
+        },
+        inline: {
+            type: Boolean,
+            default: false,
+        },
     },
     data() {
-        const path = getImagePath(this.imageItem)
-        const initialImage = getInitialImage(this.imageItem)
+        const path = getImagePath(this.item)
         return {
-            image: initialImage,
-            imagePath: path,
+            src: path,
+            size: '0x0',
         }
     },
     created() {
-        getImageSize(this.imagePath).then(
+        getImageSize(this.src).then(
             ({ w, h }) => {
-                this.image = {
-                    ...this.image,
-                    size: `${w}x${h}`,
-                }
+                this.size = `${w}x${h}`
             },
         )
     },
 }
 </script>
 <style lang="less" scoped>
-.photoswipe {
-    &__a {
+.image-wrapper {
+    &.inline {
         display: inline-block;
-        vertical-align: middle;
     }
+}
+.photoswipe {
     &__image {
         width: 100%;
         vertical-align: middle;

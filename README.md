@@ -26,15 +26,17 @@ or you can use scoped-slot
 ```html
 <!-- component.vue -->
 <Photoswipe :imageList="imageList">
-    <template slot-scope="{ image }"> 
-        <img :src="image.src" />
+    <template slot-scope="{ src }"> 
+        <img :src="src" />
     </template>
 </Photoswipe>
 ```
-image property
+slot-scope property
 
 | property | type | explain |
 | --- | --- | --- |
+| item | string or object | origin item in imageList |
+| index | number | index of imageList item |
 | src | string | image path, item of imageList |
 | size | string | eg: 640x480, width x height |
 
@@ -42,13 +44,26 @@ or you can use other element than img, then you can set src as background-image
 ```html
 <!-- component.vue -->
 <Photoswipe :imageList="imageList">
-    <template slot-scope="{ image }"> 
-        <div class="image-item" :style="{ backgroundImage: `url(${image.src})` }" />
+    <template slot-scope="{ src }"> 
+        <div class="image-item" :style="{ backgroundImage: `url(${src})` }" />
     </template>
 </Photoswipe>
 ```
 
 **Caveat:** if you set src as background-image, then image-item class is necessary for correspond element
+
+## component api
+props
+
+| property | type | explain |
+| --- | --- | --- |
+| imageList | array | image item could be a path or object contain other field |
+| options | object | original photoswipe options |
+| inline | boolean | add `display: inline-block;` to image-wrapper, deafult: false |
+
+slots
+
+use scoped slot to define how image present, other slot will be append to image list
 
 ## example
 ```

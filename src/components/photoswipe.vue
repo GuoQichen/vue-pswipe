@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="my-gallery" itemscope itemtype="http://schema.org/ImageGallery" data-type="parent">
+		<div class="my-gallery" data-type="parent">
 			<slot></slot>
 		</div>
 
@@ -32,12 +32,6 @@
 						<div class="pswp__counter"></div>
 
 						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
-						<!-- <button class="pswp__button pswp__button--share" title="Share"></button> -->
-
-						<!-- <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button> -->
-
-						<!-- <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button> -->
 
 						<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
 						<!-- element will get class pswp__preloader--active when preloader is running -->
@@ -73,6 +67,7 @@
 </template>
 
 <script>
+import isPlainObject from 'lodash/isPlainObject'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
@@ -81,54 +76,48 @@ import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
 /* eslint-disable */
 export default {
 	name: 'PhotoswipeOrigin',
+	props: {
+		options: Object
+	},
 	methods: {
 		openPswp() {
+			const _this = this
 			var initPhotoSwipeFromDOM = function(gallerySelector) {
 
 				// parse slide data (url, title, size ...) from DOM elements
 				// (children of gallerySelector)
 				var parseThumbnailElements = function(el) {
-					var thumbElements = el.querySelectorAll('figure'),
+					var thumbElements = el.querySelectorAll('.image-wrapper'),
 						numNodes = thumbElements.length,
 						items = [],
-						figureEl,
-						linkEl,
+						wrapperEl,
 						size,
 						item;
 
 					for(var i = 0; i < numNodes; i++) {
 
-						figureEl = thumbElements[i]; // <figure> element
+						wrapperEl = thumbElements[i]; // image wrapper element
 
 						// include only element nodes
-						if(figureEl.nodeType !== 1) {
+						if(wrapperEl.nodeType !== 1) {
 							continue;
 						}
 
-						linkEl = figureEl.children[0]; // <a> element
-						size = linkEl.getAttribute('data-size').split('x');
+						size = wrapperEl.dataset.size.split('x');
 
 						// create slide object
 						item = {
-							src: linkEl.getAttribute('href'),
+							src: wrapperEl.dataset.src,
 							w: parseInt(size[0], 10),
 							h: parseInt(size[1], 10)
 						};
 
-
-
-						if(figureEl.children.length > 1) {
-							// <figcaption> content
-							item.title = figureEl.children[1].innerHTML;
-						}
-
-						if(linkEl.children.length > 0) {
+						if(wrapperEl.children.length > 0) {
 							// <img> thumbnail element, retrieving thumbnail url
-							// TODO: get image-item or img instaed get a element, because a elment active problem
-							item.msrc = linkEl.getAttribute('href'); 
+							item.msrc = wrapperEl.dataset.src; 
 						}
 
-						item.el = figureEl; // save link to element for getThumbBoundsFn
+						item.el = wrapperEl; // save link to element for getThumbBoundsFn
 						items.push(item);
 					}
 
@@ -142,14 +131,13 @@ export default {
 
 				// triggers when user clicks on thumbnail
 				var onThumbnailsClick = function(e) {
-					e = e || window.event;
-					e.preventDefault ? e.preventDefault() : e.returnValue = false;
+					e.preventDefault();
 
-					var eTarget = e.target || e.srcElement;
+					var eTarget = e.target
 
 					// find root element of slide
 					var clickedListItem = closest(eTarget, function(el) {
-						return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+						return el.classList.contains('image-wrapper')
 					});
 
 					if(!clickedListItem) {
@@ -161,7 +149,8 @@ export default {
 					var clickedGallery = closest(clickedListItem.parentNode, function (el) {
 						return el.dataset.type === 'parent'
 					}),
-						childNodes = clickedGallery.querySelectorAll('figure'),
+						// childNodes = clickedGallery.querySelectorAll('figure'),
+						childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
 						numChildNodes = childNodes.length,
 						nodeIndex = 0,
 						index;
@@ -223,8 +212,13 @@ export default {
 
 					items = parseThumbnailElements(galleryElement);
 
+					const isBgImg = items[0].el.querySelector('.image-item')
 					// define options (if needed)
 					options = {
+
+						// dont need history in spa, prevent uncessary bug
+						history: false,
+						showHideOpacity: isBgImg,
 
 						// define gallery index (for URL)
 						galleryUID: galleryElement.getAttribute('data-pswp-uid'),
@@ -236,8 +230,7 @@ export default {
 								rect = thumbnail.getBoundingClientRect();
 
 							return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
-						}
-
+						},
 					};
 
 					// PhotoSwipe opened from URL
@@ -266,6 +259,11 @@ export default {
 
 					if(disableAnimation) {
 						options.showAnimationDuration = 0;
+					}
+
+					// add custom options
+					if (isPlainObject(_this.options)) {
+						Object.assign(options, _this.options)
 					}
 
 					// Pass data to PhotoSwipe and initialize it
