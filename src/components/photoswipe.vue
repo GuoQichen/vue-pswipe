@@ -131,8 +131,6 @@ export default {
 
 				// triggers when user clicks on thumbnail
 				var onThumbnailsClick = function(e) {
-					e.preventDefault();
-
 					var eTarget = e.target
 
 					// prevent uncessary click event be handle 
@@ -152,7 +150,6 @@ export default {
 					var clickedGallery = closest(clickedListItem.parentNode, function (el) {
 						return el.dataset.type === 'parent'
 					}),
-						// childNodes = clickedGallery.querySelectorAll('figure'),
 						childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
 						numChildNodes = childNodes.length,
 						nodeIndex = 0,
@@ -169,8 +166,6 @@ export default {
 						}
 						nodeIndex++;
 					}
-
-
 
 					if(index >= 0) {
 						// open PhotoSwipe if valid index found
@@ -228,11 +223,11 @@ export default {
 
 						getThumbBoundsFn: function(index) {
 							// See Options -> getThumbBoundsFn section of documentation for more info
-							var thumbnail = items[index].el.getElementsByTagName('img')[0] || items[index].el.getElementsByClassName('image-item')[0], // find thumbnail
+							var thumbnail = items[index].el.querySelector('img') || items[index].el.querySelector('.image-item'), // find thumbnail
 								pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
 								rect = thumbnail.getBoundingClientRect();
 
-							return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+							return { x:rect.left, y:rect.top + pageYScroll, w:rect.width };
 						},
 					};
 
