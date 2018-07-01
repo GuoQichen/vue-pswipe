@@ -13,6 +13,14 @@ new Vue({
                 'https://placeimg.com/640/481/any',
                 'https://placeimg.com/640/482/any',
             ],
+            discontinueImageList: [
+                { type: 'text', content: 'message' },
+                { type: 'text', content: 'message' },
+                { type: 'image', src: 'https://placeimg.com/640/480/any' },
+                { type: 'text', content: 'message' },
+                { type: 'image', src: 'https://placeimg.com/640/480/any' },
+                { type: 'text', content: 'message' },
+            ],
         }
     },
     computed: {
@@ -55,6 +63,26 @@ new Vue({
                     {{ index + 1 }}. {{ size }}
                 </template>
                 <div>append</div>
+            </Photoswipe>
+
+            <h2>dicontinued image</h2>
+            <Photoswipe :imageList="discontinueImageList">
+                <template slot-scope="{ src, size, index, item }">
+                    <div 
+                        v-if="item.type === 'text'"
+                        class="text"
+                    >
+                        {{ item.content }}
+                    </div>
+                    <div
+                        v-else 
+                        class="image-item"
+                        :style="getImageItemStyle(src)" 
+                    />
+                    <div>
+                        {{ index }}
+                    </div>
+                </template>
             </Photoswipe>
         </div>
     `,

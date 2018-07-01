@@ -1,4 +1,5 @@
 <script>
+import { isObject, isFunction, flatMap } from './utils'
 import photoswipe from './components/photoswipe.vue'
 import imageItem from './components/imageItem.vue'
 
@@ -16,12 +17,12 @@ export default {
         options: Object, // original photoswipe
     },
     render(h) {
-        return h('photoswipe', {
-            props: {
-                options: this.options,
-            },
-        }, this.imageList.map((item, index) =>
-            h('imageItem', {
+        const list = flatMap(this.imageList, ((item, index) => {
+            if (isObject(item) && !item.src) {
+                return isFunction(this.$scopedSlots.default) &&
+                    this.$scopedSlots.default({ item, index })
+            }
+            return h('imageItem', {
                 key: index,
                 props: {
                     item,
@@ -29,8 +30,14 @@ export default {
                 },
                 attrs: { ...this.$attrs }, // prevent only first imageItem get props
                 scopedSlots: this.$scopedSlots,
-            })).concat(this.$slots.default),
-        )
+            })
+        }))
+
+        return h('photoswipe', {
+            props: {
+                options: this.options,
+            },
+        }, [...list].concat(this.$slots.default))
     },
 }
 </script>

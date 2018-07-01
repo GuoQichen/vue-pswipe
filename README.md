@@ -52,6 +52,9 @@ or you can use other element than img, then you can set src as background-image
 
 **Caveat:** if you set src as background-image, then image-item class is necessary for correspond element
 
+## discontinue image
+vue-pswipe will detect item.src, if item is object and item contain src field, then slots will be render as ImageItem component, otherwise slots will render directly. you could goto demo for detail
+
 ## component api
 props
 

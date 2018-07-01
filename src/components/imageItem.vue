@@ -20,10 +20,9 @@
     </div>
 </template>
 <script>
-import isPlainObject from 'lodash/isPlainObject'
-import isString from 'lodash/isString'
-
 import {
+    isString,
+    isObject,
     getImageSize,
     getImagePath,
 } from '../utils'
@@ -33,7 +32,7 @@ export default {
     props: {
         item: {
             validator(value) {
-                return isString(value) || (isPlainObject(value) && value.src)
+                return isString(value) || isObject(value)
             },
         },
         index: {

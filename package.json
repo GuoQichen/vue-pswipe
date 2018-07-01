@@ -19,7 +19,6 @@
     "url": "https://github.com/GuoQichen/vue-pswipe.git"
   },
   "dependencies": {
-    "lodash": "^4.17.10",
     "photoswipe": "^4.1.2",
     "vue": "^2.5.16"
   },

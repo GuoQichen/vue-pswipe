@@ -67,11 +67,11 @@
 </template>
 
 <script>
-import isPlainObject from 'lodash/isPlainObject'
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
+import { isObject } from '../utils'
 
 /* eslint-disable */
 export default {
@@ -260,7 +260,7 @@ export default {
 					}
 
 					// add custom options
-					if (isPlainObject(_this.options)) {
+					if (isObject(_this.options)) {
 						Object.assign(options, _this.options)
 					}
 
