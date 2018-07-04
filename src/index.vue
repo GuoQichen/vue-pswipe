@@ -37,8 +37,13 @@ export default {
             props: {
                 options: this.options,
             },
+            class: 'photoswipe',
         }, [...list].concat(this.$slots.default))
     },
 }
 </script>
-
+<style lang="less" scoped>
+.photoswipe {
+    width: 100%;
+}
+</style>

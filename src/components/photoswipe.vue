@@ -293,3 +293,8 @@ export default {
 	},
 }
 </script>
+<style lang="less" scoped>
+.my-gallery {
+	width: 100%;
+}
+</style>
