@@ -37,7 +37,6 @@ export default {
         },
         index: {
             type: Number,
-            required: true,
         },
         inline: {
             type: Boolean,

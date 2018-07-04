@@ -55,6 +55,9 @@ or you can use other element than img, then you can set src as background-image
 ## discontinue image
 vue-pswipe will detect item.src, if item is object and item contain src field, then slots will be render as ImageItem component, otherwise slots will render directly. you could goto demo for detail
 
+## customize render
+if you dont want vue-pswipe handle loop for you, you can customize render with PhotoswipeItem
+
 ## component api
 props
 

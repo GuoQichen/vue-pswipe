@@ -84,6 +84,26 @@ new Vue({
                     </div>
                 </template>
             </Photoswipe>
+
+            <h2>customize render</h2>
+            <Photoswipe>
+                hello customize render
+                <PhotoswipeItem :item="imageList[0]">
+                    <img 
+                        slot-scope="{ src }"
+                        :src="src"
+                        style="width: 100px"
+                    />
+                </PhotoswipeItem>
+                we can add anything i want, then render
+                <PhotoswipeItem :item="imageList[1]">
+                    <img 
+                        slot-scope="{ src }"
+                        :src="src"
+                        style="width: 100px"
+                    />
+                </PhotoswipeItem>
+            </Photoswipe>
         </div>
     `,
 })
