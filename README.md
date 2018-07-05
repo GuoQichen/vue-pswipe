@@ -1,6 +1,9 @@
 # vue-pswipe
 a Vue plugin for photoswipe
 
+## example online
+[![Edit Vue Template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/4rlvqk2o8w)
+
 ## install
 ```
 npm install vue-pswipe
@@ -57,6 +60,17 @@ vue-pswipe will detect item.src, if item is object and item contain src field, t
 
 ## customize render
 if you dont want vue-pswipe handle loop for you, you can customize render with PhotoswipeItem
+```html
+<Photoswipe>
+    <PhotoswipeItem :item="item">
+        <img
+            slot-scope="{ src }"
+            :src="src"
+        />
+    </PhotoswipeItem>
+</Photoswipe>
+```
+item can be string or object contain src property
 
 ## component api
 props
