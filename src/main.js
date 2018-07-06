@@ -1,9 +1,10 @@
-import PhotoSwipe from './index.vue'
+import getPhotoswipe from './photoswipe'
 import ImageItem from './components/imageItem.vue'
 
 export default {
-    install(Vue) {
-        Vue.component(PhotoSwipe.name, PhotoSwipe)
+    install(Vue, options) {
+        const Photoswipe = getPhotoswipe(options)
+        Vue.component(Photoswipe.name, Photoswipe)
         Vue.component('PhotoswipeItem', ImageItem)
     },
 }

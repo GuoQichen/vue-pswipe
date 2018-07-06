@@ -1,9 +1,8 @@
-<script>
 import { isObject, isFunction, flatMap } from './utils'
 import photoswipe from './components/photoswipe.vue'
 import imageItem from './components/imageItem.vue'
 
-export default {
+export default (options = {}) => ({
     name: 'Photoswipe',
     components: {
         photoswipe,
@@ -35,15 +34,9 @@ export default {
 
         return h('photoswipe', {
             props: {
-                options: this.options,
+                options: { ...options, ...this.options },
             },
             class: 'photoswipe',
         }, [...list].concat(this.$slots.default))
     },
-}
-</script>
-<style lang="less" scoped>
-.photoswipe {
-    width: 100%;
-}
-</style>
+})
