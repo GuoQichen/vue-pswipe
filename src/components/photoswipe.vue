@@ -24,15 +24,10 @@
 
 				<!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
 				<div class="pswp__ui pswp__ui--hidden">
-
 					<div class="pswp__top-bar">
-
 						<!--  Controls are self-explanatory. Order can be changed. -->
-
 						<div class="pswp__counter"></div>
-
 						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-
 						<!-- Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR -->
 						<!-- element will get class pswp__preloader--active when preloader is running -->
 						<div class="pswp__preloader">
@@ -57,11 +52,8 @@
 					<div class="pswp__caption">
 						<div class="pswp__caption__center"></div>
 					</div>
-
 				</div>
-
-				</div>
-
+			</div>
 		</div>
 	</div>
 </template>

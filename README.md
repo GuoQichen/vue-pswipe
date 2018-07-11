@@ -1,5 +1,5 @@
 # vue-pswipe
-a Vue plugin for photoswipe
+a Vue plugin for photoswipe without set image size
 
 ## example online
 [![Edit Vue Template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/4rlvqk2o8w)
