@@ -63,7 +63,27 @@
         <Photoswipe
             imageField="image"
             :imageList="imageListWithOtherField"
-        />
+        >
+            <div
+                slot-scope="{ src }"
+                :style="getImageItemStyle(src)"
+                class="image-item"
+            />
+        </Photoswipe>
+
+        <h2>set image field in customize render</h2>
+        <Photoswipe>
+            <PhotoswipeItem
+                imageField="image"
+                :item="customizeImageItemWithOtherField"
+            >
+                <img
+                    slot-scope="{ src }"
+                    :src="src"
+                    style="width: 100%;"
+                />
+            </PhotoswipeItem>
+        </Photoswipe>
     </div>
 </template>
 <script>
@@ -86,6 +106,11 @@ export default {
         }
     },
     computed: {
+        customizeImageItemWithOtherField() {
+            return {
+                image: this.imageList[0],
+            }
+        },
         imageListWithOtherField() {
             return this.imageList.map(path => ({
                 image: path,

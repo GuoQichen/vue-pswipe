@@ -17,12 +17,8 @@ import Photoswipe from 'vue-pswipe'
 import Vue from 'vue'
 
 Vue.use(Photoswipe, options)
-
-/**
- * complete options
- * http://photoswipe.com/documentation/options.html
- */
 ```
+[complete options](http://photoswipe.com/documentation/options.html)
 
 you can pass imageList directly, each item is image path
 ```html
