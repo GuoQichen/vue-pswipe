@@ -36,14 +36,7 @@ export const getImageSize = path => new Promise((resolve) => {
     check()
 })
 
-export const getImagePath = imageItem =>
+export const getImagePath = (imageItem, field = 'src') =>
     (isString(imageItem)
         ? imageItem
-        : imageItem.src)
-
-export const setImageField = (target, field) =>
-    Object.defineProperty(target, 'src', {
-        get() {
-            return this[field]
-        },
-    })
+        : imageItem[field])

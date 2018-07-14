@@ -25,7 +25,6 @@ import {
     isObject,
     getImageSize,
     getImagePath,
-    setImageField,
 } from '../utils'
 
 export default {
@@ -44,22 +43,11 @@ export default {
         },
     },
     data() {
-        const path = getImagePath(this.item)
+        const path = getImagePath(this.item, this.imageField)
         return {
             src: path,
             size: '0x0',
         }
-    },
-    methods: {
-        setImageFieldHanlder() {
-            if (
-                !isObject(this.item) ||
-                !this.$props.imageField
-            ) return
-
-            setImageField(this.item, this.imageField)
-            this.src = getImagePath(this.item)
-        },
     },
     created() {
         getImageSize(this.src).then(
@@ -67,12 +55,6 @@ export default {
                 this.size = `${w}x${h}`
             },
         )
-    },
-    watch: {
-        item: {
-            handler: 'setImageFieldHanlder',
-            immediate: true,
-        },
     },
 }
 </script>
