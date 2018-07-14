@@ -40,3 +40,10 @@ export const getImagePath = imageItem =>
     (isString(imageItem)
         ? imageItem
         : imageItem.src)
+
+export const setImageField = (target, field) =>
+    Object.defineProperty(target, 'src', {
+        get() {
+            return this[field]
+        },
+    })

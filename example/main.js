@@ -24,6 +24,11 @@ new Vue({
         }
     },
     computed: {
+        imageListWithOtherField() {
+            return this.imageList.map(path => ({
+                image: path,
+            }))
+        },
         imageItemList() {
             return this.imageList.map(path => ({
                 src: path,
@@ -43,7 +48,7 @@ new Vue({
             }
         },
     },
-    // FIXME: history options will be shared, because new Photoswipe is single instance
+    // FIXME: history options will be shared
     template: `
         <div>
             <h2>default </h2>
@@ -104,6 +109,12 @@ new Vue({
                     />
                 </PhotoswipeItem>
             </Photoswipe>
+
+            <h2>set image field instead src</h2>
+            <Photoswipe 
+                imageField="image"
+                :imageList="imageListWithOtherField"
+            />
         </div>
     `,
 })

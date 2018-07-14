@@ -1,4 +1,9 @@
-import { isObject, isFunction, flatMap } from './utils'
+import {
+    isObject,
+    isFunction,
+    flatMap,
+    setImageField,
+} from './utils'
 import photoswipe from './components/photoswipe.vue'
 import imageItem from './components/imageItem.vue'
 
@@ -9,11 +14,25 @@ export default (options = {}) => ({
         imageItem,
     },
     props: {
+        imageField: String,
         imageList: {
             type: Array,
             default: () => [],
         },
         options: Object, // original photoswipe
+    },
+    methods: {
+        setImageFieldBatch() {
+            if (
+                !Array.isArray(this.imageList) ||
+                !this.$props.imageField
+            ) return
+
+            this.imageList.forEach((item) => {
+                if (!isObject(item)) return
+                setImageField(item, this.imageField)
+            })
+        },
     },
     render(h) {
         const list = flatMap(this.imageList, ((item, index) => {
@@ -38,5 +57,11 @@ export default (options = {}) => ({
             },
             class: 'photoswipe',
         }, [...list].concat(this.$slots.default))
+    },
+    watch: {
+        imageList: {
+            handler: 'setImageFieldBatch',
+            immediate: true,
+        },
     },
 })
