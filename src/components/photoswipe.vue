@@ -63,11 +63,11 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
-import { isObject } from '../utils'
+import { isObject, setOptions } from '../utils'
 
 /* eslint-disable */
 export default {
-	name: 'PhotoswipeOrigin',
+	name: 'PhotoswipeWrapper',
 	props: {
 		options: Object
 	},
@@ -202,11 +202,11 @@ export default {
 
 					items = parseThumbnailElements(galleryElement);
 
-					const isBgImg = items[0].el.querySelector('.image-item')
+					const isBgImg = items[index].el.querySelector('.image-item')
 					// define options (if needed)
 					options = {
 
-						// dont need history in spa, prevent uncessary bug
+						// dont need history in spa, prevent unnecessary bug
 						history: false,
 						showHideOpacity: isBgImg,
 
@@ -252,9 +252,8 @@ export default {
 					}
 
 					// add custom options
-					if (isObject(_this.options)) {
-						Object.assign(options, _this.options)
-					}
+					setOptions(options, _this.globalOptions)
+					setOptions(options, _this.options)
 
 					// Pass data to PhotoSwipe and initialize it
 					gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);

@@ -1,16 +1,10 @@
 <template>
     <div
         class="image-wrapper"
-        :class="{ inline }"
         :data-src="src"
         :data-size="size"
     >
-        <slot
-            :item="item"
-            :index="index"
-            :src="src"
-            :size="size"
-        >
+        <slot>
             <img
                 class="photoswipe__image"
                 :src="src"
@@ -20,32 +14,18 @@
     </div>
 </template>
 <script>
-import {
-    isString,
-    isObject,
-    getImageSize,
-    getImagePath,
-} from '../utils'
+import { getImageSize } from '../utils'
 
 export default {
-    name: 'ImageItem',
+    name: 'PhotoswipeItem',
     props: {
-        item: {
-            validator(value) {
-                return isString(value) || isObject(value)
-            },
-        },
-        index: Number,
-        imageField: String,
-        inline: {
-            type: Boolean,
-            default: false,
+        src: {
+            type: String,
+            required: true,
         },
     },
     data() {
-        const path = getImagePath(this.item, this.imageField)
         return {
-            src: path,
             size: '0x0',
         }
     },
@@ -59,16 +39,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-.image-wrapper {
-    &.inline {
-        display: inline-block;
-    }
-}
-.photoswipe {
-    &__image {
-        width: 100%;
-        vertical-align: middle;
-    }
+.photoswipe__image {
+    width: 100%;
+    vertical-align: bottom;
 }
 </style>
 
