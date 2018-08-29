@@ -42,3 +42,26 @@ export const findIndex = (array, fn) => {
     })
     return index
 }
+
+/**
+ * parse picture index and gallery index from URL (#&pid=1&gid=2)
+ */
+export const parseHash = () => {
+    const hash = window.location.hash.substring(1)
+    const params = {}
+
+    if (hash.length < 5) return params
+
+    hash.split('&').reduce((acc, cur) => {
+        if (!cur) return acc
+        const pair = cur.split('=')
+        if (pair.length < 2) return acc
+        const [key, value] = pair
+        acc[key] = value
+        return acc
+    }, params)
+
+    if (params.gid) params.gid = parseInt(params.gid, 10)
+
+    return params
+}

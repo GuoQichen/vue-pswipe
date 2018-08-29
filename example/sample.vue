@@ -1,31 +1,34 @@
 <template>
-    <Photoswipe>
-        <PhotoswipeItem
-            v-for="(src, index) in imageList"
-            :key="index"
-            :src="src"
-            style="width: 200px;"
-        />
-
-        <PhotoswipeItem
-            v-for="(src, index) in imageList"
-            :key="index+imageList.length"
-            :src="src"
-        >
-            <div
-                class="image-item"
-                :style="getImageItemStyle(src)"
+    <div>
+        <Photoswipe>
+            <PhotoswipeItem
+                v-for="(src, index) in imageList"
+                :key="index"
+                :src="src"
+                style="width: 200px;"
             />
-        </PhotoswipeItem>
 
-        <img
-            v-for="(src, index) in imageList"
-            :src="src"
-            class="photoswipe-item"
-            :key="`i-${index}`"
-            style="width: 200px;"
-        />
-    </Photoswipe>
+            <PhotoswipeItem
+                v-for="(src, index) in imageList"
+                :key="index+imageList.length"
+                :src="src"
+            >
+                <div
+                    class="image-item"
+                    :style="getImageItemStyle(src)"
+                />
+            </PhotoswipeItem>
+        </Photoswipe>
+
+        <Photoswipe auto>
+            <img
+                v-for="(src, index) in imageList"
+                :src="src"
+                :key="`i-${index}`"
+                style="width: 200px;"
+            />
+        </Photoswipe>
+    </div>
 </template>
 <script>
 export default {
