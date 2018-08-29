@@ -31,3 +31,14 @@ export const setOptions = (origin, addition) => {
     if (!isObject(addition)) return
     Object.assign(origin, addition)
 }
+
+
+export const findIndex = (array, fn) => {
+    let index = -1
+    array.some((item, idx) => {
+        const result = fn(item, idx)
+        if (result) index = idx
+        return result
+    })
+    return index
+}

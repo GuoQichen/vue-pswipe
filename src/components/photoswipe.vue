@@ -62,225 +62,142 @@
 import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
-import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default.min'
-import { isObject, setOptions } from '../utils'
+import defaultUI from 'photoswipe/dist/photoswipe-ui-default.min'
+import { setOptions, findIndex } from '../utils'
 
-/* eslint-disable */
 export default {
-	name: 'PhotoswipeWrapper',
-	props: {
-		options: Object
-	},
-	methods: {
-		openPswp() {
-			const _this = this
-			var initPhotoSwipeFromDOM = function(gallerySelector) {
+    name: 'PhotoswipeWrapper',
+    props: {
+        options: Object,
+    },
+    methods: {
+        // find nearest parent element
+        closest(el, fn) {
+            return el && (fn(el) ? el : this.closest(el.parentNode, fn))
+        },
+        // parse slide data (url, title, size ...) from DOM elements
+        parseThumbnailElements(el) {
+            const thumbElements = [...el.querySelectorAll('.image-wrapper')]
 
-				// parse slide data (url, title, size ...) from DOM elements
-				// (children of gallerySelector)
-				var parseThumbnailElements = function(el) {
-					var thumbElements = el.querySelectorAll('.image-wrapper'),
-						numNodes = thumbElements.length,
-						items = [],
-						wrapperEl,
-						size,
-						item;
+            return thumbElements.map((wrapperEl) => {
+                const { src } = wrapperEl.dataset
+                const size = wrapperEl.dataset.size.split('x')
+                return {
+                    src,
+                    msrc: src,
+                    el: wrapperEl,
+                    w: parseInt(size[0], 10),
+                    h: parseInt(size[1], 10),
+                }
+            })
+        },
+        // triggers when user clicks on thumbnail
+        onThumbnailsClick(e) {
+            const eTarget = e.target
 
-					for(var i = 0; i < numNodes; i++) {
+            // prevent uncessary click event be handle
+            if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return
 
-						wrapperEl = thumbElements[i]; // image wrapper element
+            // find root element of slide
+            const clickedListItem = this.closest(eTarget, el => el.classList.contains('image-wrapper'))
+            if (!clickedListItem) return
 
-						// include only element nodes
-						if(wrapperEl.nodeType !== 1) {
-							continue;
-						}
+            // find index of clicked item by looping through all child nodes
+            const clickedGallery = this.closest(clickedListItem.parentNode, el => el.dataset.type === 'parent')
+            const childNodes = [...clickedGallery.querySelectorAll('.image-wrapper')]
+            const index = findIndex(childNodes, child => child === clickedListItem)
 
-						size = wrapperEl.dataset.size.split('x');
+            // open PhotoSwipe if valid index found
+            if (index >= 0) this.openPhotoSwipe(index, clickedGallery)
+        },
+        // parse picture index and gallery index from URL (#&pid=1&gid=2)
+        photoswipeParseHash() {
+            const hash = window.location.hash.substring(1)
+            const params = {}
 
-						// create slide object
-						item = {
-							src: wrapperEl.dataset.src,
-							w: parseInt(size[0], 10),
-							h: parseInt(size[1], 10)
-						};
+            if (hash.length < 5) return params
 
-						if(wrapperEl.children.length > 0) {
-							// <img> thumbnail element, retrieving thumbnail url
-							item.msrc = wrapperEl.dataset.src; 
-						}
+            hash.split('&').reduce((acc, cur) => {
+                if (!cur) return acc
+                const pair = cur.split('=')
+                if (pair.length < 2) return acc
+                const [key, value] = pair
+                acc[key] = value
+                return acc
+            }, params)
 
-						item.el = wrapperEl; // save link to element for getThumbBoundsFn
-						items.push(item);
-					}
+            if (params.gid) params.gid = parseInt(params.gid, 10)
 
-					return items;
-				};
+            return params
+        },
+        getThumbBoundsFn: parsedThumbItems => (index) => {
+            const thumbEl = parsedThumbItems[index].el
+            // See Options -> getThumbBoundsFn section of documentation for more info
+            const thumbnail = thumbEl.querySelector('img') || thumbEl.querySelector('.image-item')
+            const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
+            const rect = thumbnail.getBoundingClientRect()
 
-				// find nearest parent element
-				var closest = function closest(el, fn) {
-					return el && ( fn(el) ? el : closest(el.parentNode, fn) );
-				};
+            return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
+        },
+        parseIndex(index, items, fromURL, options) {
+            // PhotoSwipe opened from URL
+            /* eslint-disable no-nested-ternary */
+            return fromURL
+                ? options.galleryPIDs
+                    ? findIndex(items, item => item.pid === index)
+                    : parseInt(index, 10) - 1
+                : parseInt(index, 10)
+        },
+        openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
+            const pswpElement = document.querySelectorAll('.pswp')[0]
+            const items = this.parseThumbnailElements(galleryElement)
+            const isBgImg = !!items[index].el.querySelector('.image-item')
+            const options = {
+                // dont need history in spa, prevent unnecessary bug
+                history: false,
+                showHideOpacity: isBgImg,
+                // define gallery index (for URL)
+                galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+                getThumbBoundsFn: this.getThumbBoundsFn(items),
+            }
 
-				// triggers when user clicks on thumbnail
-				var onThumbnailsClick = function(e) {
-					var eTarget = e.target
+            const parsedIndex = this.parseIndex(index, items, fromURL, options)
+            if (parsedIndex >= 0) options.index = parsedIndex
 
-					// prevent uncessary click event be handle 
-					if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return
+            // exit if index not found
+            if (Number.isNaN(options.index)) return
 
-					// find root element of slide
-					var clickedListItem = closest(eTarget, function(el) {
-						return el.classList.contains('image-wrapper')
-					});
+            if (disableAnimation) options.showAnimationDuration = 0
 
-					if(!clickedListItem) {
-						return;
-					}
+            // add custom options
+            setOptions(options, this.globalOptions)
+            setOptions(options, this.options)
 
-					// find index of clicked item by looping through all child nodes
-					// alternatively, you may define index via data- attribute
-					var clickedGallery = closest(clickedListItem.parentNode, function (el) {
-						return el.dataset.type === 'parent'
-					}),
-						childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
-						numChildNodes = childNodes.length,
-						nodeIndex = 0,
-						index;
+            // Pass data to PhotoSwipe and initialize it
+            new PhotoSwipe(pswpElement, defaultUI, items, options).init()
+        },
+        initPhotoSwipeFromDOM(gallerySelector) {
+            // loop through all gallery elements and bind events
+            const galleryElements = [...document.querySelectorAll(gallerySelector)]
 
-					for (var i = 0; i < numChildNodes; i++) {
-						if(childNodes[i].nodeType !== 1) {
-							continue;
-						}
+            galleryElements.forEach((gallery, index) => {
+                gallery.setAttribute('data-pswp-uid', index + 1)
+                /* eslint-disable no-param-reassign */
+                gallery.onclick = this.onThumbnailsClick
+            })
 
-						if(childNodes[i] === clickedListItem) {
-							index = nodeIndex;
-							break;
-						}
-						nodeIndex++;
-					}
-
-					if(index >= 0) {
-						// open PhotoSwipe if valid index found
-						openPhotoSwipe( index, clickedGallery );
-					}
-					return false;
-				};
-
-				// parse picture index and gallery index from URL (#&pid=1&gid=2)
-				var photoswipeParseHash = function() {
-					var hash = window.location.hash.substring(1),
-					params = {};
-
-					if(hash.length < 5) {
-						return params;
-					}
-
-					var vars = hash.split('&');
-					for (var i = 0; i < vars.length; i++) {
-						if(!vars[i]) {
-							continue;
-						}
-						var pair = vars[i].split('=');
-						if(pair.length < 2) {
-							continue;
-						}
-						params[pair[0]] = pair[1];
-					}
-
-					if(params.gid) {
-						params.gid = parseInt(params.gid, 10);
-					}
-
-					return params;
-				};
-
-				var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
-					var pswpElement = document.querySelectorAll('.pswp')[0],
-						gallery,
-						options,
-						items;
-
-					items = parseThumbnailElements(galleryElement);
-
-					const isBgImg = items[index].el.querySelector('.image-item')
-					// define options (if needed)
-					options = {
-
-						// dont need history in spa, prevent unnecessary bug
-						history: false,
-						showHideOpacity: isBgImg,
-
-						// define gallery index (for URL)
-						galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-
-						getThumbBoundsFn: function(index) {
-							// See Options -> getThumbBoundsFn section of documentation for more info
-							var thumbnail = items[index].el.querySelector('img') || items[index].el.querySelector('.image-item'), // find thumbnail
-								pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-								rect = thumbnail.getBoundingClientRect();
-
-							return { x:rect.left, y:rect.top + pageYScroll, w:rect.width };
-						},
-					};
-
-					// PhotoSwipe opened from URL
-					if(fromURL) {
-						if(options.galleryPIDs) {
-							// parse real index when custom PIDs are used
-							// http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-							for(var j = 0; j < items.length; j++) {
-								if(items[j].pid == index) {
-									options.index = j;
-									break;
-								}
-							}
-						} else {
-							// in URL indexes start from 1
-							options.index = parseInt(index, 10) - 1;
-						}
-					} else {
-						options.index = parseInt(index, 10);
-					}
-
-					// exit if index not found
-					if( isNaN(options.index) ) {
-						return;
-					}
-
-					if(disableAnimation) {
-						options.showAnimationDuration = 0;
-					}
-
-					// add custom options
-					setOptions(options, _this.globalOptions)
-					setOptions(options, _this.options)
-
-					// Pass data to PhotoSwipe and initialize it
-					gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-					gallery.init();
-				};
-
-				// loop through all gallery elements and bind events
-				var galleryElements = document.querySelectorAll( gallerySelector );
-
-				for(var i = 0, l = galleryElements.length; i < l; i++) {
-					galleryElements[i].setAttribute('data-pswp-uid', i+1);
-					galleryElements[i].onclick = onThumbnailsClick;
-				}
-
-				// Parse URL and open gallery if it contains #&pid=3&gid=1
-				var hashData = photoswipeParseHash();
-				if(hashData.pid && hashData.gid) {
-					openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
-				}
-			};
-
-			// execute above function
-			initPhotoSwipeFromDOM('.my-gallery');
-		},
-	},
-	mounted() {
-		this.openPswp()
-	},
+            // Parse URL and open gallery if it contains #&pid=3&gid=1
+            const hashData = this.photoswipeParseHash()
+            if (hashData.pid && hashData.gid) {
+                this.openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true)
+            }
+        },
+        openPswp() {
+            this.initPhotoSwipeFromDOM('.my-gallery')
+        },
+    },
+    mounted() {
+        this.openPswp()
+    },
 }
 </script>

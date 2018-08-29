@@ -19,8 +19,7 @@
     "url": "https://github.com/GuoQichen/vue-pswipe.git"
   },
   "dependencies": {
-    "photoswipe": "^4.1.2",
-    "vue": "^2.5.16"
+    "photoswipe": "^4.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-rc.5",
@@ -29,6 +28,7 @@
     "@vue/eslint-config-airbnb": "^3.0.0-rc.5",
     "less": "^3.7.1",
     "less-loader": "^4.1.0",
+    "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.16"
   },
   "browserslist": [

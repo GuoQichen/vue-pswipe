@@ -17,6 +17,14 @@
                 :style="getImageItemStyle(src)"
             />
         </PhotoswipeItem>
+
+        <img
+            v-for="(src, index) in imageList"
+            :src="src"
+            class="photoswipe-item"
+            :key="`i-${index}`"
+            style="width: 200px;"
+        />
     </Photoswipe>
 </template>
 <script>
