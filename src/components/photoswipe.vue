@@ -4,7 +4,7 @@
 			<slot></slot>
 		</div>
 
-		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" ref="pswp">
 			<div class="pswp__bg"></div>
 			<div class="pswp__scroll-wrap">
 				<div class="pswp__container">
@@ -58,8 +58,8 @@ export default {
         options: Object,
         auto: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     methods: {
         // find nearest parent element
@@ -75,11 +75,11 @@ export default {
 
             return thumbElements.map((wrapperEl) => {
                 let { src } = wrapperEl.dataset
-                let size = wrapperEl.dataset.size.split('x')
+                const size = wrapperEl.dataset.size.split('x')
 
                 if (this.auto && wrapperEl.tagName === 'IMG') {
-                    src = wrapperEl.src
-                    wrapperEl.dataset.src = src
+                    src = wrapperEl.src // eslint-disable-line
+                    wrapperEl.dataset.src = src // eslint-disable-line
                 }
                 return {
                     src,
@@ -99,7 +99,7 @@ export default {
             // find root element of slide
             const clickedListItem = this.closest(eTarget, el =>
                 el.classList.contains('image-wrapper') ||
-                (this.auto && el.tagName === 'IMG')
+                (this.auto && el.tagName === 'IMG'),
             )
             if (!clickedListItem) return
 
@@ -113,7 +113,7 @@ export default {
             // open PhotoSwipe if valid index found
             if (index >= 0) this.openPhotoSwipe(index, clickedGallery)
         },
-       
+
 
         getThumbBoundsFn(parsedThumbItems) {
             return (index) => {
@@ -125,7 +125,7 @@ export default {
                 }
                 const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
                 const rect = thumbnail.getBoundingClientRect()
-    
+
                 return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
             }
         },
@@ -139,7 +139,9 @@ export default {
                 : parseInt(index, 10)
         },
         openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
-            const pswpElement = document.querySelectorAll('.pswp')[0]
+            // TODO: determin public or private
+            // const pswpElement = document.querySelectorAll('.pswp')[0]
+            const pswpElement = this.$refs.pswp
             const items = this.parseThumbnailElements(galleryElement)
             const isBgImg = !!items[index].el.querySelector('.image-item')
             const options = {
@@ -168,7 +170,7 @@ export default {
         },
         initPhotoSwipeFromDOM(gallerySelector) {
             const galleryElements = [...document.querySelectorAll(gallerySelector)]
-            const gallery = this.$refs.gallery
+            const { gallery } = this.$refs
             const galleryIndex = findIndex(galleryElements, el => el === gallery)
             const currentGid = galleryIndex + 1
             gallery.setAttribute('data-pswp-uid', currentGid)
@@ -186,19 +188,20 @@ export default {
             this.initPhotoSwipeFromDOM('.my-gallery')
         },
         setImageSize() {
-            const gallery = this.$refs.gallery
+            const { gallery } = this.$refs
             const imgs = gallery.querySelectorAll('img')
             const defaultSize = { w: 0, h: 0 }
-            const setDataset = (el, { w, h }) => el.dataset.size = `${w}x${h}`
-            imgs.forEach(img => {
+            // eslint-disable-next-line
+            const setDataset = (el, { w, h }) => { el.dataset.size = `${w}x${h}` }
+            imgs.forEach((img) => {
                 getImageSize(img.src)
-                    .then((size) => setDataset(img, size))
-                    .catch((err) => setDataset(img, defaultSize))
+                    .then(size => setDataset(img, size))
+                    .catch(() => setDataset(img, defaultSize))
             })
-        }
+        },
     },
     mounted() {
-        this.auto && this.setImageSize()
+        this.auto && this.setImageSize() // eslint-disable-line
         this.openPswp()
     },
 }
