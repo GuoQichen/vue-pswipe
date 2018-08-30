@@ -1,12 +1,16 @@
-export const isObject = _ => Object.prototype.toString.call(_) === '[object Object]'
+export const isObject = value => Object.prototype.toString.call(value) === '[object Object]'
 
-export const errorHanlde = (hint) => {
+const isDef = value => (value !== undefined) && (value !== null)
+
+export const isImg = el => el.tagName === 'IMG'
+
+export const errorHandler = (hint) => {
     throw new Error(
         `[vue-pswipe] ${hint}`,
     )
 }
 
-/* eslint-disable consistent-return */
+
 export const getImageSize = path => new Promise((resolve) => {
     const img = new Image()
     let timer
@@ -14,7 +18,7 @@ export const getImageSize = path => new Promise((resolve) => {
     img.addEventListener('error', () => {
         clearTimeout(timer)
     })
-    const check = () => {
+    const check = () => { // eslint-disable-line
         if (img.width > 0 || img.height > 0) {
             return resolve({
                 src: path,
@@ -65,3 +69,24 @@ export const parseHash = () => {
 
     return params
 }
+
+export const querySelectorList = (selector, context = document) =>
+    [...context.querySelectorAll(selector)]
+
+// find nearest parent element
+export const closest = (el, fn) =>
+    el &&
+    el.nodeType === 1 &&
+    (fn(el) ? el : closest(el.parentNode, fn))
+
+export const get = (context, path, defaultValue) => {
+    try {
+        const result = path.split('.').reduce((acc, cur) => acc[cur], context)
+        return isDef(result)
+            ? result
+            : defaultValue
+    } catch (err) {
+        return defaultValue
+    }
+}
+

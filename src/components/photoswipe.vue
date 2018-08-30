@@ -1,6 +1,10 @@
 <template>
 	<div>
-		<div class="my-gallery" data-type="parent" ref="gallery" @click="onThumbnailsClick">
+		<div
+            class="pswipe-gallery"
+            ref="gallery"
+            @click="onThumbnailsClick"
+        >
 			<slot></slot>
 		</div>
 
@@ -50,7 +54,17 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default.min'
-import { setOptions, findIndex, getImageSize, parseHash } from '../utils'
+import {
+    setOptions,
+    findIndex,
+    getImageSize,
+    parseHash,
+    closest,
+    querySelectorList,
+    get,
+    errorHandler,
+    isImg,
+} from '../utils'
 
 export default {
     name: 'PhotoswipeWrapper',
@@ -62,25 +76,20 @@ export default {
         },
     },
     methods: {
-        // find nearest parent element
-        closest(el, fn) {
-            return el && el.nodeType === 1 && (fn(el) ? el : this.closest(el.parentNode, fn))
-        },
-        // parse slide data (url, title, size ...) from DOM elements
-        parseThumbnailElements(el) {
-            let thumbElements = [...el.querySelectorAll('.image-wrapper')]
-            if (this.auto && thumbElements.length === 0) {
-                thumbElements = [...el.querySelectorAll('img')]
+        getThumbnailElements() {
+            let thumbnailElements = querySelectorList('.image-wrapper', this.gallery)
+            if (this.auto && thumbnailElements.length === 0) {
+                thumbnailElements = querySelectorList('img', this.gallery)
             }
+            return thumbnailElements
+        },
+        parseThumbnailElements() {
+            return this.getThumbnailElements().map((wrapperEl) => {
+                const src = get(wrapperEl, 'dataset.src', this.auto ? wrapperEl.src : '')
+                const size = get(wrapperEl, 'dataset.size', '').split('x')
 
-            return thumbElements.map((wrapperEl) => {
-                let { src } = wrapperEl.dataset
-                const size = wrapperEl.dataset.size.split('x')
+                if (!size[0]) return errorHandler('cant find data-size in thumbnail element')
 
-                if (this.auto && wrapperEl.tagName === 'IMG') {
-                    src = wrapperEl.src // eslint-disable-line
-                    wrapperEl.dataset.src = src // eslint-disable-line
-                }
                 return {
                     src,
                     msrc: src,
@@ -90,43 +99,52 @@ export default {
                 }
             })
         },
-        // triggers when user clicks on thumbnail
-        onThumbnailsClick(e) {
-            const eTarget = e.target
-
-            // prevent uncessary click event be handle
-            if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return
-            // find root element of slide
-            const clickedListItem = this.closest(eTarget, el =>
+        // prevent uncessary click event be handle
+        irrelevant(eventTarget) {
+            return !isImg(eventTarget) && !eventTarget.classList.contains('image-item')
+        },
+        // find root element of slide
+        getClickedListItem(eventTarget) {
+            return closest(eventTarget, el =>
                 el.classList.contains('image-wrapper') ||
                 (this.auto && el.tagName === 'IMG'),
             )
+        },
+        // triggers when user clicks on thumbnail
+        onThumbnailsClick(e) {
+            const eTarget = e.target
+            if (this.irrelevant(eTarget)) return
+
+            const clickedListItem = this.getClickedListItem(eTarget)
             if (!clickedListItem) return
 
             // find index of clicked item by looping through all child nodes
-            const clickedGallery = this.closest(clickedListItem.parentNode, el => el.dataset.type === 'parent')
-            let childNodes = [...clickedGallery.querySelectorAll('.image-wrapper')]
-            if (this.auto && childNodes.length === 0) {
-                childNodes = [...clickedGallery.querySelectorAll('img')]
-            }
+            const childNodes = this.getThumbnailElements()
             const index = findIndex(childNodes, child => child === clickedListItem)
+
             // open PhotoSwipe if valid index found
-            if (index >= 0) this.openPhotoSwipe(index, clickedGallery)
+            if (index >= 0) this.openPhotoSwipe(index, this.gallery)
         },
-
-
+        getPresentElement(thumbEl) {
+            let thumbnail = thumbEl.querySelector('img') || thumbEl.querySelector('.image-item')
+            if (this.auto && thumbEl.tagName === 'IMG') {
+                thumbnail = thumbEl
+            }
+            return thumbnail
+        },
         getThumbBoundsFn(parsedThumbItems) {
+            // See Options -> getThumbBoundsFn section of documentation for more info
             return (index) => {
                 const thumbEl = parsedThumbItems[index].el
-                // See Options -> getThumbBoundsFn section of documentation for more info
-                let thumbnail = thumbEl.querySelector('img') || thumbEl.querySelector('.image-item')
-                if (this.auto && thumbEl.tagName === 'IMG') {
-                    thumbnail = thumbEl
-                }
+                const thumbnail = this.getPresentElement(thumbEl)
                 const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
                 const rect = thumbnail.getBoundingClientRect()
 
-                return { x: rect.left, y: rect.top + pageYScroll, w: rect.width }
+                return {
+                    x: rect.left,
+                    y: rect.top + pageYScroll,
+                    w: rect.width,
+                }
             }
         },
         parseIndex(index, items, fromURL, options) {
@@ -138,16 +156,18 @@ export default {
                     : parseInt(index, 10) - 1
                 : parseInt(index, 10)
         },
+        isBgImg(el) {
+            return !!el.querySelector('.image-item')
+        },
         openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
             // TODO: determin public or private
             // const pswpElement = document.querySelectorAll('.pswp')[0]
             const pswpElement = this.$refs.pswp
             const items = this.parseThumbnailElements(galleryElement)
-            const isBgImg = !!items[index].el.querySelector('.image-item')
             const options = {
-                // dont need history in spa, prevent unnecessary bug
+                // no need history in spa
                 history: false,
-                showHideOpacity: isBgImg,
+                showHideOpacity: this.isBgImg(items[index].el),
                 // define gallery index (for URL)
                 galleryUID: galleryElement.getAttribute('data-pswp-uid'),
                 getThumbBoundsFn: this.getThumbBoundsFn(items),
@@ -169,23 +189,22 @@ export default {
             new PhotoSwipe(pswpElement, defaultUI, items, options).init()
         },
         initPhotoSwipeFromDOM(gallerySelector) {
-            const galleryElements = [...document.querySelectorAll(gallerySelector)]
-            const { gallery } = this.$refs
-            const galleryIndex = findIndex(galleryElements, el => el === gallery)
+            const galleryElements = querySelectorList(gallerySelector)
+            const galleryIndex = findIndex(galleryElements, el => el === this.gallery)
             const currentGid = galleryIndex + 1
-            gallery.setAttribute('data-pswp-uid', currentGid)
+            this.gallery.setAttribute('data-pswp-uid', currentGid)
 
             // Parse URL and open gallery if it contains #&pid=3&gid=1
             const { pid, gid } = parseHash()
             if (pid && gid && gid === currentGid) {
                 // in history mode, it will be empty in first time access because cant get image size
                 setTimeout(() => {
-                    this.openPhotoSwipe(pid - 1, gallery, true, true)
+                    this.openPhotoSwipe(pid - 1, this.gallery, true, true)
                 })
             }
         },
         openPswp() {
-            this.initPhotoSwipeFromDOM('.my-gallery')
+            this.initPhotoSwipeFromDOM('.pswipe-gallery')
         },
         setImageSize() {
             const { gallery } = this.$refs
@@ -202,6 +221,7 @@ export default {
         },
     },
     mounted() {
+        this.gallery = this.$refs.gallery
         this.auto && this.setImageSize() // eslint-disable-line
         this.openPswp()
     },
