@@ -7,7 +7,7 @@
 		exports["Photoswipe"] = factory();
 	else
 		root["Photoswipe"] = factory();
-})(typeof self !== 'undefined' ? self : this, function() {
+})((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -91,61 +91,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "+xUi");
+/******/ 	return __webpack_require__(__webpack_require__.s = "fb15");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "+xUi":
+/***/ "000e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _setPublicPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("HrLf");
-/* harmony import */ var _setPublicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_setPublicPath__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Vtdi");
-/* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_entry__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _entry__WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _entry__WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-
-
-/* harmony default export */ __webpack_exports__["default"] = (_entry__WEBPACK_IMPORTED_MODULE_1___default.a);
-
-
-
-/***/ }),
-
-/***/ "7p8N":
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__("QsiB");
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var add = __webpack_require__("SZ7m").default
-var update = add("07fd3612", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "8wEU":
-/***/ (function(module, exports) {
-
-module.exports = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjY0IiBoZWlnaHQ9Ijg4IiB2aWV3Qm94PSIwIDAgMjY0IDg4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZT5kZWZhdWx0LXNraW4gMjwvdGl0bGU+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48Zz48cGF0aCBkPSJNNjcuMDAyIDU5LjV2My43NjhjLTYuMzA3Ljg0LTkuMTg0IDUuNzUtMTAuMDAyIDkuNzMyIDIuMjItMi44MyA1LjU2NC01LjA5OCAxMC4wMDItNS4wOThWNzEuNUw3MyA2NS41ODUgNjcuMDAyIDU5LjV6IiBpZD0iU2hhcGUiIGZpbGw9IiNmZmYiLz48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTMgMjl2LTVoMnYzaDN2MmgtNXpNMTMgMTVoNXYyaC0zdjNoLTJ2LTV6TTMxIDE1djVoLTJ2LTNoLTN2LTJoNXpNMzEgMjloLTV2LTJoM3YtM2gydjV6IiBpZD0iU2hhcGUiLz48L2c+PGcgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTYyIDI0djVoLTJ2LTNoLTN2LTJoNXpNNjIgMjBoLTV2LTJoM3YtM2gydjV6TTcwIDIwdi01aDJ2M2gzdjJoLTV6TTcwIDI0aDV2MmgtM3YzaC0ydi01eiIvPjwvZz48cGF0aCBkPSJNMjAuNTg2IDY2bC01LjY1Ni01LjY1NiAxLjQxNC0xLjQxNEwyMiA2NC41ODZsNS42NTYtNS42NTYgMS40MTQgMS40MTRMMjMuNDE0IDY2bDUuNjU2IDUuNjU2LTEuNDE0IDEuNDE0TDIyIDY3LjQxNGwtNS42NTYgNS42NTYtMS40MTQtMS40MTRMMjAuNTg2IDY2eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMTEuNzg1IDY1LjAzTDExMCA2My41bDMtMy41aC0xMHYtMmgxMGwtMy0zLjUgMS43ODUtMS40NjhMMTE3IDU5bC01LjIxNSA2LjAzeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xNTIuMjE1IDY1LjAzTDE1NCA2My41bC0zLTMuNWgxMHYtMmgtMTBsMy0zLjUtMS43ODUtMS40NjhMMTQ3IDU5bDUuMjE1IDYuMDN6IiBmaWxsPSIjZmZmIi8+PGc+PHBhdGggaWQ9IlJlY3RhbmdsZS0xMSIgZmlsbD0iI2ZmZiIgZD0iTTE2MC45NTcgMjguNTQzbC0zLjI1LTMuMjUtMS40MTMgMS40MTQgMy4yNSAzLjI1eiIvPjxwYXRoIGQ9Ik0xNTIuNSAyN2MzLjAzOCAwIDUuNS0yLjQ2MiA1LjUtNS41cy0yLjQ2Mi01LjUtNS41LTUuNS01LjUgMi40NjItNS41IDUuNSAyLjQ2MiA1LjUgNS41IDUuNXoiIGlkPSJPdmFsLTEiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTUwIDIxaDV2MWgtNXoiLz48L2c+PGc+PHBhdGggZD0iTTExNi45NTcgMjguNTQzbC0xLjQxNCAxLjQxNC0zLjI1LTMuMjUgMS40MTQtMS40MTQgMy4yNSAzLjI1eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMDguNSAyN2MzLjAzOCAwIDUuNS0yLjQ2MiA1LjUtNS41cy0yLjQ2Mi01LjUtNS41LTUuNS01LjUgMi40NjItNS41IDUuNSAyLjQ2MiA1LjUgNS41IDUuNXoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA2IDIxaDV2MWgtNXoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA5LjA0MyAxOS4wMDhsLS4wODUgNS0xLS4wMTcuMDg1LTV6Ii8+PC9nPjwvZz48L2c+PC9zdmc+"
-
-/***/ }),
-
-/***/ "AA7H":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _imageItem_vue_vue_type_template_id_93d20a6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("YYa+");
-/* harmony import */ var _imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("Tx/p");
+/* harmony import */ var _imageItem_vue_vue_type_template_id_93d20a6a_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("6186");
+/* harmony import */ var _imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("4f1f");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("usC4");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("KHd+");
+/* harmony import */ var _imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("bac0");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("2877");
 
 
 
@@ -165,11 +125,12 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+component.options.__file = "imageItem.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "Al62":
+/***/ "025e":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -178,7 +139,15 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.setOptions = exports.getImageSize = exports.errorHanlde = exports.isObject = void 0;
+exports.parseHash = exports.findIndex = exports.setOptions = exports.getImageSize = exports.errorHanlde = exports.isObject = void 0;
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var isObject = function isObject(_) {
   return Object.prototype.toString.call(_) === '[object Object]';
@@ -228,31 +197,54 @@ var setOptions = function setOptions(origin, addition) {
 
 exports.setOptions = setOptions;
 
+var findIndex = function findIndex(array, fn) {
+  var index = -1;
+  array.some(function (item, idx) {
+    var result = fn(item, idx);
+    if (result) index = idx;
+    return result;
+  });
+  return index;
+};
+/**
+ * parse picture index and gallery index from URL (#&pid=1&gid=2)
+ */
+
+
+exports.findIndex = findIndex;
+
+var parseHash = function parseHash() {
+  var hash = window.location.hash.substring(1);
+  var params = {};
+  if (hash.length < 5) return params;
+  hash.split('&').reduce(function (acc, cur) {
+    if (!cur) return acc;
+    var pair = cur.split('=');
+    if (pair.length < 2) return acc;
+
+    var _pair = _slicedToArray(pair, 2),
+        key = _pair[0],
+        value = _pair[1];
+
+    acc[key] = value;
+    return acc;
+  }, params);
+  if (params.gid) params.gid = parseInt(params.gid, 10);
+  return params;
+};
+
+exports.parseHash = parseHash;
+
 /***/ }),
 
-/***/ "F400":
+/***/ "178d":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQgAAABYCAQAAACjBqE3AAAB6klEQVR4Ae3bsWpUQRTG8YkkanwCa7GzVotsI/gEgk9h4Vu4ySLYmMYgbJrc3lrwZbJwC0FMt4j7F6Y4oIZrsXtgxvx/1c0ufEX4cnbmLCmSJEmSJEmSJEmSJP3XCBPvbJU+8doWmDFwyZpLBmYlNJebz0KwzykwsuSYJSNwykEJreV2BaBMaLIQZ2xYcFgqDlmw4ayE/FwL0dDk4Qh4W37DAjgqIT+3HRbigjH+iikVdxgZStgyN0Su2sXIeTwTT+esdpcbIlfNAuZ/TxresG4zV8kYWSZNiKUTokMMSWeIwTNEn4fK2TW3gRNgVkJLuVksROA9G+bEvoATNlBCa7nZXEwdxEZxzpKRKFh+bsv8LmPFmhX1OwfIz81jIRJQ5eeqG9B+riRJkiRJkiRJkiRJkiRJkiRJUkvA/8RQoEpKlJWINFkJ62AlrEP/mNBibnv2yz/A3t7Uq3LcpoxP8COjC1T5vxoAD5VdoEqdDrd5QuW1swtUSaueh3zkiuBiqgtA2OlkeMcP/uDqugsJdbjHF65VdPMKwS0+WQc/MgKvrIOHysB9vgPwk8+85hmPbnQdvHZyDMAFD7L3EOpgMcVdvnHFS0/vlatrXvCVx0U9gt3fxvnA0/hB4nmRJEmSJEmSJEmSJGmHfgFLaDPoMu5xWwAAAABJRU5ErkJggg=="
 
 /***/ }),
 
-/***/ "F5KI":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("I1BE")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\tStyles for basic PhotoSwipe functionality (sliding area, open/close transitions)\n*/\n/* pswp = photoswipe */\n.pswp {\n  display: none;\n  position: absolute;\n  width: 100%;\n  height: 100%;\n  left: 0;\n  top: 0;\n  overflow: hidden;\n  -ms-touch-action: none;\n  touch-action: none;\n  z-index: 1500;\n  -webkit-text-size-adjust: 100%;\n  /* create separate layer, to avoid paint on window.onscroll in webkit/blink */\n  -webkit-backface-visibility: hidden;\n  outline: none; }\n  .pswp * {\n    -webkit-box-sizing: border-box;\n            box-sizing: border-box; }\n  .pswp img {\n    max-width: none; }\n\n/* style is added when JS option showHideOpacity is set to true */\n.pswp--animate_opacity {\n  /* 0.001, because opacity:0 doesn't trigger Paint action, which causes lag at start of transition */\n  opacity: 0.001;\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--open {\n  display: block; }\n\n.pswp--zoom-allowed .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-zoom-in;\n  cursor: -moz-zoom-in;\n  cursor: zoom-in; }\n\n.pswp--zoomed-in .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grab;\n  cursor: -moz-grab;\n  cursor: grab; }\n\n.pswp--dragging .pswp__img {\n  /* autoprefixer: off */\n  cursor: -webkit-grabbing;\n  cursor: -moz-grabbing;\n  cursor: grabbing; }\n\n/*\n\tBackground is added as a separate element.\n\tAs animating opacity is much faster than animating rgba() background-color.\n*/\n.pswp__bg {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  background: #000;\n  opacity: 0;\n  -webkit-transform: translateZ(0);\n          transform: translateZ(0);\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__scroll-wrap {\n  position: absolute;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  overflow: hidden; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -ms-touch-action: none;\n  touch-action: none;\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0; }\n\n/* Prevent selection and tap highlights */\n.pswp__container,\n.pswp__img {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none;\n  -webkit-tap-highlight-color: transparent;\n  -webkit-touch-callout: none; }\n\n.pswp__zoom-wrap {\n  position: absolute;\n  width: 100%;\n  -webkit-transform-origin: left top;\n  transform-origin: left top;\n  /* for open/close transition */\n  -webkit-transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: transform 333ms cubic-bezier(0.4, 0, 0.22, 1), -webkit-transform 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp__bg {\n  will-change: opacity;\n  /* for open/close transition */\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n.pswp--animated-in .pswp__bg,\n.pswp--animated-in .pswp__zoom-wrap {\n  -webkit-transition: none;\n  transition: none; }\n\n.pswp__container,\n.pswp__zoom-wrap {\n  -webkit-backface-visibility: hidden; }\n\n.pswp__item {\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n  overflow: hidden; }\n\n.pswp__img {\n  position: absolute;\n  width: auto;\n  height: auto;\n  top: 0;\n  left: 0; }\n\n/*\n\tstretched thumbnail or div placeholder element (see below)\n\tstyle is added to avoid flickering in webkit/blink when layers overlap\n*/\n.pswp__img--placeholder {\n  -webkit-backface-visibility: hidden; }\n\n/*\n\tdiv element that matches size of large image\n\tlarge image loads on top of it\n*/\n.pswp__img--placeholder--blank {\n  background: #222; }\n\n.pswp--ie .pswp__img {\n  width: 100% !important;\n  height: auto !important;\n  left: 0;\n  top: 0; }\n\n/*\n\tError message appears when image is not loaded\n\t(JS option errorMsg controls markup)\n*/\n.pswp__error-msg {\n  position: absolute;\n  left: 0;\n  top: 50%;\n  width: 100%;\n  text-align: center;\n  font-size: 14px;\n  line-height: 16px;\n  margin-top: -8px;\n  color: #CCC; }\n\n.pswp__error-msg a {\n  color: #CCC;\n  text-decoration: underline; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "HrLf":
+/***/ "1eb2":
 /***/ (function(module, exports, __webpack_require__) {
 
 // This file is imported into lib/wc client bundles.
@@ -267,7 +259,7 @@ if (typeof window !== 'undefined') {
 
 /***/ }),
 
-/***/ "I1BE":
+/***/ "2350":
 /***/ (function(module, exports) {
 
 /*
@@ -350,7 +342,7 @@ function toComment(sourceMap) {
 
 /***/ }),
 
-/***/ "KHd+":
+/***/ "2877":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -452,52 +444,52 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "NDqF":
+/***/ "343a":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("F5KI");
+var content = __webpack_require__("57de");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__("SZ7m").default
-var update = add("21c2c836", content, true, {"sourceMap":false,"shadowMode":false});
+var add = __webpack_require__("499e").default
+var update = add("cb5609f4", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
-/***/ "P7Wk":
+/***/ "3fb5":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("v+Vm");
+var content = __webpack_require__("75b8");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var add = __webpack_require__("SZ7m").default
-var update = add("427db1d6", content, true, {"sourceMap":false,"shadowMode":false});
+var add = __webpack_require__("499e").default
+var update = add("7e09c727", content, true, {"sourceMap":false,"shadowMode":false});
 
 /***/ }),
 
-/***/ "QsiB":
+/***/ "42c8":
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__("I1BE")(false);
+exports = module.exports = __webpack_require__("2350")(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.photoswipe__image[data-v-93d20a6a] {\n  width: 100%;\n  vertical-align: bottom;\n}\n", ""]);
+exports.push([module.i, "\n.photoswipe__image[data-v-93d20a6a]{vertical-align:bottom;width:100%\n}", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ "SZ7m":
+/***/ "499e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -760,19 +752,19 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ "Tx/p":
+/***/ "4f1f":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("gBr4");
+/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("801a");
 /* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "UjYt":
+/***/ "5236":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe - v4.1.2 - 2017-04-05
@@ -786,7 +778,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe
 
 /***/ }),
 
-/***/ "Vtdi":
+/***/ "56d7":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -797,9 +789,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _photoswipe = _interopRequireDefault(__webpack_require__("luxp"));
+var _photoswipe = _interopRequireDefault(__webpack_require__("96ec"));
 
-var _imageItem = _interopRequireDefault(__webpack_require__("AA7H"));
+var _imageItem = _interopRequireDefault(__webpack_require__("000e"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -823,48 +815,79 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "X6/s":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ "57de":
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"59eac6af-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=5211573a&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{staticClass:"my-gallery",attrs:{"data-type":"parent"}},[_vm._t("default")],2),_vm._m(0)])}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=5211573a&
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+// module
+exports.push([module.i, "/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */.pswp{-ms-touch-action:none;-webkit-backface-visibility:hidden;-webkit-text-size-adjust:100%;display:none;height:100%;left:0;outline:none;overflow:hidden;position:absolute;top:0;touch-action:none;width:100%;z-index:1500}.pswp *{-webkit-box-sizing:border-box;box-sizing:border-box}.pswp img{max-width:none}.pswp--animate_opacity{-webkit-transition:opacity 333ms cubic-bezier(.4,0,.22,1);opacity:.001;transition:opacity 333ms cubic-bezier(.4,0,.22,1);will-change:opacity}.pswp--open{display:block}.pswp--zoom-allowed .pswp__img{cursor:-webkit-zoom-in;cursor:-moz-zoom-in;cursor:zoom-in}.pswp--zoomed-in .pswp__img{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.pswp--dragging .pswp__img{cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.pswp__bg{-webkit-backface-visibility:hidden;-webkit-transform:translateZ(0);background:#000;opacity:0;transform:translateZ(0)}.pswp__bg,.pswp__scroll-wrap{height:100%;left:0;position:absolute;top:0;width:100%}.pswp__scroll-wrap{overflow:hidden}.pswp__container,.pswp__zoom-wrap{-ms-touch-action:none;bottom:0;left:0;position:absolute;right:0;top:0;touch-action:none}.pswp__container,.pswp__img{-moz-user-select:none;-ms-user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.pswp__zoom-wrap{-webkit-transform-origin:left top;-webkit-transition:-webkit-transform 333ms cubic-bezier(.4,0,.22,1);position:absolute;transform-origin:left top;transition:-webkit-transform 333ms cubic-bezier(.4,0,.22,1);transition:transform 333ms cubic-bezier(.4,0,.22,1);transition:transform 333ms cubic-bezier(.4,0,.22,1),-webkit-transform 333ms cubic-bezier(.4,0,.22,1);width:100%}.pswp__bg{-webkit-transition:opacity 333ms cubic-bezier(.4,0,.22,1);transition:opacity 333ms cubic-bezier(.4,0,.22,1);will-change:opacity}.pswp--animated-in .pswp__bg,.pswp--animated-in .pswp__zoom-wrap{-webkit-transition:none;transition:none}.pswp__container,.pswp__zoom-wrap{-webkit-backface-visibility:hidden}.pswp__item{bottom:0;overflow:hidden;right:0}.pswp__img,.pswp__item{left:0;position:absolute;top:0}.pswp__img{height:auto;width:auto}.pswp__img--placeholder{-webkit-backface-visibility:hidden}.pswp__img--placeholder--blank{background:#222}.pswp--ie .pswp__img{height:auto!important;left:0;top:0;width:100%!important}.pswp__error-msg{color:#ccc;font-size:14px;left:0;line-height:16px;margin-top:-8px;position:absolute;text-align:center;top:50%;width:100%}.pswp__error-msg a{color:#ccc;text-decoration:underline}", ""]);
+
+// exports
 
 
 /***/ }),
 
-/***/ "YYa+":
+/***/ "6186":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"/Users/guoqichen/code/vue-pswipe/node_modules/.cache/vue-loader","cacheIdentifier":"59eac6af-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/imageItem.vue?vue&type=template&id=93d20a6a&scoped=true&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"15f2d1d9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/imageItem.vue?vue&type=template&id=93d20a6a&scoped=true&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"image-wrapper",attrs:{"data-src":_vm.src,"data-size":_vm.size}},[_vm._t("default",[_c('img',{staticClass:"photoswipe__image",attrs:{"src":_vm.src,"alt":"图片"}})])],2)}
 var staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./src/components/imageItem.vue?vue&type=template&id=93d20a6a&scoped=true&
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
-/* concated harmony reexport */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+/* concated harmony reexport render */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* concated harmony reexport staticRenderFns */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
 
 
 /***/ }),
 
-/***/ "dtzU":
+/***/ "7490":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"15f2d1d9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=142a5ea2&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',[_c('div',{ref:"gallery",staticClass:"my-gallery",attrs:{"data-type":"parent"},on:{"click":_vm.onThumbnailsClick}},[_vm._t("default")],2),_c('div',{ref:"pswp",staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_vm._m(0)])])}
+var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])}]
+
+
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=142a5ea2&
+/* concated harmony reexport render */__webpack_require__.d(__webpack_exports__, "a", function() { return render; });
+/* concated harmony reexport staticRenderFns */__webpack_require__.d(__webpack_exports__, "b", function() { return staticRenderFns; });
+
+
+/***/ }),
+
+/***/ "75b8":
+/***/ (function(module, exports, __webpack_require__) {
+
+var escape = __webpack_require__("b041");
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */.pswp__button{-webkit-appearance:none;-webkit-box-shadow:none;-webkit-transition:opacity .2s;background:none;border:0;box-shadow:none;cursor:pointer;display:block;float:right;height:44px;margin:0;opacity:.75;overflow:visible;padding:0;position:relative;transition:opacity .2s;width:44px}.pswp__button:focus,.pswp__button:hover{opacity:1}.pswp__button:active{opacity:.9;outline:none}.pswp__button::-moz-focus-inner{border:0;padding:0}.pswp__ui--over-close .pswp__button--close{opacity:1}.pswp__button,.pswp__button--arrow--left:before,.pswp__button--arrow--right:before{background:url(" + escape(__webpack_require__("178d")) + ") 0 0 no-repeat;background-size:264px 88px;height:44px;width:44px}@media (-webkit-min-device-pixel-ratio:1.1),(-webkit-min-device-pixel-ratio:1.09375),(min-resolution:1.1dppx),(min-resolution:105dpi){.pswp--svg .pswp__button,.pswp--svg .pswp__button--arrow--left:before,.pswp--svg .pswp__button--arrow--right:before{background-image:url(" + escape(__webpack_require__("f301")) + ")}.pswp--svg .pswp__button--arrow--left,.pswp--svg .pswp__button--arrow--right{background:none}}.pswp__button--close{background-position:0 -44px}.pswp__button--share{background-position:-44px -44px}.pswp__button--fs{display:none}.pswp--supports-fs .pswp__button--fs{display:block}.pswp--fs .pswp__button--fs{background-position:-44px 0}.pswp__button--zoom{background-position:-88px 0;display:none}.pswp--zoom-allowed .pswp__button--zoom{display:block}.pswp--zoomed-in .pswp__button--zoom{background-position:-132px 0}.pswp--touch .pswp__button--arrow--left,.pswp--touch .pswp__button--arrow--right{visibility:hidden}.pswp__button--arrow--left,.pswp__button--arrow--right{background:none;height:100px;margin-top:-50px;position:absolute;top:50%;width:70px}.pswp__button--arrow--left{left:0}.pswp__button--arrow--right{right:0}.pswp__button--arrow--left:before,.pswp__button--arrow--right:before{background-color:rgba(0,0,0,.3);content:\"\";height:30px;position:absolute;top:35px;width:32px}.pswp__button--arrow--left:before{background-position:-138px -44px;left:6px}.pswp__button--arrow--right:before{background-position:-94px -44px;right:6px}.pswp__counter,.pswp__share-modal{-moz-user-select:none;-ms-user-select:none;-webkit-user-select:none;user-select:none}.pswp__share-modal{-webkit-backface-visibility:hidden;-webkit-transition:opacity .25s ease-out;background:rgba(0,0,0,.5);display:block;height:100%;left:0;opacity:0;padding:10px;position:absolute;top:0;transition:opacity .25s ease-out;width:100%;will-change:opacity;z-index:1600}.pswp__share-modal--hidden{display:none}.pswp__share-tooltip{-webkit-backface-visibility:hidden;-webkit-box-shadow:0 2px 5px rgba(0,0,0,.25);-webkit-transform:translateY(6px);-webkit-transition:-webkit-transform .25s;background:#fff;border-radius:2px;box-shadow:0 2px 5px rgba(0,0,0,.25);display:block;position:absolute;right:44px;top:56px;transform:translateY(6px);transition:-webkit-transform .25s;transition:transform .25s;transition:transform .25s,-webkit-transform .25s;width:auto;will-change:transform;z-index:1620}.pswp__share-tooltip a{display:block;font-size:14px;line-height:18px;padding:8px 12px}.pswp__share-tooltip a,.pswp__share-tooltip a:hover{color:#000;text-decoration:none}.pswp__share-tooltip a:first-child{border-radius:2px 2px 0 0}.pswp__share-tooltip a:last-child{border-radius:0 0 2px 2px}.pswp__share-modal--fade-in{opacity:1}.pswp__share-modal--fade-in .pswp__share-tooltip{-webkit-transform:translateY(0);transform:translateY(0)}.pswp--touch .pswp__share-tooltip a{padding:16px 12px}a.pswp__share--facebook:before{-moz-pointer-events:none;-webkit-pointer-events:none;border:6px solid transparent;border-bottom-color:#fff;content:\"\";display:block;height:0;pointer-events:none;position:absolute;right:15px;top:-12px;width:0}a.pswp__share--facebook:hover{background:#3e5c9a;color:#fff}a.pswp__share--facebook:hover:before{border-bottom-color:#3e5c9a}a.pswp__share--twitter:hover{background:#55acee;color:#fff}a.pswp__share--pinterest:hover{background:#ccc;color:#ce272d}a.pswp__share--download:hover{background:#ddd}.pswp__counter{color:#fff;font-size:13px;height:44px;left:0;line-height:44px;opacity:.75;padding:0 10px;position:absolute;top:0}.pswp__caption{bottom:0;left:0;min-height:44px;position:absolute;width:100%}.pswp__caption small{color:#bbb;font-size:11px}.pswp__caption__center{color:#ccc;font-size:13px;line-height:20px;margin:0 auto;max-width:420px;padding:10px;text-align:left}.pswp__caption--empty{display:none}.pswp__caption--fake{visibility:hidden}.pswp__preloader{-webkit-transition:opacity .25s ease-out;direction:ltr;height:44px;left:50%;margin-left:-22px;opacity:0;position:absolute;top:0;transition:opacity .25s ease-out;width:44px;will-change:opacity}.pswp__preloader__icn{height:20px;margin:12px;width:20px}.pswp__preloader--active{opacity:1}.pswp__preloader--active .pswp__preloader__icn{background:url(" + escape(__webpack_require__("76dc")) + ") 0 0 no-repeat}.pswp--css_animation .pswp__preloader--active{opacity:1}.pswp--css_animation .pswp__preloader--active .pswp__preloader__icn{-webkit-animation:clockwise .5s linear infinite;animation:clockwise .5s linear infinite}.pswp--css_animation .pswp__preloader--active .pswp__preloader__donut{-webkit-animation:donut-rotate 1s cubic-bezier(.4,0,.22,1) infinite;animation:donut-rotate 1s cubic-bezier(.4,0,.22,1) infinite}.pswp--css_animation .pswp__preloader__icn{background:none;height:14px;left:15px;margin:0;opacity:.75;position:absolute;top:15px;width:14px}.pswp--css_animation .pswp__preloader__cut{height:14px;overflow:hidden;position:relative;width:7px}.pswp--css_animation .pswp__preloader__donut{-webkit-box-sizing:border-box;background:none;border-color:#fff #fff transparent transparent;border-radius:50%;border-style:solid;border-width:2px;box-sizing:border-box;height:14px;left:0;margin:0;position:absolute;top:0;width:14px}@media screen and (max-width:1024px){.pswp__preloader{float:right;left:auto;margin:0;position:relative;top:auto}}@-webkit-keyframes clockwise{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes clockwise{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@-webkit-keyframes donut-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}50%{-webkit-transform:rotate(-140deg);transform:rotate(-140deg)}to{-webkit-transform:rotate(0);transform:rotate(0)}}@keyframes donut-rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}50%{-webkit-transform:rotate(-140deg);transform:rotate(-140deg)}to{-webkit-transform:rotate(0);transform:rotate(0)}}.pswp__ui{-webkit-font-smoothing:auto;opacity:1;visibility:visible;z-index:1550}.pswp__top-bar{height:44px;left:0;position:absolute;top:0;width:100%}.pswp--has_mouse .pswp__button--arrow--left,.pswp--has_mouse .pswp__button--arrow--right,.pswp__caption,.pswp__top-bar{-webkit-backface-visibility:hidden;-webkit-transition:opacity 333ms cubic-bezier(.4,0,.22,1);transition:opacity 333ms cubic-bezier(.4,0,.22,1);will-change:opacity}.pswp--has_mouse .pswp__button--arrow--left,.pswp--has_mouse .pswp__button--arrow--right{visibility:visible}.pswp__caption,.pswp__top-bar{background-color:rgba(0,0,0,.5)}.pswp__ui--fit .pswp__caption,.pswp__ui--fit .pswp__top-bar{background-color:rgba(0,0,0,.3)}.pswp__ui--idle .pswp__button--arrow--left,.pswp__ui--idle .pswp__button--arrow--right,.pswp__ui--idle .pswp__top-bar{opacity:0}.pswp__ui--hidden .pswp__button--arrow--left,.pswp__ui--hidden .pswp__button--arrow--right,.pswp__ui--hidden .pswp__caption,.pswp__ui--hidden .pswp__top-bar{opacity:.001}.pswp__ui--one-slide .pswp__button--arrow--left,.pswp__ui--one-slide .pswp__button--arrow--right,.pswp__ui--one-slide .pswp__counter{display:none}.pswp__element--disabled{display:none!important}.pswp--minimal--dark .pswp__top-bar{background:none}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "76dc":
 /***/ (function(module, exports) {
 
 module.exports = "data:image/gif;base64,R0lGODlhFAAUAPMIAIeHhz8/P1dXVycnJ8/Pz7e3t5+fn29vb////wAAAAAAAAAAAAAAAAAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh+QQFBwAIACwAAAAAFAAUAEAEUxDJSatFxtwaggWAdIyHJAhXoRYSQUhDPGx0TbmujahbXGWZWqdDAYEsp5NupLPkdDwE7oXwWVasimzWrAE1tKFHErQRK8eL8mMUlRBJVI307uoiACH5BAUHAAgALAEAAQASABIAAAROEMkpS6E4W5upMdUmEQT2feFIltMJYivbvhnZ3R0A4NMwIDodz+cL7nDEn5CH8DGZh8MtEMBEoxkqlXKVIgQCibbK9YLBYvLtHH5K0J0IACH5BAUHAAgALAEAAQASABIAAAROEMkpjaE4W5spANUmFQX2feFIltMJYivbvhnZ3d1x4BNBIDodz+cL7nDEn5CH8DGZAsFtMMBEoxkqlXKVIgIBibbK9YLBYvLtHH5K0J0IACH5BAUHAAgALAEAAQASABIAAAROEMkpAaA4W5vpOdUmGQb2feFIltMJYivbvhnZ3Z0g4FNRIDodz+cL7nDEn5CH8DGZgcCNQMBEoxkqlXKVIgYDibbK9YLBYvLtHH5K0J0IACH5BAUHAAgALAEAAQASABIAAAROEMkpz6E4W5upENUmAQD2feFIltMJYivbvhnZ3V0Q4JNhIDodz+cL7nDEn5CH8DGZg8GtUMBEoxkqlXKVIggEibbK9YLBYvLtHH5K0J0IACH5BAUHAAgALAEAAQASABIAAAROEMkphaA4W5tpCNUmHQf2feFIltMJYivbvhnZ3d0w4BMAIDodz+cL7nDEn5CH8DGZBMLNYMBEoxkqlXKVIgoFibbK9YLBYvLtHH5K0J0IACH5BAUHAAgALAEAAQASABIAAAROEMkpQ6A4W5vpGNUmCQL2feFIltMJYivbvhnZ3R1B4NNxIDodz+cL7nDEn5CH8DGZhcINAMBEoxkqlXKVIgwGibbK9YLBYvLtHH5K0J0IACH5BAUHAAcALAEAAQASABIAAANCeLo6wzA6FxkhbaoQ4L3ZxnXLh0EjWZ4RV71VUcCLIByyTNt2PsO8m452sBGJBsNxkUwuD03lAQBASqnUJ7aq5UYSADs="
 
 /***/ }),
 
-/***/ "gBr4":
+/***/ "801a":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -875,7 +898,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _utils = __webpack_require__("Al62");
+var _utils = __webpack_require__("025e");
 
 //
 //
@@ -919,27 +942,27 @@ exports.default = _default;
 
 /***/ }),
 
-/***/ "kAT+":
+/***/ "9004":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("v4TG");
+/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("bf84");
 /* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
  /* harmony default export */ __webpack_exports__["default"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_thread_loader_dist_cjs_js_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "luxp":
+/***/ "96ec":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _photoswipe_vue_vue_type_template_id_5211573a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("X6/s");
-/* harmony import */ var _photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("kAT+");
+/* harmony import */ var _photoswipe_vue_vue_type_template_id_142a5ea2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7490");
+/* harmony import */ var _photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("9004");
 /* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("KHd+");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("2877");
 
 
 
@@ -949,8 +972,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[/* default */ "a"])(
   _photoswipe_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _photoswipe_vue_vue_type_template_id_5211573a___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
-  _photoswipe_vue_vue_type_template_id_5211573a___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
+  _photoswipe_vue_vue_type_template_id_142a5ea2___WEBPACK_IMPORTED_MODULE_0__[/* render */ "a"],
+  _photoswipe_vue_vue_type_template_id_142a5ea2___WEBPACK_IMPORTED_MODULE_0__[/* staticRenderFns */ "b"],
   false,
   null,
   null,
@@ -958,11 +981,12 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   
 )
 
+component.options.__file = "photoswipe.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "sEG9":
+/***/ "b041":
 /***/ (function(module, exports) {
 
 module.exports = function escape(url) {
@@ -985,7 +1009,7 @@ module.exports = function escape(url) {
 
 /***/ }),
 
-/***/ "sngw":
+/***/ "b278":
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe Default UI - 4.1.2 - 2017-04-05
@@ -999,34 +1023,18 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe
 
 /***/ }),
 
-/***/ "usC4":
+/***/ "bac0":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7p8N");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("ee9f");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
 /* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_10_oneOf_1_0_node_modules_css_loader_index_js_ref_10_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_lib_index_js_ref_10_oneOf_1_2_node_modules_less_loader_dist_cjs_js_ref_10_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_imageItem_vue_vue_type_style_index_0_id_93d20a6a_lang_less_scoped_true___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "v+Vm":
-/***/ (function(module, exports, __webpack_require__) {
-
-var escape = __webpack_require__("sEG9");
-exports = module.exports = __webpack_require__("I1BE")(false);
-// imports
-
-
-// module
-exports.push([module.i, "/*! PhotoSwipe Default UI CSS by Dmitry Semenov | photoswipe.com | MIT license */\n/*\n\n\tContents:\n\n\t1. Buttons\n\t2. Share modal and links\n\t3. Index indicator (\"1 of X\" counter)\n\t4. Caption\n\t5. Loading indicator\n\t6. Additional styles (root element, top bar, idle state, hidden state, etc.)\n\n*/\n/*\n\t\n\t1. Buttons\n\n */\n/* <button> css reset */\n.pswp__button {\n  width: 44px;\n  height: 44px;\n  position: relative;\n  background: none;\n  cursor: pointer;\n  overflow: visible;\n  -webkit-appearance: none;\n  display: block;\n  border: 0;\n  padding: 0;\n  margin: 0;\n  float: right;\n  opacity: 0.75;\n  -webkit-transition: opacity 0.2s;\n          transition: opacity 0.2s;\n  -webkit-box-shadow: none;\n          box-shadow: none; }\n  .pswp__button:focus, .pswp__button:hover {\n    opacity: 1; }\n  .pswp__button:active {\n    outline: none;\n    opacity: 0.9; }\n  .pswp__button::-moz-focus-inner {\n    padding: 0;\n    border: 0; }\n\n/* pswp__ui--over-close class it added when mouse is over element that should close gallery */\n.pswp__ui--over-close .pswp__button--close {\n  opacity: 1; }\n\n.pswp__button,\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  background: url(" + escape(__webpack_require__("F400")) + ") 0 0 no-repeat;\n  background-size: 264px 88px;\n  width: 44px;\n  height: 44px; }\n\n@media (-webkit-min-device-pixel-ratio: 1.1), (-webkit-min-device-pixel-ratio: 1.09375), (min-resolution: 105dpi), (min-resolution: 1.1dppx) {\n  /* Serve SVG sprite if browser supports SVG and resolution is more than 105dpi */\n  .pswp--svg .pswp__button,\n  .pswp--svg .pswp__button--arrow--left:before,\n  .pswp--svg .pswp__button--arrow--right:before {\n    background-image: url(" + escape(__webpack_require__("8wEU")) + "); }\n  .pswp--svg .pswp__button--arrow--left,\n  .pswp--svg .pswp__button--arrow--right {\n    background: none; } }\n\n.pswp__button--close {\n  background-position: 0 -44px; }\n\n.pswp__button--share {\n  background-position: -44px -44px; }\n\n.pswp__button--fs {\n  display: none; }\n\n.pswp--supports-fs .pswp__button--fs {\n  display: block; }\n\n.pswp--fs .pswp__button--fs {\n  background-position: -44px 0; }\n\n.pswp__button--zoom {\n  display: none;\n  background-position: -88px 0; }\n\n.pswp--zoom-allowed .pswp__button--zoom {\n  display: block; }\n\n.pswp--zoomed-in .pswp__button--zoom {\n  background-position: -132px 0; }\n\n/* no arrows on touch screens */\n.pswp--touch .pswp__button--arrow--left,\n.pswp--touch .pswp__button--arrow--right {\n  visibility: hidden; }\n\n/*\n\tArrow buttons hit area\n\t(icon is added to :before pseudo-element)\n*/\n.pswp__button--arrow--left,\n.pswp__button--arrow--right {\n  background: none;\n  top: 50%;\n  margin-top: -50px;\n  width: 70px;\n  height: 100px;\n  position: absolute; }\n\n.pswp__button--arrow--left {\n  left: 0; }\n\n.pswp__button--arrow--right {\n  right: 0; }\n\n.pswp__button--arrow--left:before,\n.pswp__button--arrow--right:before {\n  content: '';\n  top: 35px;\n  background-color: rgba(0, 0, 0, 0.3);\n  height: 30px;\n  width: 32px;\n  position: absolute; }\n\n.pswp__button--arrow--left:before {\n  left: 6px;\n  background-position: -138px -44px; }\n\n.pswp__button--arrow--right:before {\n  right: 6px;\n  background-position: -94px -44px; }\n\n/*\n\n\t2. Share modal/popup and links\n\n */\n.pswp__counter,\n.pswp__share-modal {\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n      user-select: none; }\n\n.pswp__share-modal {\n  display: block;\n  background: rgba(0, 0, 0, 0.5);\n  width: 100%;\n  height: 100%;\n  top: 0;\n  left: 0;\n  padding: 10px;\n  position: absolute;\n  z-index: 1600;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  -webkit-backface-visibility: hidden;\n  will-change: opacity; }\n\n.pswp__share-modal--hidden {\n  display: none; }\n\n.pswp__share-tooltip {\n  z-index: 1620;\n  position: absolute;\n  background: #FFF;\n  top: 56px;\n  border-radius: 2px;\n  display: block;\n  width: auto;\n  right: 44px;\n  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);\n  -webkit-transform: translateY(6px);\n          transform: translateY(6px);\n  -webkit-transition: -webkit-transform 0.25s;\n          transition: -webkit-transform 0.25s;\n          transition: transform 0.25s;\n          transition: transform 0.25s, -webkit-transform 0.25s;\n  -webkit-backface-visibility: hidden;\n  will-change: transform; }\n  .pswp__share-tooltip a {\n    display: block;\n    padding: 8px 12px;\n    color: #000;\n    text-decoration: none;\n    font-size: 14px;\n    line-height: 18px; }\n    .pswp__share-tooltip a:hover {\n      text-decoration: none;\n      color: #000; }\n    .pswp__share-tooltip a:first-child {\n      /* round corners on the first/last list item */\n      border-radius: 2px 2px 0 0; }\n    .pswp__share-tooltip a:last-child {\n      border-radius: 0 0 2px 2px; }\n\n.pswp__share-modal--fade-in {\n  opacity: 1; }\n  .pswp__share-modal--fade-in .pswp__share-tooltip {\n    -webkit-transform: translateY(0);\n            transform: translateY(0); }\n\n/* increase size of share links on touch devices */\n.pswp--touch .pswp__share-tooltip a {\n  padding: 16px 12px; }\n\na.pswp__share--facebook:before {\n  content: '';\n  display: block;\n  width: 0;\n  height: 0;\n  position: absolute;\n  top: -12px;\n  right: 15px;\n  border: 6px solid transparent;\n  border-bottom-color: #FFF;\n  -webkit-pointer-events: none;\n  -moz-pointer-events: none;\n  pointer-events: none; }\n\na.pswp__share--facebook:hover {\n  background: #3E5C9A;\n  color: #FFF; }\n  a.pswp__share--facebook:hover:before {\n    border-bottom-color: #3E5C9A; }\n\na.pswp__share--twitter:hover {\n  background: #55ACEE;\n  color: #FFF; }\n\na.pswp__share--pinterest:hover {\n  background: #CCC;\n  color: #CE272D; }\n\na.pswp__share--download:hover {\n  background: #DDD; }\n\n/*\n\n\t3. Index indicator (\"1 of X\" counter)\n\n */\n.pswp__counter {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  font-size: 13px;\n  line-height: 44px;\n  color: #FFF;\n  opacity: 0.75;\n  padding: 0 10px; }\n\n/*\n\t\n\t4. Caption\n\n */\n.pswp__caption {\n  position: absolute;\n  left: 0;\n  bottom: 0;\n  width: 100%;\n  min-height: 44px; }\n  .pswp__caption small {\n    font-size: 11px;\n    color: #BBB; }\n\n.pswp__caption__center {\n  text-align: left;\n  max-width: 420px;\n  margin: 0 auto;\n  font-size: 13px;\n  padding: 10px;\n  line-height: 20px;\n  color: #CCC; }\n\n.pswp__caption--empty {\n  display: none; }\n\n/* Fake caption element, used to calculate height of next/prev image */\n.pswp__caption--fake {\n  visibility: hidden; }\n\n/*\n\n\t5. Loading indicator (preloader)\n\n\tYou can play with it here - http://codepen.io/dimsemenov/pen/yyBWoR\n\n */\n.pswp__preloader {\n  width: 44px;\n  height: 44px;\n  position: absolute;\n  top: 0;\n  left: 50%;\n  margin-left: -22px;\n  opacity: 0;\n  -webkit-transition: opacity 0.25s ease-out;\n          transition: opacity 0.25s ease-out;\n  will-change: opacity;\n  direction: ltr; }\n\n.pswp__preloader__icn {\n  width: 20px;\n  height: 20px;\n  margin: 12px; }\n\n.pswp__preloader--active {\n  opacity: 1; }\n  .pswp__preloader--active .pswp__preloader__icn {\n    /* We use .gif in browsers that don't support CSS animation */\n    background: url(" + escape(__webpack_require__("dtzU")) + ") 0 0 no-repeat; }\n\n.pswp--css_animation .pswp__preloader--active {\n  opacity: 1; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__icn {\n    -webkit-animation: clockwise 500ms linear infinite;\n            animation: clockwise 500ms linear infinite; }\n  .pswp--css_animation .pswp__preloader--active .pswp__preloader__donut {\n    -webkit-animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite;\n            animation: donut-rotate 1000ms cubic-bezier(0.4, 0, 0.22, 1) infinite; }\n\n.pswp--css_animation .pswp__preloader__icn {\n  background: none;\n  opacity: 0.75;\n  width: 14px;\n  height: 14px;\n  position: absolute;\n  left: 15px;\n  top: 15px;\n  margin: 0; }\n\n.pswp--css_animation .pswp__preloader__cut {\n  /* \n\t\t\tThe idea of animating inner circle is based on Polymer (\"material\") loading indicator \n\t\t\t by Keanu Lee https://blog.keanulee.com/2014/10/20/the-tale-of-three-spinners.html\n\t\t*/\n  position: relative;\n  width: 7px;\n  height: 14px;\n  overflow: hidden; }\n\n.pswp--css_animation .pswp__preloader__donut {\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  width: 14px;\n  height: 14px;\n  border: 2px solid #FFF;\n  border-radius: 50%;\n  border-left-color: transparent;\n  border-bottom-color: transparent;\n  position: absolute;\n  top: 0;\n  left: 0;\n  background: none;\n  margin: 0; }\n\n@media screen and (max-width: 1024px) {\n  .pswp__preloader {\n    position: relative;\n    left: auto;\n    top: auto;\n    margin: 0;\n    float: right; } }\n\n@-webkit-keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@keyframes clockwise {\n  0% {\n    -webkit-transform: rotate(0deg);\n            transform: rotate(0deg); }\n  100% {\n    -webkit-transform: rotate(360deg);\n            transform: rotate(360deg); } }\n\n@-webkit-keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n@keyframes donut-rotate {\n  0% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); }\n  50% {\n    -webkit-transform: rotate(-140deg);\n            transform: rotate(-140deg); }\n  100% {\n    -webkit-transform: rotate(0);\n            transform: rotate(0); } }\n\n/*\n\t\n\t6. Additional styles\n\n */\n/* root element of UI */\n.pswp__ui {\n  -webkit-font-smoothing: auto;\n  visibility: visible;\n  opacity: 1;\n  z-index: 1550; }\n\n/* top black bar with buttons and \"1 of X\" indicator */\n.pswp__top-bar {\n  position: absolute;\n  left: 0;\n  top: 0;\n  height: 44px;\n  width: 100%; }\n\n.pswp__caption,\n.pswp__top-bar,\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  -webkit-backface-visibility: hidden;\n  will-change: opacity;\n  -webkit-transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1);\n          transition: opacity 333ms cubic-bezier(0.4, 0, 0.22, 1); }\n\n/* pswp--has_mouse class is added only when two subsequent mousemove events occur */\n.pswp--has_mouse .pswp__button--arrow--left,\n.pswp--has_mouse .pswp__button--arrow--right {\n  visibility: visible; }\n\n.pswp__top-bar,\n.pswp__caption {\n  background-color: rgba(0, 0, 0, 0.5); }\n\n/* pswp__ui--fit class is added when main image \"fits\" between top bar and bottom bar (caption) */\n.pswp__ui--fit .pswp__top-bar,\n.pswp__ui--fit .pswp__caption {\n  background-color: rgba(0, 0, 0, 0.3); }\n\n/* pswp__ui--idle class is added when mouse isn't moving for several seconds (JS option timeToIdle) */\n.pswp__ui--idle .pswp__top-bar {\n  opacity: 0; }\n\n.pswp__ui--idle .pswp__button--arrow--left,\n.pswp__ui--idle .pswp__button--arrow--right {\n  opacity: 0; }\n\n/*\n\tpswp__ui--hidden class is added when controls are hidden\n\te.g. when user taps to toggle visibility of controls\n*/\n.pswp__ui--hidden .pswp__top-bar,\n.pswp__ui--hidden .pswp__caption,\n.pswp__ui--hidden .pswp__button--arrow--left,\n.pswp__ui--hidden .pswp__button--arrow--right {\n  /* Force paint & create composition layer for controls. */\n  opacity: 0.001; }\n\n/* pswp__ui--one-slide class is added when there is just one item in gallery */\n.pswp__ui--one-slide .pswp__button--arrow--left,\n.pswp__ui--one-slide .pswp__button--arrow--right,\n.pswp__ui--one-slide .pswp__counter {\n  display: none; }\n\n.pswp__element--disabled {\n  display: none !important; }\n\n.pswp--minimal--dark .pswp__top-bar {\n  background: none; }\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "v4TG":
+/***/ "bf84":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1037,299 +1045,249 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-__webpack_require__("NDqF");
+__webpack_require__("343a");
 
-__webpack_require__("P7Wk");
+__webpack_require__("3fb5");
 
-var _photoswipe2 = _interopRequireDefault(__webpack_require__("UjYt"));
+var _photoswipe2 = _interopRequireDefault(__webpack_require__("5236"));
 
-var _photoswipeUiDefault = _interopRequireDefault(__webpack_require__("sngw"));
+var _photoswipeUiDefault = _interopRequireDefault(__webpack_require__("b278"));
 
-var _utils = __webpack_require__("Al62");
+var _utils = __webpack_require__("025e");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
-/* eslint-disable */
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 var _default = {
   name: 'PhotoswipeWrapper',
   props: {
-    options: Object
+    options: Object,
+    auto: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
-    openPswp: function openPswp() {
+    // find nearest parent element
+    closest: function closest(el, fn) {
+      return el && el.nodeType === 1 && (fn(el) ? el : this.closest(el.parentNode, fn));
+    },
+    // parse slide data (url, title, size ...) from DOM elements
+    parseThumbnailElements: function parseThumbnailElements(el) {
       var _this = this;
 
-      var initPhotoSwipeFromDOM = function initPhotoSwipeFromDOM(gallerySelector) {
-        // parse slide data (url, title, size ...) from DOM elements
-        // (children of gallerySelector)
-        var parseThumbnailElements = function parseThumbnailElements(el) {
-          var thumbElements = el.querySelectorAll('.image-wrapper'),
-              numNodes = thumbElements.length,
-              items = [],
-              wrapperEl,
-              size,
-              item;
+      var thumbElements = _toConsumableArray(el.querySelectorAll('.image-wrapper'));
 
-          for (var i = 0; i < numNodes; i++) {
-            wrapperEl = thumbElements[i]; // image wrapper element
-            // include only element nodes
+      if (this.auto && thumbElements.length === 0) {
+        thumbElements = _toConsumableArray(el.querySelectorAll('img'));
+      }
 
-            if (wrapperEl.nodeType !== 1) {
-              continue;
-            }
+      return thumbElements.map(function (wrapperEl) {
+        var src = wrapperEl.dataset.src;
+        var size = wrapperEl.dataset.size.split('x');
 
-            size = wrapperEl.dataset.size.split('x'); // create slide object
+        if (_this.auto && wrapperEl.tagName === 'IMG') {
+          src = wrapperEl.src; // eslint-disable-line
 
-            item = {
-              src: wrapperEl.dataset.src,
-              w: parseInt(size[0], 10),
-              h: parseInt(size[1], 10)
-            };
-
-            if (wrapperEl.children.length > 0) {
-              // <img> thumbnail element, retrieving thumbnail url
-              item.msrc = wrapperEl.dataset.src;
-            }
-
-            item.el = wrapperEl; // save link to element for getThumbBoundsFn
-
-            items.push(item);
-          }
-
-          return items;
-        }; // find nearest parent element
-
-
-        var closest = function closest(el, fn) {
-          return el && (fn(el) ? el : closest(el.parentNode, fn));
-        }; // triggers when user clicks on thumbnail
-
-
-        var onThumbnailsClick = function onThumbnailsClick(e) {
-          var eTarget = e.target; // prevent uncessary click event be handle 
-
-          if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return; // find root element of slide
-
-          var clickedListItem = closest(eTarget, function (el) {
-            return el.classList.contains('image-wrapper');
-          });
-
-          if (!clickedListItem) {
-            return;
-          } // find index of clicked item by looping through all child nodes
-          // alternatively, you may define index via data- attribute
-
-
-          var clickedGallery = closest(clickedListItem.parentNode, function (el) {
-            return el.dataset.type === 'parent';
-          }),
-              childNodes = clickedGallery.querySelectorAll('.image-wrapper'),
-              numChildNodes = childNodes.length,
-              nodeIndex = 0,
-              index;
-
-          for (var i = 0; i < numChildNodes; i++) {
-            if (childNodes[i].nodeType !== 1) {
-              continue;
-            }
-
-            if (childNodes[i] === clickedListItem) {
-              index = nodeIndex;
-              break;
-            }
-
-            nodeIndex++;
-          }
-
-          if (index >= 0) {
-            // open PhotoSwipe if valid index found
-            openPhotoSwipe(index, clickedGallery);
-          }
-
-          return false;
-        }; // parse picture index and gallery index from URL (#&pid=1&gid=2)
-
-
-        var photoswipeParseHash = function photoswipeParseHash() {
-          var hash = window.location.hash.substring(1),
-              params = {};
-
-          if (hash.length < 5) {
-            return params;
-          }
-
-          var vars = hash.split('&');
-
-          for (var i = 0; i < vars.length; i++) {
-            if (!vars[i]) {
-              continue;
-            }
-
-            var pair = vars[i].split('=');
-
-            if (pair.length < 2) {
-              continue;
-            }
-
-            params[pair[0]] = pair[1];
-          }
-
-          if (params.gid) {
-            params.gid = parseInt(params.gid, 10);
-          }
-
-          return params;
-        };
-
-        var openPhotoSwipe = function openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
-          var pswpElement = document.querySelectorAll('.pswp')[0],
-              gallery,
-              options,
-              items;
-          items = parseThumbnailElements(galleryElement);
-          var isBgImg = items[index].el.querySelector('.image-item'); // define options (if needed)
-
-          options = {
-            // dont need history in spa, prevent unnecessary bug
-            history: false,
-            showHideOpacity: isBgImg,
-            // define gallery index (for URL)
-            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
-            getThumbBoundsFn: function getThumbBoundsFn(index) {
-              // See Options -> getThumbBoundsFn section of documentation for more info
-              var thumbnail = items[index].el.querySelector('img') || items[index].el.querySelector('.image-item'),
-                  // find thumbnail
-              pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
-                  rect = thumbnail.getBoundingClientRect();
-              return {
-                x: rect.left,
-                y: rect.top + pageYScroll,
-                w: rect.width
-              };
-            }
-          }; // PhotoSwipe opened from URL
-
-          if (fromURL) {
-            if (options.galleryPIDs) {
-              // parse real index when custom PIDs are used
-              // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
-              for (var j = 0; j < items.length; j++) {
-                if (items[j].pid == index) {
-                  options.index = j;
-                  break;
-                }
-              }
-            } else {
-              // in URL indexes start from 1
-              options.index = parseInt(index, 10) - 1;
-            }
-          } else {
-            options.index = parseInt(index, 10);
-          } // exit if index not found
-
-
-          if (isNaN(options.index)) {
-            return;
-          }
-
-          if (disableAnimation) {
-            options.showAnimationDuration = 0;
-          } // add custom options
-
-
-          (0, _utils.setOptions)(options, _this.globalOptions);
-          (0, _utils.setOptions)(options, _this.options); // Pass data to PhotoSwipe and initialize it
-
-          gallery = new _photoswipe2.default(pswpElement, _photoswipeUiDefault.default, items, options);
-          gallery.init();
-        }; // loop through all gallery elements and bind events
-
-
-        var galleryElements = document.querySelectorAll(gallerySelector);
-
-        for (var i = 0, l = galleryElements.length; i < l; i++) {
-          galleryElements[i].setAttribute('data-pswp-uid', i + 1);
-          galleryElements[i].onclick = onThumbnailsClick;
-        } // Parse URL and open gallery if it contains #&pid=3&gid=1
-
-
-        var hashData = photoswipeParseHash();
-
-        if (hashData.pid && hashData.gid) {
-          openPhotoSwipe(hashData.pid, galleryElements[hashData.gid - 1], true, true);
+          wrapperEl.dataset.src = src; // eslint-disable-line
         }
-      }; // execute above function
 
+        return {
+          src: src,
+          msrc: src,
+          el: wrapperEl,
+          w: parseInt(size[0], 10),
+          h: parseInt(size[1], 10)
+        };
+      });
+    },
+    // triggers when user clicks on thumbnail
+    onThumbnailsClick: function onThumbnailsClick(e) {
+      var _this2 = this;
 
-      initPhotoSwipeFromDOM('.my-gallery');
+      var eTarget = e.target; // prevent uncessary click event be handle
+
+      if (eTarget.tagName !== 'IMG' && !eTarget.classList.contains('image-item')) return; // find root element of slide
+
+      var clickedListItem = this.closest(eTarget, function (el) {
+        return el.classList.contains('image-wrapper') || _this2.auto && el.tagName === 'IMG';
+      });
+      if (!clickedListItem) return; // find index of clicked item by looping through all child nodes
+
+      var clickedGallery = this.closest(clickedListItem.parentNode, function (el) {
+        return el.dataset.type === 'parent';
+      });
+
+      var childNodes = _toConsumableArray(clickedGallery.querySelectorAll('.image-wrapper'));
+
+      if (this.auto && childNodes.length === 0) {
+        childNodes = _toConsumableArray(clickedGallery.querySelectorAll('img'));
+      }
+
+      var index = (0, _utils.findIndex)(childNodes, function (child) {
+        return child === clickedListItem;
+      }); // open PhotoSwipe if valid index found
+
+      if (index >= 0) this.openPhotoSwipe(index, clickedGallery);
+    },
+    getThumbBoundsFn: function getThumbBoundsFn(parsedThumbItems) {
+      var _this3 = this;
+
+      return function (index) {
+        var thumbEl = parsedThumbItems[index].el; // See Options -> getThumbBoundsFn section of documentation for more info
+
+        var thumbnail = thumbEl.querySelector('img') || thumbEl.querySelector('.image-item');
+
+        if (_this3.auto && thumbEl.tagName === 'IMG') {
+          thumbnail = thumbEl;
+        }
+
+        var pageYScroll = window.pageYOffset || document.documentElement.scrollTop;
+        var rect = thumbnail.getBoundingClientRect();
+        return {
+          x: rect.left,
+          y: rect.top + pageYScroll,
+          w: rect.width
+        };
+      };
+    },
+    parseIndex: function parseIndex(index, items, fromURL, options) {
+      // PhotoSwipe opened from URL
+
+      /* eslint-disable no-nested-ternary */
+      return fromURL ? options.galleryPIDs ? (0, _utils.findIndex)(items, function (item) {
+        return item.pid === index;
+      }) : parseInt(index, 10) - 1 : parseInt(index, 10);
+    },
+    openPhotoSwipe: function openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
+      // TODO: determin public or private
+      // const pswpElement = document.querySelectorAll('.pswp')[0]
+      var pswpElement = this.$refs.pswp;
+      var items = this.parseThumbnailElements(galleryElement);
+      var isBgImg = !!items[index].el.querySelector('.image-item');
+      var options = {
+        // dont need history in spa, prevent unnecessary bug
+        history: false,
+        showHideOpacity: isBgImg,
+        // define gallery index (for URL)
+        galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+        getThumbBoundsFn: this.getThumbBoundsFn(items)
+      };
+      var parsedIndex = this.parseIndex(index, items, fromURL, options);
+      if (parsedIndex >= 0) options.index = parsedIndex; // exit if index not found
+
+      if (Number.isNaN(options.index)) return;
+      if (disableAnimation) options.showAnimationDuration = 0; // add custom options
+
+      (0, _utils.setOptions)(options, this.globalOptions);
+      (0, _utils.setOptions)(options, this.options); // Pass data to PhotoSwipe and initialize it
+
+      new _photoswipe2.default(pswpElement, _photoswipeUiDefault.default, items, options).init();
+    },
+    initPhotoSwipeFromDOM: function initPhotoSwipeFromDOM(gallerySelector) {
+      var _this4 = this;
+
+      var galleryElements = _toConsumableArray(document.querySelectorAll(gallerySelector));
+
+      var gallery = this.$refs.gallery;
+      var galleryIndex = (0, _utils.findIndex)(galleryElements, function (el) {
+        return el === gallery;
+      });
+      var currentGid = galleryIndex + 1;
+      gallery.setAttribute('data-pswp-uid', currentGid); // Parse URL and open gallery if it contains #&pid=3&gid=1
+
+      var _parseHash = (0, _utils.parseHash)(),
+          pid = _parseHash.pid,
+          gid = _parseHash.gid;
+
+      if (pid && gid && gid === currentGid) {
+        // in history mode, it will be empty in first time access because cant get image size
+        setTimeout(function () {
+          _this4.openPhotoSwipe(pid - 1, gallery, true, true);
+        });
+      }
+    },
+    openPswp: function openPswp() {
+      this.initPhotoSwipeFromDOM('.my-gallery');
+    },
+    setImageSize: function setImageSize() {
+      var gallery = this.$refs.gallery;
+      var imgs = gallery.querySelectorAll('img');
+      var defaultSize = {
+        w: 0,
+        h: 0 // eslint-disable-next-line
+
+      };
+
+      var setDataset = function setDataset(el, _ref) {
+        var w = _ref.w,
+            h = _ref.h;
+        el.dataset.size = "".concat(w, "x").concat(h);
+      };
+
+      imgs.forEach(function (img) {
+        (0, _utils.getImageSize)(img.src).then(function (size) {
+          return setDataset(img, size);
+        }).catch(function () {
+          return setDataset(img, defaultSize);
+        });
+      });
     }
   },
   mounted: function mounted() {
+    this.auto && this.setImageSize(); // eslint-disable-line
+
     this.openPswp();
   }
 };
 exports.default = _default;
+
+/***/ }),
+
+/***/ "ee9f":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("42c8");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("3f3a5dd3", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
+/***/ "f301":
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjY0IiBoZWlnaHQ9Ijg4IiB2aWV3Qm94PSIwIDAgMjY0IDg4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0aXRsZT5kZWZhdWx0LXNraW4gMjwvdGl0bGU+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48Zz48cGF0aCBkPSJNNjcuMDAyIDU5LjV2My43NjhjLTYuMzA3Ljg0LTkuMTg0IDUuNzUtMTAuMDAyIDkuNzMyIDIuMjItMi44MyA1LjU2NC01LjA5OCAxMC4wMDItNS4wOThWNzEuNUw3MyA2NS41ODUgNjcuMDAyIDU5LjV6IiBpZD0iU2hhcGUiIGZpbGw9IiNmZmYiLz48ZyBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTMgMjl2LTVoMnYzaDN2MmgtNXpNMTMgMTVoNXYyaC0zdjNoLTJ2LTV6TTMxIDE1djVoLTJ2LTNoLTN2LTJoNXpNMzEgMjloLTV2LTJoM3YtM2gydjV6IiBpZD0iU2hhcGUiLz48L2c+PGcgZmlsbD0iI2ZmZiI+PHBhdGggZD0iTTYyIDI0djVoLTJ2LTNoLTN2LTJoNXpNNjIgMjBoLTV2LTJoM3YtM2gydjV6TTcwIDIwdi01aDJ2M2gzdjJoLTV6TTcwIDI0aDV2MmgtM3YzaC0ydi01eiIvPjwvZz48cGF0aCBkPSJNMjAuNTg2IDY2bC01LjY1Ni01LjY1NiAxLjQxNC0xLjQxNEwyMiA2NC41ODZsNS42NTYtNS42NTYgMS40MTQgMS40MTRMMjMuNDE0IDY2bDUuNjU2IDUuNjU2LTEuNDE0IDEuNDE0TDIyIDY3LjQxNGwtNS42NTYgNS42NTYtMS40MTQtMS40MTRMMjAuNTg2IDY2eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMTEuNzg1IDY1LjAzTDExMCA2My41bDMtMy41aC0xMHYtMmgxMGwtMy0zLjUgMS43ODUtMS40NjhMMTE3IDU5bC01LjIxNSA2LjAzeiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xNTIuMjE1IDY1LjAzTDE1NCA2My41bC0zLTMuNWgxMHYtMmgtMTBsMy0zLjUtMS43ODUtMS40NjhMMTQ3IDU5bDUuMjE1IDYuMDN6IiBmaWxsPSIjZmZmIi8+PGc+PHBhdGggaWQ9IlJlY3RhbmdsZS0xMSIgZmlsbD0iI2ZmZiIgZD0iTTE2MC45NTcgMjguNTQzbC0zLjI1LTMuMjUtMS40MTMgMS40MTQgMy4yNSAzLjI1eiIvPjxwYXRoIGQ9Ik0xNTIuNSAyN2MzLjAzOCAwIDUuNS0yLjQ2MiA1LjUtNS41cy0yLjQ2Mi01LjUtNS41LTUuNS01LjUgMi40NjItNS41IDUuNSAyLjQ2MiA1LjUgNS41IDUuNXoiIGlkPSJPdmFsLTEiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTUwIDIxaDV2MWgtNXoiLz48L2c+PGc+PHBhdGggZD0iTTExNi45NTcgMjguNTQzbC0xLjQxNCAxLjQxNC0zLjI1LTMuMjUgMS40MTQtMS40MTQgMy4yNSAzLjI1eiIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik0xMDguNSAyN2MzLjAzOCAwIDUuNS0yLjQ2MiA1LjUtNS41cy0yLjQ2Mi01LjUtNS41LTUuNS01LjUgMi40NjItNS41IDUuNSAyLjQ2MiA1LjUgNS41IDUuNXoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjUiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA2IDIxaDV2MWgtNXoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTA5LjA0MyAxOS4wMDhsLS4wODUgNS0xLS4wMTcuMDg1LTV6Ii8+PC9nPjwvZz48L2c+PC9zdmc+"
+
+/***/ }),
+
+/***/ "fb15":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _setPublicPath__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1eb2");
+/* harmony import */ var _setPublicPath__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_setPublicPath__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("56d7");
+/* harmony import */ var _entry__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_entry__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _entry__WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _entry__WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/* harmony default export */ __webpack_exports__["default"] = (_entry__WEBPACK_IMPORTED_MODULE_1___default.a);
+
+
 
 /***/ })
 
