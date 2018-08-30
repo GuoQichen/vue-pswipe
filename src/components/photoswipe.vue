@@ -194,6 +194,7 @@ export default {
             // eslint-disable-next-line
             const setDataset = (el, { w, h }) => { el.dataset.size = `${w}x${h}` }
             imgs.forEach((img) => {
+                if (img.dataset.size) return
                 getImageSize(img.src)
                     .then(size => setDataset(img, size))
                     .catch(() => setDataset(img, defaultSize))

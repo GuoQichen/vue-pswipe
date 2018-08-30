@@ -20,7 +20,8 @@
             </PhotoswipeItem>
         </Photoswipe>
 
-        <Photoswipe auto>
+        <Photoswipe auto ref="photoswipe">
+            <div v-html="htmlTemplate"></div>
             <img
                 v-for="(src, index) in imageList"
                 :src="src"
@@ -39,6 +40,7 @@ export default {
                 'https://placeimg.com/640/481/any',
                 'https://placeimg.com/640/482/any',
             ],
+            htmlTemplate: '',
         }
     },
     methods: {
@@ -52,6 +54,14 @@ export default {
                 backgroundRepeat: 'no-repeat',
             }
         },
+    },
+    mounted() {
+        setTimeout(() => {
+            this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 100%;"/>'
+            this.$nextTick(() => {
+                this.$refs.photoswipe.setImageSize()
+            })
+        }, 1e3)
     },
 }
 </script>
