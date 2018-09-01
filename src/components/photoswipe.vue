@@ -1,52 +1,11 @@
 <template>
-	<div>
-		<div
-            class="pswipe-gallery"
-            ref="gallery"
-            @click="onThumbnailsClick"
-        >
-			<slot></slot>
-		</div>
-
-		<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true" ref="pswp">
-			<div class="pswp__bg"></div>
-			<div class="pswp__scroll-wrap">
-				<div class="pswp__container">
-					<div class="pswp__item"></div>
-					<div class="pswp__item"></div>
-					<div class="pswp__item"></div>
-				</div>
-
-				<div class="pswp__ui pswp__ui--hidden">
-					<div class="pswp__top-bar">
-						<div class="pswp__counter"></div>
-						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-						<div class="pswp__preloader">
-							<div class="pswp__preloader__icn">
-							<div class="pswp__preloader__cut">
-								<div class="pswp__preloader__donut"></div>
-							</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-						<div class="pswp__share-tooltip"></div>
-					</div>
-
-					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-					</button>
-
-					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-					</button>
-
-					<div class="pswp__caption">
-						<div class="pswp__caption__center"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div
+        class="pswipe-gallery"
+        ref="gallery"
+        @click="onThumbnailsClick"
+    >
+        <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -54,8 +13,10 @@ import 'photoswipe/dist/photoswipe.css'
 import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.min'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default.min'
+
+import { defualtGlobalOption } from '../config'
+
 import {
-    setOptions,
     findIndex,
     getImageSize,
     parseHash,
@@ -77,6 +38,8 @@ export default {
     },
     methods: {
         getThumbnailElements() {
+            // TODO: will be invoke twice in one click event (parse and open)
+            // TODO: will be invoke in click every time (think carefully, include dynamic html generate)
             let thumbnailElements = querySelectorList('.image-wrapper', this.gallery)
             if (this.auto && thumbnailElements.length === 0) {
                 thumbnailElements = querySelectorList('img', this.gallery)
@@ -125,6 +88,7 @@ export default {
             // open PhotoSwipe if valid index found
             if (index >= 0) this.openPhotoSwipe(index, this.gallery)
         },
+        // TODO: use .pswipe-item instead of component
         getPresentElement(thumbEl) {
             let thumbnail = thumbEl.querySelector('img') || thumbEl.querySelector('.image-item')
             if (this.auto && thumbEl.tagName === 'IMG') {
@@ -133,7 +97,6 @@ export default {
             return thumbnail
         },
         getThumbBoundsFn(parsedThumbItems) {
-            // See Options -> getThumbBoundsFn section of documentation for more info
             return (index) => {
                 const thumbEl = parsedThumbItems[index].el
                 const thumbnail = this.getPresentElement(thumbEl)
@@ -160,13 +123,8 @@ export default {
             return !!el.querySelector('.image-item')
         },
         openPhotoSwipe(index, galleryElement, disableAnimation, fromURL) {
-            // TODO: determin public or private
-            // const pswpElement = document.querySelectorAll('.pswp')[0]
-            const pswpElement = this.$refs.pswp
             const items = this.parseThumbnailElements(galleryElement)
             const options = {
-                // no need history in spa
-                history: false,
                 showHideOpacity: this.isBgImg(items[index].el),
                 // define gallery index (for URL)
                 galleryUID: galleryElement.getAttribute('data-pswp-uid'),
@@ -176,17 +134,13 @@ export default {
             const parsedIndex = this.parseIndex(index, items, fromURL, options)
             if (parsedIndex >= 0) options.index = parsedIndex
 
-            // exit if index not found
             if (Number.isNaN(options.index)) return
 
             if (disableAnimation) options.showAnimationDuration = 0
 
-            // add custom options
-            setOptions(options, this.globalOptions)
-            setOptions(options, this.options)
+            Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
 
-            // Pass data to PhotoSwipe and initialize it
-            new PhotoSwipe(pswpElement, defaultUI, items, options).init()
+            new PhotoSwipe(this.pswpElement, defaultUI, items, options).init()
         },
         initPhotoSwipeFromDOM(gallerySelector) {
             const galleryElements = querySelectorList(gallerySelector)

@@ -1,18 +1,14 @@
 import Photoswipe from './components/photoswipe.vue'
 import ImageItem from './components/imageItem.vue'
-
-const getGlobalMixin = options => ({
-    data() {
-        return {
-            globalOptions: options,
-        }
-    },
-})
+import Pswp from './components/pswp.vue'
+import { getGlobalMixin } from './config'
 
 export default {
     install(Vue, options) {
+        const pswp = new Vue(Pswp).$mount()
+
         Vue.component('Photoswipe', {
-            mixins: [getGlobalMixin(options)],
+            mixins: [getGlobalMixin(pswp, options)],
             ...Photoswipe,
         })
         Vue.component('PhotoswipeItem', ImageItem)

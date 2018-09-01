@@ -1,4 +1,4 @@
-export const isObject = value => Object.prototype.toString.call(value) === '[object Object]'
+export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 const isDef = value => (value !== undefined) && (value !== null)
 
@@ -9,7 +9,6 @@ export const errorHandler = (hint) => {
         `[vue-pswipe] ${hint}`,
     )
 }
-
 
 export const getImageSize = path => new Promise((resolve) => {
     const img = new Image()
@@ -30,12 +29,6 @@ export const getImageSize = path => new Promise((resolve) => {
     }
     check()
 })
-
-export const setOptions = (origin, addition) => {
-    if (!isObject(addition)) return
-    Object.assign(origin, addition)
-}
-
 
 export const findIndex = (array, fn) => {
     let index = -1
@@ -90,3 +83,13 @@ export const get = (context, path, defaultValue) => {
     }
 }
 
+const single = (fn) => {
+    let result
+    return function (...args) { // eslint-disable-line
+        return result || (result = fn.apply(this, args)) // eslint-disable-line
+    }
+}
+
+const append = el => document.body.appendChild(el)
+
+export const appendOnce = single(append)
