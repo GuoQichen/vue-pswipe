@@ -83,7 +83,7 @@ export const get = (context, path, defaultValue) => {
     }
 }
 
-const single = (fn) => {
+export const single = (fn) => {
     let result
     return function (...args) { // eslint-disable-line
         return result || (result = fn.apply(this, args)) // eslint-disable-line
@@ -93,3 +93,26 @@ const single = (fn) => {
 const append = el => document.body.appendChild(el)
 
 export const appendOnce = single(append)
+
+export const setSize = (
+    el,
+    { w, h } = { w: 0, h: 0 },
+) => {
+    // eslint-disable-next-line
+    el.dataset.pswpSize = `${w}x${h}`
+}
+
+export const getSrc = (target, auto) => (
+    auto
+        ? target.src
+        : target.dataset.pswpSrc
+)
+
+// prevent uncessary click event be handle
+export const relevant = (el, auto) => (
+    auto
+        ? isImg(el)
+        : el.dataset.pswpSrc
+)
+
+export const isBgImg = el => !isImg(el) && el.dataset.pswpSrc

@@ -1,23 +1,20 @@
 <template>
     <div>
         <Photoswipe>
-            <PhotoswipeItem
+            <img
                 v-for="(src, index) in imageList"
                 :key="index"
                 :src="src"
+                :data-pswp-src="src"
                 style="width: 200px;"
             />
 
-            <PhotoswipeItem
+            <div
                 v-for="(src, index) in imageList"
-                :key="index+imageList.length"
-                :src="src"
-            >
-                <div
-                    class="image-item"
-                    :style="getImageItemStyle(src)"
-                />
-            </PhotoswipeItem>
+                :data-pswp-src="src"
+                :key="`bg-${index}`"
+                :style="getImageItemStyle(src)"
+            />
         </Photoswipe>
 
         <Photoswipe auto ref="photoswipe">
@@ -25,7 +22,7 @@
             <img
                 v-for="(src, index) in imageList"
                 :src="src"
-                :key="`i-${index}`"
+                :key="`auto-${index}`"
                 style="width: 200px;"
             />
         </Photoswipe>
