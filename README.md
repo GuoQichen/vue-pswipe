@@ -2,7 +2,7 @@
 a Vue plugin for photoswipe without set image size
 
 ## example online
-[![Edit Vue Template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/38q57m2o26)
+[![Edit Vue Template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/619x48656r)
 
 ## install
 ```
@@ -51,7 +51,7 @@ Photoswipe
 
 | property | type | explain |
 | --- | --- | --- |
-| options | object | original photoswipe options |
+| options | object | original photoswipe options |
 | auto | boolean | auto initial without data-pswp-src |
 
 [complete options](http://photoswipe.com/documentation/options.html)
