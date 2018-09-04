@@ -22,7 +22,6 @@ import {
     parseHash,
     querySelectorList,
     get,
-    errorHandler,
     setSize,
     getSrc,
     relevant,
@@ -48,20 +47,28 @@ export default {
             return thumbEls.map((wrapperEl) => {
                 const src = getSrc(wrapperEl, this.auto)
                 const size = get(wrapperEl, 'dataset.pswpSize', '').split('x')
-                if (!size[0]) return errorHandler('cant find data-pswp-size in thumbnail element')
 
                 return {
                     src,
                     msrc: src,
                     el: wrapperEl,
-                    w: parseInt(size[0], 10),
-                    h: parseInt(size[1], 10),
+                    w: Number(size[0] || 0),
+                    h: Number(size[1] || 0),
                 }
             })
         },
         onThumbClick(e) {
             const eTarget = e.target
             if (!relevant(eTarget, this.auto)) return
+
+            const size = eTarget.dataset.pswpSize
+            if (!size) {
+                this.setImageSizeSeparately(eTarget)
+                    .then(() => {
+                        this.onThumbClick({ target: eTarget })
+                    })
+                return
+            }
 
             const thumbEls = this.getThumbEls()
             const index = findIndex(
@@ -137,14 +144,15 @@ export default {
         openPswp() {
             this.initPhotoSwipeFromDOM('.pswipe-gallery')
         },
+        setImageSizeSeparately(target) {
+            if (target.dataset.pswpSize) return
+            return getImageSize(getSrc(target, this.auto))
+                .then(size => setSize(target, size))
+        },
         setImageSize() {
-            this.getThumbEls()
-                .forEach((target) => {
-                    if (target.dataset.pswpSize) return
-                    getImageSize(getSrc(target, this.auto))
-                        .then(size => setSize(target, size))
-                        .catch(() => setSize(target))
-                })
+            this.getThumbEls().forEach((target) => {
+                this.setImageSizeSeparately(target)
+            })
         },
     },
     mounted() {

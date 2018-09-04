@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             imageList: [
+                'http://img.dxycdn.com/dxycare/2018/07/05/201807051426215b3dba0d6749c.png',
                 'https://placeimg.com/640/480/any',
                 'https://placeimg.com/640/481/any',
                 'https://placeimg.com/640/482/any',
@@ -55,9 +56,6 @@ export default {
     mounted() {
         setTimeout(() => {
             this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 100%;"/>'
-            this.$nextTick(() => {
-                this.$refs.photoswipe.setImageSize()
-            })
         }, 1e3)
     },
 }

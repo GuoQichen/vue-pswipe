@@ -94,13 +94,7 @@ const append = el => document.body.appendChild(el)
 
 export const appendOnce = single(append)
 
-export const setSize = (
-    el,
-    { w, h } = { w: 0, h: 0 },
-) => {
-    // eslint-disable-next-line
-    el.dataset.pswpSize = `${w}x${h}`
-}
+export const setSize = (el, { w, h }) => el.dataset.pswpSize = `${w}x${h}` // eslint-disable-line
 
 export const getSrc = (target, auto) => (
     auto
