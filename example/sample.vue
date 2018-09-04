@@ -1,6 +1,7 @@
 <template>
     <div>
         <Photoswipe>
+            <h2>use img tag</h2>
             <img
                 v-for="(src, index) in imageList"
                 :key="index"
@@ -9,6 +10,7 @@
                 style="width: 200px;"
             />
 
+            <h2>use background-image</h2>
             <div
                 v-for="(src, index) in imageList"
                 :data-pswp-src="src"
@@ -18,7 +20,11 @@
         </Photoswipe>
 
         <Photoswipe auto ref="photoswipe">
+            <h2>use dynamic template</h2>
+            <button @click="handleInsert">dynamic insert htmlTemplate</button>
             <div v-html="htmlTemplate"></div>
+
+            <h2>use auto mode</h2>
             <img
                 v-for="(src, index) in imageList"
                 :src="src"
@@ -33,7 +39,6 @@ export default {
     data() {
         return {
             imageList: [
-                'http://img.dxycdn.com/dxycare/2018/07/05/201807051426215b3dba0d6749c.png',
                 'https://placeimg.com/640/480/any',
                 'https://placeimg.com/640/481/any',
                 'https://placeimg.com/640/482/any',
@@ -52,11 +57,9 @@ export default {
                 backgroundRepeat: 'no-repeat',
             }
         },
-    },
-    mounted() {
-        setTimeout(() => {
-            this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 100%;"/>'
-        }, 1e3)
+        handleInsert() {
+            this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
+        },
     },
 }
 </script>

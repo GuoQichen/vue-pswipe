@@ -20,24 +20,29 @@ Vue.use(Photoswipe, options)
 ```
 [complete options](http://photoswipe.com/documentation/options.html)
 
-you can use default slot, it will render img with src
-```html
-<!-- someComponent.vue -->
-<Photoswipe>
-    <PhotoswipeItem :src="imageSrc" />
+```vue
+<Photopswipe>
+    <img 
+        :src="imageSrc"
+        :data-pswp-src="imageSrc"
+    />
 </Photoswipe>
 ```
 
-or you can use background-image instead of img, and **image-item class is necessary for background-image**, because its use for identified as thumbnail image element 
-```html
-<!-- someComponent.vue -->
+or you can use background-image instead of img tag
+```vue
 <Photoswipe>
-    <PhotoswipeItem :src="imageSrc">
-        <div 
-            class="image-item"
-            :style="getBgImgStyle(src)"
-        >
-    </PhotoswipeItem>
+    <div 
+        :data-pswp-src="imageSrc"
+        :style="getBgImgStyle(imageSrc)"
+    >
+</Photoswipe>
+```
+
+or you can set auto props, then vue-pswipe will collect all img tag
+```vue
+<Photoswipe auto>
+    <img :src="imageSrc" />
 </Photoswipe>
 ```
 
@@ -46,15 +51,10 @@ Photoswipe
 
 | property | type | explain |
 | --- | --- | --- |
-| options | Object | original photoswipe options |
+| options | object | original photoswipe options |
+| auto | boolean | auto initial without data-pswp-src |
 
 [complete options](http://photoswipe.com/documentation/options.html)
-
-PhotoswipeItem
-
-| property | type | explain |
-| --- | --- | --- |
-| src | String | image src |
 
 ## example
 ```
