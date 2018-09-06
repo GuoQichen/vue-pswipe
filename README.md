@@ -21,7 +21,7 @@ Vue.use(Photoswipe, options)
 [complete options](http://photoswipe.com/documentation/options.html)
 
 ```vue
-<Photopswipe>
+<Photoswipe>
     <img 
         :src="imageSrc"
         :data-pswp-src="imageSrc"
