@@ -46,6 +46,15 @@ or you can set auto props, then vue-pswipe will collect all img tag
 </Photoswipe>
 ```
 
+if you dont want collect all img under auto mode, u can set filter props
+```vue
+<Photoswipe auto :filter="(img) => img.parentNode.tagName !== 'A'">
+    <img :src="imageSrc" />
+</Photoswipe>
+```
+
+The above example filters the all img in a tags
+
 ## props
 Photoswipe 
 
@@ -53,6 +62,7 @@ Photoswipe
 | --- | --- | --- |
 | options | object | original photoswipe options |
 | auto | boolean | auto initial without data-pswp-src |
+| filter | function | a filter function that accept img as argument, only work in auto mode |
 
 [complete options](http://photoswipe.com/documentation/options.html)
 
