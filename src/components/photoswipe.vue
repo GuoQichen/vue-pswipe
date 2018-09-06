@@ -64,7 +64,7 @@ export default {
         onThumbClick(e) {
             const eTarget = e.target
             if (!relevant(eTarget, this.auto)) return
-            if (!this.filter(eTarget)) return
+            if (this.auto && !this.filter(eTarget)) return
 
             const size = eTarget.dataset.pswpSize
             if (!size) {
