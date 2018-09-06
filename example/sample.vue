@@ -32,12 +32,12 @@
                 style="width: 200px;"
             />
 
-            <h2>wrap with a </h2>
-            <a href="javascipt: void()">
+            <h2>use filter in auto mode</h2>
+            <a href="javascipt: void(0)">
                 <img
                     v-for="(src, index) in imageList"
                     :src="src"
-                    :key="`wrap-${index}`"
+                    :key="`filter-${index}`"
                     style="width: 200px;"
                 />
             </a>
