@@ -14,12 +14,12 @@ npm install vue-pswipe
 ```js
 // main.js
 import Photoswipe from 'vue-pswipe'
-import Vue from 'vue'
 
 Vue.use(Photoswipe, options)
 ```
 [complete options](http://photoswipe.com/documentation/options.html)
 
+you should set `data-pswp-src` to prefetch image size
 ```vue
 <Photoswipe>
     <img 
@@ -46,7 +46,7 @@ or you can set auto props, then vue-pswipe will collect all img tag
 </Photoswipe>
 ```
 
-if you dont want collect all img under auto mode, u can set filter props
+if you dont want collect all img under auto mode, you can set filter props
 ```vue
 <Photoswipe auto :filter="(img) => img.parentNode.tagName !== 'A'">
     <img :src="imageSrc" />

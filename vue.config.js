@@ -6,7 +6,7 @@ module.exports = {
             .clear()
             .loader('url-loader')
             .options({
-                limit: 4 * 1024,
+                limit: 5 * 1024,
                 name: 'img/[name].[hash:8].[ext]',
             })
     },

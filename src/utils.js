@@ -103,9 +103,9 @@ export const getSrc = (target, auto) => (
 )
 
 // prevent uncessary click event be handle
-export const relevant = (el, auto) => (
+export const relevant = (el, auto, filter) => (
     auto
-        ? isImg(el)
+        ? isImg(el) && filter(el)
         : el.dataset.pswpSrc
 )
 

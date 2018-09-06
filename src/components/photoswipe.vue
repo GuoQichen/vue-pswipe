@@ -63,19 +63,19 @@ export default {
         },
         onThumbClick(e) {
             const eTarget = e.target
-            if (!relevant(eTarget, this.auto)) return
-            if (this.auto && !this.filter(eTarget)) return
+            if (!relevant(eTarget, this.auto, this.filter)) return
 
             const size = eTarget.dataset.pswpSize
+            const thumbEls = this.getThumbEls()
+
             if (!size) {
-                this.setImageSizeSeparately(eTarget)
+                this.setImageSize(thumbEls)
                     .then(() => {
                         this.onThumbClick({ target: eTarget })
                     })
                 return
             }
 
-            const thumbEls = this.getThumbEls()
             const index = findIndex(
                 thumbEls,
                 child => child === eTarget,
@@ -149,15 +149,17 @@ export default {
         openPswp() {
             this.initPhotoSwipeFromDOM('.pswipe-gallery')
         },
-        setImageSizeSeparately(target) {
-            if (target.dataset.pswpSize) return
-            return getImageSize(getSrc(target, this.auto))
-                .then(size => setSize(target, size))
+        setImageSizeSeparately(thumbEl) {
+            if (thumbEl.dataset.pswpSize) return
+            return getImageSize(getSrc(thumbEl, this.auto))
+                .then(size => setSize(thumbEl, size))
         },
-        setImageSize() {
-            this.getThumbEls().forEach((target) => {
-                this.setImageSizeSeparately(target)
-            })
+        setImageSize(thumbEls = this.getThumbEls()) {
+            return Promise.all(
+                thumbEls.map(thumbEl =>
+                    this.setImageSizeSeparately(thumbEl),
+                ),
+            )
         },
     },
     mounted() {

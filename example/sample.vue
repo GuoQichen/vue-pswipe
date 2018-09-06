@@ -32,7 +32,7 @@
                 style="width: 200px;"
             />
 
-            <h2>use filter in auto mode</h2>
+            <h2>use filter under auto mode</h2>
             <a href="javascipt: void(0)">
                 <img
                     v-for="(src, index) in imageList"
