@@ -36,11 +36,15 @@ export default {
             type: Boolean,
             default: false,
         },
+        filter: {
+            type: Function,
+            default: () => true,
+        },
     },
     methods: {
         getThumbEls() {
             return this.auto
-                ? querySelectorList('img', this.gallery)
+                ? querySelectorList('img', this.gallery).filter(this.filter)
                 : querySelectorList('[data-pswp-src]', this.gallery)
         },
         parseThumbEls(thumbEls = this.getThumbEls()) {

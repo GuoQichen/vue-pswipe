@@ -19,7 +19,7 @@
             />
         </Photoswipe>
 
-        <Photoswipe auto ref="photoswipe">
+        <Photoswipe auto ref="photoswipe" :filter="imgFilter">
             <h2>use dynamic template</h2>
             <button @click="handleInsert">dynamic insert htmlTemplate</button>
             <div v-html="htmlTemplate"></div>
@@ -31,6 +31,16 @@
                 :key="`auto-${index}`"
                 style="width: 200px;"
             />
+
+            <h2>wrap with a </h2>
+            <a href="javascipt: void()">
+                <img
+                    v-for="(src, index) in imageList"
+                    :src="src"
+                    :key="`wrap-${index}`"
+                    style="width: 200px;"
+                />
+            </a>
         </Photoswipe>
     </div>
 </template>
@@ -59,6 +69,9 @@ export default {
         },
         handleInsert() {
             this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
+        },
+        imgFilter(img) {
+            return img.parentNode.tagName !== 'A'
         },
     },
 }
