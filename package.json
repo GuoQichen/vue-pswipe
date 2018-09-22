@@ -1,33 +1,25 @@
 {
   "name": "vue-pswipe",
   "version": "0.8.2",
-  "description": "a vue plugin for photoswipe",
-  "main": "dist/Photoswipe.umd.min.js",
   "scripts": {
-    "dev": "vue-cli-service serve ./example/index.js",
-    "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.js",
+    "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.ts",
+    "dev": "vue-cli-service serve ./example/index.ts",
     "report": "npm run build -- --report"
   },
-  "keywords": [
-    "vue",
-    "photoswipe"
-  ],
-  "author": "guoqichen",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/GuoQichen/vue-pswipe.git"
-  },
   "dependencies": {
-    "photoswipe": "^4.1.2"
+    "@types/photoswipe": "^4.0.28",
+    "photoswipe": "^4.1.2",
+    "vue-class-component": "^6.0.0",
+    "vue-property-decorator": "^7.0.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.1",
-    "@vue/cli-plugin-eslint": "^3.0.1",
-    "@vue/cli-service": "^3.0.1",
-    "@vue/eslint-config-airbnb": "^3.0.1",
-    "less": "^3.8.1",
-    "less-loader": "^4.1.0",
+    "@vue/cli-plugin-babel": "^3.0.3",
+    "@vue/cli-plugin-eslint": "^3.0.3",
+    "@vue/cli-plugin-typescript": "^3.0.3",
+    "@vue/cli-service": "^3.0.3",
+    "@vue/eslint-config-airbnb": "^3.0.3",
+    "@vue/eslint-config-typescript": "^3.0.1",
+    "typescript": "^3.0.0",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
   },
@@ -35,5 +27,17 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "keywords": [
+    "vue",
+    "photoswipe"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuoQichen/vue-pswipe.git"
+  },
+  "main": "dist/Photoswipe.umd.min.js",
+  "description": "a vue plugin for photoswipe",
+  "author": "guoqichen"
 }

@@ -44,35 +44,35 @@
         </Photoswipe>
     </div>
 </template>
-<script>
-export default {
-    data() {
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({ name: 'sample' })
+export default class Sample extends Vue {
+    imageList = [
+        'https://placeimg.com/640/480/any',
+        'https://placeimg.com/640/481/any',
+        'https://placeimg.com/640/482/any',
+    ]
+    htmlTemplate = ''
+
+    getImageItemStyle(src: string) {
         return {
-            imageList: [
-                'https://placeimg.com/640/480/any',
-                'https://placeimg.com/640/481/any',
-                'https://placeimg.com/640/482/any',
-            ],
-            htmlTemplate: '',
+            width: '200px',
+            height: '200px',
+            backgroundImage: `url(${src})`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
         }
-    },
-    methods: {
-        getImageItemStyle(src) {
-            return {
-                width: '200px',
-                height: '200px',
-                backgroundImage: `url(${src})`,
-                backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-            }
-        },
-        handleInsert() {
-            this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
-        },
-        imgFilter(img) {
-            return img.parentNode.tagName !== 'A'
-        },
-    },
+    }
+
+    handleInsert() {
+        this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
+    }
+
+    imgFilter(img: HTMLImageElement) {
+        return img.parentElement && img.parentElement.tagName !== 'A'
+    }
 }
 </script>

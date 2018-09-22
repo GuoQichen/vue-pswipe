@@ -5,20 +5,23 @@ module.exports = {
   },
   'extends': [
     'plugin:vue/essential',
-    '@vue/airbnb'
+    '@vue/airbnb',
+    '@vue/typescript'
   ],
   rules: {
     indent: ['error', 4],
     semi: ['error', 'never'],
-    'no-tabs': 0,
-    'function-paren-newline': 0,
+    'no-tabs': 'off',
+    'function-paren-newline': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-return-assign': 0,
-    'no-nested-ternary': 0,
-    'consistent-return': 0
+    'no-return-assign': 'off',
+    'no-nested-ternary': 'off',
+    'consistent-return': 'off',
+    'class-methods-use-this': 'off',
+    'camelcase': 'off'
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'typescript-eslint-parser'
   }
 }

@@ -1,7 +1,7 @@
-import Vue from 'vue/dist/vue'
+import Vue, { CreateElement } from 'vue' // eslint-disable-line
 import PhotoswipePlugin from '../src/main'
 // import PhotoswipePlugin from '../dist/Photoswipe.umd'
-import sample from './sample.vue'
+import Sample from './sample.vue'
 
 Vue.use(PhotoswipePlugin, {
     // history: true,
@@ -11,7 +11,7 @@ Vue.use(PhotoswipePlugin, {
 new Vue({
     el: '#app',
     components: {
-        sample,
+        Sample,
     },
-    template: '<sample />',
+    render: (h: CreateElement) => h(Sample),
 })

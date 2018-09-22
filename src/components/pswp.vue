@@ -63,8 +63,9 @@
         </div>
     </div>
 </template>
-<script>
-export default {
-    name: 'pswp',
-}
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+
+@Component({ name: 'Pswp' })
+export default class Pswp extends Vue {}
 </script>
