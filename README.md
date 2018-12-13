@@ -62,6 +62,7 @@ Photoswipe
 | --- | --- | --- |
 | options | object | original photoswipe options |
 | auto | boolean | auto initial without data-pswp-src |
+| bubble | boolean | allow click event bubbling, default is false |
 | filter | function | a filter function that accept img as argument, only work in auto mode |
 
 [complete options](http://photoswipe.com/documentation/options.html)

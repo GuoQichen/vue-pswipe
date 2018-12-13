@@ -88,7 +88,7 @@ export const querySelectorList = <T extends HTMLElement>(selector: string, conte
     [...context.querySelectorAll(selector)] as T[]
 
 interface Closest {
-    (el: Node | null, fn: (el: Node) => boolean): HTMLElement | false
+    (el: Node | null, fn: (el: HTMLElement) => boolean): HTMLElement | false
 }
 
 /**

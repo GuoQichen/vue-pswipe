@@ -29,6 +29,7 @@ import {
     relevant,
     isBgImg,
     isNum,
+    closest,
 } from '../utils'
 
 interface ParsedItem extends Item {
@@ -63,6 +64,7 @@ export default class Photoswipe extends Vue {
 
     @Prop(Object) options!: Options
     @Prop({ type: Boolean, default: false }) auto!: boolean
+    @Prop({ type: Boolean, default: false }) bubble!: boolean
     @Prop({ type: Function, default: () => true }) filter!: Filter
 
     getThumbEls(): HTMLElement[] {
@@ -87,7 +89,12 @@ export default class Photoswipe extends Vue {
     }
 
     onThumbClick(e: { target: HTMLElement }) {
-        const eTarget = e.target
+        const eTarget = (
+            !this.auto
+            && this.bubble
+            && closest(e.target, el => !!el.dataset.pswpSrc)
+        ) || e.target
+
         if (!relevant(eTarget, this.auto, this.filter)) return
 
         const size = eTarget.dataset.pswpSize

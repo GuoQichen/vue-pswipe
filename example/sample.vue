@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Photoswipe>
+        <Photoswipe bubble>
             <h2>use img tag</h2>
             <img
                 v-for="(src, index) in imageList"
@@ -17,6 +17,17 @@
                 :key="`bg-${index}`"
                 :style="getImageItemStyle(src)"
             />
+
+            <h2>use bubble mode</h2>
+            <div
+                v-for="(src, index) in imageList"
+                :data-pswp-src="src"
+                :key="`bubble-${index}`"
+                style="marginBottom: 20px;"
+            >
+                <div :style="getImageItemStyle(src)" />
+                <div class="child" style="padding: 10px 0;">this is a child</div>
+            </div>
         </Photoswipe>
 
         <Photoswipe auto ref="photoswipe" :filter="imgFilter">
