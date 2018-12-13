@@ -10,8 +10,6 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import 'photoswipe/dist/photoswipe.css'
-import 'photoswipe/dist/default-skin/default-skin.css'
 import PhotoSwipe, { Item } from 'photoswipe'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
 
@@ -206,3 +204,7 @@ export default class Photoswipe extends Vue {
     }
 }
 </script>
+<style>
+@import '~photoswipe/dist/photoswipe.css';
+@import '~photoswipe/dist/default-skin/default-skin.css';
+</style>
