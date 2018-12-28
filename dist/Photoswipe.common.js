@@ -5587,12 +5587,12 @@ var config_getGlobalMixin = function getGlobalMixin(pswp, options) {
     }
   };
 };
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"723203b9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=5bc7a7d5&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"723203b9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=408d52e3&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"gallery",staticClass:"pswipe-gallery",on:{"click":_vm.onThumbClick}},[_vm._t("default")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=5bc7a7d5&
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=408d52e3&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -5965,7 +5965,7 @@ function (_Vue) {
     }
   }, {
     key: "onThumbClick",
-    value: function onThumbClick(e) {
+    value: function onThumbClick(e, skipHook) {
       var _this2 = this;
 
       var eTarget = !this.auto && this.bubble && closest(e.target, function (el) {
@@ -5988,6 +5988,26 @@ function (_Vue) {
         return child === eTarget;
       });
       if (index === -1) return;
+
+      if (this.$listeners.beforeOpen && !skipHook) {
+        var beforeOpenEvent = {
+          index: index,
+          target: eTarget
+        };
+
+        var beforeOpenNext = function beforeOpenNext() {
+          var continued = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+          if (!continued) return;
+
+          _this2.onThumbClick({
+            target: eTarget
+          }, true);
+        };
+
+        this.$emit('beforeOpen', beforeOpenEvent, beforeOpenNext);
+        return;
+      }
+
       this.openPhotoSwipe({
         index: index,
         thumbEls: thumbEls
