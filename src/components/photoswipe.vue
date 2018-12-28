@@ -50,6 +50,13 @@ interface OpenArgs {
     thumbEls?: HTMLElement[]
 }
 
+interface BeforeOpenEvent {
+    index: number
+    target: HTMLElement
+}
+
+type BeforeOpenNext = (continued?: boolean) => void
+
 @Component
 export default class Photoswipe extends Vue {
     gallery!: HTMLElement
@@ -86,7 +93,7 @@ export default class Photoswipe extends Vue {
         })
     }
 
-    onThumbClick(e: { target: HTMLElement }) {
+    onThumbClick(e: { target: HTMLElement }, skipHook?: boolean) {
         const eTarget = (
             !this.auto
             && this.bubble
@@ -111,6 +118,16 @@ export default class Photoswipe extends Vue {
             child => child === eTarget,
         )
         if (index === -1) return
+
+        if (this.$listeners.beforeOpen && !skipHook) {
+            const beforeOpenEvent: BeforeOpenEvent = { index, target: eTarget }
+            const beforeOpenNext: BeforeOpenNext = (continued: boolean = true) => {
+                if (!continued) return
+                this.onThumbClick({ target: eTarget }, true)
+            }
+            this.$emit('beforeOpen', beforeOpenEvent, beforeOpenNext)
+            return
+        }
 
         this.openPhotoSwipe({ index, thumbEls })
     }

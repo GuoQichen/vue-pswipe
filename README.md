@@ -46,9 +46,9 @@ or you can set auto props, then vue-pswipe will collect all img tag
 </Photoswipe>
 ```
 
-if you dont want collect all img under auto mode, you can set filter props
+if you dont want collect all img under auto mode, you can use beforeOpen hook
 ```vue
-<Photoswipe auto :filter="(img) => img.parentNode.tagName !== 'A'">
+<Photoswipe auto @beforeOpen="({ target }, next) => next(target.parentNode.tagName !== 'A')">
     <img :src="imageSrc" />
 </Photoswipe>
 ```
@@ -63,9 +63,18 @@ Photoswipe
 | options | object | original photoswipe options |
 | auto | boolean | auto initial without data-pswp-src |
 | bubble | boolean | allow click event bubbling, default is false |
-| filter | function | a filter function that accept img as argument, only work in auto mode |
+| ❗️ ️filter | function | a filter function that accept img as argument, only work in auto mode. you should use beforeOpen instead. (deprecated) |
 
 [complete options](http://photoswipe.com/documentation/options.html)
+
+## event
+
+### beforeOpen
+emit after click thumbnail, beforeOpen function receives two arguments:
+- `event`:
+    - `index`: current image index
+    - `target`: target that triggers effective click event
+- `next`: this function must be called to resolve the hook. `next(false)` will abort open photoswipe
 
 ## example
 ```

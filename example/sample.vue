@@ -30,7 +30,7 @@
             </div>
         </Photoswipe>
 
-        <Photoswipe auto ref="photoswipe" :filter="imgFilter">
+        <Photoswipe auto ref="photoswipe" @beforeOpen="handleBeforeOpen">
             <h2>use dynamic template</h2>
             <button @click="handleInsert">dynamic insert htmlTemplate</button>
             <div v-html="htmlTemplate"></div>
@@ -43,12 +43,12 @@
                 style="width: 200px;"
             />
 
-            <h2>use filter under auto mode</h2>
+            <h2>use beforeOpen hook</h2>
             <a href="javascipt: void(0)">
                 <img
                     v-for="(src, index) in imageList"
                     :src="src"
-                    :key="`filter-${index}`"
+                    :key="`hook-${index}`"
                     style="width: 200px;"
                 />
             </a>
@@ -57,6 +57,13 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+
+interface BeforeOpenEvent {
+    index: number
+    target: HTMLElement
+}
+
+type BeforeOpenNext = (continued?: boolean) => void
 
 @Component({ name: 'sample' })
 export default class Sample extends Vue {
@@ -82,8 +89,12 @@ export default class Sample extends Vue {
         this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
     }
 
-    imgFilter(img: HTMLImageElement) {
-        return img.parentElement && img.parentElement.tagName !== 'A'
+    handleBeforeOpen({
+        index, target,
+    }: BeforeOpenEvent, next: BeforeOpenNext) {
+        if (target.parentElement && target.parentElement.tagName !== 'A') {
+            next()
+        }
     }
 }
 </script>
