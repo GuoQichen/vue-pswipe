@@ -76,6 +76,12 @@ emit after click thumbnail, beforeOpen function receives two arguments:
     - `target`: target that triggers effective click event
 - `next`: this function must be called to resolve the hook. `next(false)` will abort open photoswipe
 
+### beforeClose
+gallery starts closing
+
+### closed
+after gallery is closed and closing animation finished. Clean up your stuff here.
+
 ## example
 ```
 npm run dev

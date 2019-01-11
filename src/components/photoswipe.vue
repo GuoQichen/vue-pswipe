@@ -62,6 +62,7 @@ export default class Photoswipe extends Vue {
     gallery!: HTMLElement
     pswpElement!: HTMLElement
     globalOptions!: Options
+    pswp!: PhotoSwipe<Options>
 
     $refs!: {
         gallery: HTMLElement
@@ -178,8 +179,18 @@ export default class Photoswipe extends Vue {
 
         Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
 
-        new PhotoSwipe(this.pswpElement, defaultUI, items, options).init()
+        const pswp = new PhotoSwipe(this.pswpElement, defaultUI, items, options)
+        pswp.init()
+
+        this.pswp = pswp
+        this.bindEvent()
     }
+
+    bindEvent() {
+        this.pswp.listen('close', () => this.$emit('beforeClose'))
+        this.pswp.listen('destroy', () => this.$emit('closed'))
+    }
+
     initPhotoSwipeFromDOM(gallerySelector: string) {
         const galleryEls = querySelectorList(gallerySelector)
         const galleryIndex = findIndex(galleryEls, el => el === this.gallery)
@@ -199,13 +210,16 @@ export default class Photoswipe extends Vue {
             })
         }
     }
+
     openPswp() {
         this.initPhotoSwipeFromDOM('.pswipe-gallery')
     }
+
     setImageSizeSeparately(thumbEl: HTMLElement) {
         return getImageSize(getSrc(thumbEl, this.auto))
             .then(size => setSize(thumbEl, size))
     }
+
     setImageSize(thumbEls = this.getThumbEls()) {
         return Promise.all(
             thumbEls
