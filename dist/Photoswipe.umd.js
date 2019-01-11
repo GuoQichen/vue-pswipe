@@ -5596,12 +5596,12 @@ var config_getGlobalMixin = function getGlobalMixin(pswp, options) {
     }
   };
 };
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"723203b9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=408d52e3&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"723203b9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=26ee03f2&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"gallery",staticClass:"pswipe-gallery",on:{"click":_vm.onThumbClick}},[_vm._t("default")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=408d52e3&
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=26ee03f2&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -6061,16 +6061,31 @@ function (_Vue) {
       if (!isNum(options.index) || Number.isNaN(options.index)) return;
       if (disableAnimation) options.showAnimationDuration = 0;
       Object.assign(options, defualtGlobalOption, this.globalOptions, this.options);
-      new photoswipe_default.a(this.pswpElement, photoswipe_ui_default_default.a, items, options).init();
+      var pswp = new photoswipe_default.a(this.pswpElement, photoswipe_ui_default_default.a, items, options);
+      pswp.init();
+      this.pswp = pswp;
+      this.bindEvent();
+    }
+  }, {
+    key: "bindEvent",
+    value: function bindEvent() {
+      var _this3 = this;
+
+      this.pswp.listen('close', function () {
+        return _this3.$emit('beforeClose');
+      });
+      this.pswp.listen('destroy', function () {
+        return _this3.$emit('closed');
+      });
     }
   }, {
     key: "initPhotoSwipeFromDOM",
     value: function initPhotoSwipeFromDOM(gallerySelector) {
-      var _this3 = this;
+      var _this4 = this;
 
       var galleryEls = querySelectorList(gallerySelector);
       var galleryIndex = findIndex(galleryEls, function (el) {
-        return el === _this3.gallery;
+        return el === _this4.gallery;
       });
       var currentGid = galleryIndex + 1;
       this.gallery.dataset.pswpUid = "".concat(currentGid); // Parse URL and open gallery if it contains #&pid=3&gid=1
@@ -6082,7 +6097,7 @@ function (_Vue) {
       if (pid && gid && gid === currentGid) {
         // in history mode, it will be empty in first time access because cant get image size
         setTimeout(function () {
-          _this3.openPhotoSwipe({
+          _this4.openPhotoSwipe({
             index: pid - 1,
             disableAnimation: true,
             fromURL: true
@@ -6105,13 +6120,13 @@ function (_Vue) {
   }, {
     key: "setImageSize",
     value: function setImageSize() {
-      var _this4 = this;
+      var _this5 = this;
 
       var thumbEls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getThumbEls();
       return Promise.all(thumbEls.filter(function (thumbEl) {
         return !thumbEl.dataset.pswpSize;
       }).map(function (thumbEl) {
-        return _this4.setImageSizeSeparately(thumbEl);
+        return _this5.setImageSizeSeparately(thumbEl);
       }));
     }
   }, {
