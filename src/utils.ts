@@ -1,5 +1,3 @@
-import { Dictionary } from './type/index.d'
-
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 export const isNum = (value: any): value is number => typeof value === 'number'
@@ -47,9 +45,7 @@ export const getImageSize = (path: string) => new Promise<ParsedImg>((resolve) =
     check()
 })
 
-interface FindIndex {
-    <T>(array: T[], fn: (item: T, idx: number) => boolean): number
-}
+type FindIndex = <T>(array: T[], fn: (item: T, idx: number) => boolean) => number
 
 export const findIndex: FindIndex = (array, fn) => {
     let index = -1
@@ -66,7 +62,7 @@ export const findIndex: FindIndex = (array, fn) => {
  */
 export const parseHash = () => {
     const hash = window.location.hash.substring(1)
-    const params: Dictionary = {}
+    const params: Record<string, number> = {}
 
     if (hash.length < 5) return params
 
@@ -75,21 +71,19 @@ export const parseHash = () => {
         const pair = cur.split('=')
         if (pair.length < 2) return acc
         const [key, value] = pair
-        acc[key] = value
+        acc[key] = +value
         return acc
     }, params)
-
-    if (params.gid) params.gid = parseInt(params.gid, 10)
 
     return params
 }
 
-export const querySelectorList = <T extends HTMLElement>(selector: string, context: HTMLElement | Document = document) =>
-    [...context.querySelectorAll(selector)] as T[]
+export const querySelectorList = <T extends HTMLElement>(
+    selector: string,
+    context: HTMLElement | Document = document,
+) => [...context.querySelectorAll(selector)] as T[]
 
-interface Closest {
-    (el: Node | null, fn: (el: HTMLElement) => boolean): HTMLElement | false
-}
+type Closest = (el: Node | null, fn: (el: HTMLElement) => boolean) => HTMLElement | false
 
 /**
  * find nearest parent element
@@ -99,13 +93,11 @@ export const closest: Closest = (el, fn) =>
     isEle(el) &&
     (fn(el) ? el : closest(el.parentNode, fn))
 
-interface Get {
-    <T>(context: Dictionary, path: string, defaultValue: T): T
-}
+type Get = <T>(context: Record<string, any>, path: string, defaultValue: T) => T
 
 export const get: Get = (context, path, defaultValue) => {
     try {
-        const result = path.split('.').reduce((acc, cur) => acc[cur], context)
+        const result = path.split('.').reduce<any>((acc, cur) => acc[cur], context)
         return isDef(result)
             ? result
             : defaultValue
@@ -114,11 +106,9 @@ export const get: Get = (context, path, defaultValue) => {
     }
 }
 
-interface Single {
-    <T>(fn: Function): (...args: any[]) => T
-}
+type Single = <T>(fn: Function) => (...args: any[]) => T
 
-export const single: Single = (fn: Function) => {
+export const single: Single = (fn) => {
     let result: any
     return function (this: any, ...args: any[]) { // eslint-disable-line
         return result || (result = fn.apply(this, args)) // eslint-disable-line
@@ -137,12 +127,12 @@ export const getSrc = (target: HTMLImageElement | HTMLElement, auto: boolean): s
         : target.dataset.pswpSrc || ''
 )
 
-interface Relevant {
-    (el: HTMLElement, auto: boolean, filter: (el: HTMLImageElement) => boolean): boolean
-}
-
 // prevent uncessary click event be handle
-export const relevant: Relevant = (el, auto, filter) => (
+export const relevant = (
+    el: HTMLElement,
+    auto: boolean,
+    filter: (el: HTMLImageElement) => boolean,
+): boolean => (
     auto
         ? isImg(el) && filter(el)
         : !!el.dataset.pswpSrc

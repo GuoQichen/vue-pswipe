@@ -5,7 +5,3 @@ export interface Options extends PhotoSwipeUI_Default.Options {
 }
 
 export type Filter = (img: HTMLImageElement) => boolean
-
-export interface Dictionary {
-    [key: string]: any
-}
