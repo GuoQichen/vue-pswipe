@@ -83,6 +83,7 @@ export default class Photoswipe extends Vue {
         return thumbEls.map((wrapperEl) => {
             const src = getSrc(wrapperEl, this.auto) || ''
             const size = get(wrapperEl, 'dataset.pswpSize', '').split('x')
+            const title = get(wrapperEl, 'dataset.pswpTitle', '')
 
             return {
                 src,
@@ -90,6 +91,7 @@ export default class Photoswipe extends Vue {
                 el: wrapperEl,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),
+                title,
             }
         })
     }
