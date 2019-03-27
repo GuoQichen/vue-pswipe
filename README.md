@@ -55,6 +55,17 @@ if you dont want collect all img under auto mode, you can use beforeOpen hook
 
 The above example filters the all img in a tags
 
+if you need image caption, you can set `data-pswp-title`
+```vue
+<Photoswipe>
+    <img 
+        :src="imageSrc"
+        :data-pswp-src="imageSrc"
+        data-pswp-title="Image Caption"
+    />
+</Photoswipe>
+```
+
 ## props
 Photoswipe 
 
