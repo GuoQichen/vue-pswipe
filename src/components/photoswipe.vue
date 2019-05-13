@@ -84,10 +84,11 @@ export default class Photoswipe extends Vue {
             const src = getSrc(wrapperEl, this.auto) || ''
             const size = get(wrapperEl, 'dataset.pswpSize', '').split('x')
             const title = get(wrapperEl, 'dataset.pswpTitle', '')
+            const msrc = get(wrapperEl, 'dataset.pswpMsrc', src)
 
             return {
                 src,
-                msrc: src,
+                msrc,
                 el: wrapperEl,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),

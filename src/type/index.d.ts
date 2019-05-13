@@ -5,3 +5,14 @@ export interface Options extends PhotoSwipeUI_Default.Options {
 }
 
 export type Filter = (img: HTMLImageElement) => boolean
+
+export interface PswpItemOptions {
+    src: string // path to image
+    size?: string // image size, 'width x height', eg: '100x100'
+    msrc?: string // small image placeholder,
+    // main (large) image loads on top of it,
+    // if you skip this parameter - grey rectangle will be displayed,
+    // try to define this property only when small image was loaded before
+    title?: string // used by Default PhotoSwipe UI
+    // if you skip it, there won't be any caption
+}

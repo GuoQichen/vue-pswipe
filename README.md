@@ -19,12 +19,12 @@ Vue.use(Photoswipe, options)
 ```
 [complete options](http://photoswipe.com/documentation/options.html)
 
-you should set `data-pswp-src` to prefetch image size
+you should set `v-pswp` to prefetch image size
 ```vue
 <Photoswipe>
     <img 
         :src="imageSrc"
-        :data-pswp-src="imageSrc"
+        v-pswp="imageSrc"
     />
 </Photoswipe>
 ```
@@ -33,7 +33,7 @@ or you can use background-image instead of img tag
 ```vue
 <Photoswipe>
     <div 
-        :data-pswp-src="imageSrc"
+        v-pswp="imageSrc"
         :style="getBgImgStyle(imageSrc)"
     >
 </Photoswipe>
@@ -55,13 +55,12 @@ if you dont want collect all img under auto mode, you can use beforeOpen hook
 
 The above example filters the all img in a tags
 
-if you need image caption, you can set `data-pswp-title`
+if you need image caption, you can set `v-pswp` as object with title property
 ```vue
 <Photoswipe>
     <img 
         :src="imageSrc"
-        :data-pswp-src="imageSrc"
-        data-pswp-title="Image Caption"
+        v-pswp="{ src: imageSrc, title: imageTitle }"
     />
 </Photoswipe>
 ```

@@ -1,6 +1,12 @@
+import { PswpItemOptions } from './type/index.d'
+
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 export const isNum = (value: any): value is number => typeof value === 'number'
+
+export const isStr = (value: any): value is string => typeof value === 'string'
+
+export const isObj = (value: any): value is object => Object.prototype.toString.call(value) === '[object Object]'
 
 const isDef = (value: any) => (value !== undefined) && (value !== null)
 
@@ -137,3 +143,22 @@ export const relevant = (
         ? isImg(el) && filter(el)
         : !!el.dataset.pswpSrc
 )
+
+const upperFirst = (str: string) => str.replace(/^\S/, match => match.toUpperCase())
+
+const getPswpDataKey = (property: string) => `pswp${upperFirst(property)}`
+
+type OptionKeys = keyof PswpItemOptions
+
+export const setPswpData = (options: PswpItemOptions, el: HTMLElement) => {
+    (Object.keys(options) as OptionKeys[]).forEach((key: OptionKeys) => {
+        el.dataset[getPswpDataKey(key)] = options[key] // eslint-disable-line
+    })
+}
+
+export const setPswpDataByCond = (el: HTMLElement, value: string | PswpItemOptions) => {
+    if (isStr(value)) setPswpData({ src: value }, el)
+    if (isObj(value)) setPswpData((value as PswpItemOptions), el)
+}
+
+export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON.stringify(val2)
