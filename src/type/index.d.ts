@@ -1,4 +1,5 @@
 import PhotoSwipeUI_Default from 'photoswipe/dist/photoswipe-ui-default'
+import { Item } from 'photoswipe'
 
 export interface Options extends PhotoSwipeUI_Default.Options {
     galleryPIDs?: number
@@ -15,4 +16,11 @@ export interface PswpItemOptions {
     // try to define this property only when small image was loaded before
     title?: string // used by Default PhotoSwipe UI
     // if you skip it, there won't be any caption
+}
+
+export interface ParsedItem extends Item {
+    el: HTMLElement
+    src: string
+    msrc?: string
+    pid?: number
 }

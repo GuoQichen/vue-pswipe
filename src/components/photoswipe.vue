@@ -9,12 +9,13 @@
 </template>
 
 <script lang="ts">
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import PhotoSwipe, { Item } from 'photoswipe'
+import PhotoSwipe from 'photoswipe'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
 
 import { defualtGlobalOption } from '@/config'
-import { Filter, Options } from '@/type/index.d'
+import { Filter, Options, ParsedItem } from '@/type/index.d'
 
 import {
     findIndex,
@@ -28,14 +29,8 @@ import {
     isBgImg,
     isNum,
     closest,
+    setSizeToTarget,
 } from '../utils'
-
-interface ParsedItem extends Item {
-    el: HTMLElement
-    src: string
-    msrc?: string
-    pid?: number
-}
 
 interface ThumbBounds {
     x: number
@@ -80,20 +75,19 @@ export default class Photoswipe extends Vue {
     }
 
     parseThumbEls(thumbEls = this.getThumbEls()): ParsedItem[] {
-        return thumbEls.map((wrapperEl) => {
-            const src = getSrc(wrapperEl, this.auto) || ''
-            const size = get(wrapperEl, 'dataset.pswpSize', '').split('x')
-            const title = get(wrapperEl, 'dataset.pswpTitle', '')
-            const msrc = get(wrapperEl, 'dataset.pswpMsrc', src)
+        return thumbEls.map((el) => {
+            const src = getSrc(el, this.auto) || ''
+            const size = get(el, 'dataset.pswpSize', '').split('x')
+            const title = get(el, 'dataset.pswpTitle', '')
+            const msrc = get(el, 'dataset.pswpMsrc', '')
 
-            return {
+            return Object.assign({
                 src,
-                msrc,
-                el: wrapperEl,
+                el,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),
                 title,
-            }
+            }, msrc && { msrc })
         })
     }
 
@@ -106,21 +100,8 @@ export default class Photoswipe extends Vue {
 
         if (!relevant(eTarget, this.auto, this.filter)) return
 
-        const size = eTarget.dataset.pswpSize
         const thumbEls = this.getThumbEls()
-
-        if (!size) {
-            this.setImageSize(thumbEls)
-                .then(() => {
-                    this.onThumbClick({ target: eTarget })
-                })
-            return
-        }
-
-        const index = findIndex(
-            thumbEls,
-            child => child === eTarget,
-        )
+        const index = findIndex(thumbEls, el => el === eTarget)
         if (index === -1) return
 
         if (this.$listeners.beforeOpen && !skipHook) {
@@ -153,21 +134,22 @@ export default class Photoswipe extends Vue {
     parseIndex(index: number, items: ParsedItem[], options: Options, fromURL?: boolean) {
         return fromURL
             ? options.galleryPIDs
-                ? findIndex(
-                    items,
-                    item => item.pid === index,
-                )
+                ? findIndex(items, item => item.pid === index)
                 : index - 1
             : index
     }
 
     openPhotoSwipe({
         index,
-        disableAnimation,
         fromURL,
         thumbEls,
     }: OpenArgs) {
         const items = this.parseThumbEls(thumbEls)
+
+        const targetItem = items[index]
+        const { w, h, msrc } = targetItem
+        if (!w && !h && msrc) setSizeToTarget(targetItem, 'msrc')
+
         const options: Options = {
             showHideOpacity: isBgImg(items[index].el),
             galleryUID: +(this.gallery.dataset.pswpUid || ''), // define gallery index (for URL)
@@ -177,8 +159,7 @@ export default class Photoswipe extends Vue {
         const parsedIndex = this.parseIndex(index, items, options, fromURL)
         if (parsedIndex >= 0) options.index = parsedIndex
         if (!isNum(options.index) || Number.isNaN(options.index)) return
-
-        if (disableAnimation) options.showAnimationDuration = 0
+        if (fromURL) options.showAnimationDuration = 0
 
         Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
 
@@ -192,6 +173,17 @@ export default class Photoswipe extends Vue {
     bindEvent() {
         this.pswp.listen('close', () => this.$emit('beforeClose'))
         this.pswp.listen('destroy', () => this.$emit('closed'))
+        this.pswp.listen('imageLoadComplete', (index, item: ParsedItem) => {
+            if (item.el.dataset.pswpSize) return
+            setSizeToTarget(item, 'src')
+            if (this.pswp.getCurrentIndex() === index) this.pswp.invalidateCurrItems()
+            this.pswp.updateSize(true)
+        })
+        this.pswp.listen('gettingData', (index, item: ParsedItem) => {
+            const { w, h, msrc } = item
+            if (!msrc || w || h) return
+            setSizeToTarget(item, 'msrc')
+        })
     }
 
     initPhotoSwipeFromDOM(gallerySelector: string) {
@@ -207,7 +199,6 @@ export default class Photoswipe extends Vue {
             setTimeout(() => {
                 this.openPhotoSwipe({
                     index: pid - 1,
-                    disableAnimation: true,
                     fromURL: true,
                 })
             })
@@ -233,7 +224,6 @@ export default class Photoswipe extends Vue {
 
     mounted() {
         this.gallery = this.$refs.gallery
-        this.setImageSize() // eslint-disable-line
         this.openPswp()
     }
 }

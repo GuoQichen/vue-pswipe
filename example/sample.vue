@@ -19,6 +19,15 @@
                 style="display: inline-block;"
             />
 
+            <h2>use lazy mode</h2>
+            <div
+                v-for="(item, index) in getBatchImages(10)"
+                v-pswp="item"
+                :key="`batch-bg-${index}`"
+                :style="getImageItemStyle(imageList[0])"
+                style="display: inline-block;"
+            />
+
             <h2>use bubble mode</h2>
             <div
                 v-pswp="imageList[0]"
@@ -68,7 +77,16 @@
     </div>
 </template>
 <script lang="ts">
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { Vue, Component } from 'vue-property-decorator'
+
+const getRandomSize = () => Math.floor((Math.random() * 1e3) + 1e2)
+
+const getRandomImgSrc = () => {
+    const width: number = getRandomSize()
+    const height: number = getRandomSize()
+    return `https://placeimg.com/${width}/${height}/any`
+}
 
 interface BeforeOpenEvent {
     index: number
@@ -132,6 +150,15 @@ export default class Sample extends Vue {
 
     changeSrc() {
         this.dynamicSrc = 'https://placeimg.com/600/320/any'
+    }
+
+    getBatchImages(length: number) {
+        const msrc = getRandomImgSrc()
+        const results = Array(length).fill('').map(() => ({
+            src: getRandomImgSrc(),
+            msrc: this.imageList[0],
+        }))
+        return results
     }
 }
 </script>

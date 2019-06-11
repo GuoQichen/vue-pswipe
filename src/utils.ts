@@ -1,4 +1,5 @@
-import { PswpItemOptions } from './type/index.d'
+import PhotoSwipe from 'photoswipe'
+import { PswpItemOptions, ParsedItem, Options } from './type/index.d'
 
 export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -162,3 +163,19 @@ export const setPswpDataByCond = (el: HTMLElement, value: string | PswpItemOptio
 }
 
 export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON.stringify(val2)
+
+type SetSizeType = 'src' | 'msrc'
+
+export const setSizeToTarget = (item: ParsedItem, type: SetSizeType): void => {
+    /* eslint-disable no-param-reassign */
+    const src = item[type]
+    if (!src) return
+    const img = new Image()
+    img.src = src
+    const { width, height } = img
+    item.w = width
+    item.h = height
+    if (type === 'src' && width && height) {
+        item.el.dataset.pswpSize = `${width}x${height}`
+    }
+}
