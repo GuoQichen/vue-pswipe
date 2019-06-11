@@ -1,6 +1,6 @@
 import Vue, { CreateElement } from 'vue' // eslint-disable-line
+
 import PhotoswipePlugin from '../src/main'
-// import PhotoswipePlugin from '../dist/Photoswipe.umd'
 import Sample from './sample.vue'
 
 Vue.use(PhotoswipePlugin, {

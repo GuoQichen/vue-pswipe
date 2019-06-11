@@ -1,7 +1,6 @@
-import PhotoSwipe from 'photoswipe'
-import { PswpItemOptions, ParsedItem, Options } from './type/index.d'
+import { PswpItem, Size, FindIndex, Closest, Get, Single, PswpDirectiveOptions } from '@/type'
 
-export const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+export const isMobile = (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 export const isNum = (value: any): value is number => typeof value === 'number'
 
@@ -9,30 +8,30 @@ export const isStr = (value: any): value is string => typeof value === 'string'
 
 export const isObj = (value: any): value is object => Object.prototype.toString.call(value) === '[object Object]'
 
-const isDef = (value: any) => (value !== undefined) && (value !== null)
+const isDef = (value: any): boolean => (value !== undefined) && (value !== null)
 
 export const isImg = (el: HTMLElement): el is HTMLImageElement => el.tagName === 'IMG'
 
 const isEle = (node: Node): node is HTMLElement => node.nodeType === 1
 
-export const isBgImg = (el: HTMLElement) => !isImg(el) && !!el.dataset.pswpSrc
+export const isBgImg = (el: HTMLElement): boolean => !isImg(el) && !!el.dataset.pswpSrc
 
-export const errorHandler = (hint: string) => {
+/**
+ * default error handle method
+ * @param hint error hint
+ */
+export const errorHandler = (hint: string): never => {
     throw new Error(
         `[vue-pswipe] ${hint}`,
     )
 }
 
-interface Size {
-    w: number
-    h: number
-}
-
-interface ParsedImg extends Size {
-    src: string
-}
-
-export const getImageSize = (path: string) => new Promise<ParsedImg>((resolve) => {
+/**
+ * get image size by polling
+ * @param path the image src to get size
+ * @return return promise
+ */
+export const getImageSize = (path: string) => new Promise<Size>((resolve) => {
     const img = new Image()
     let timer: number
     img.src = path
@@ -42,7 +41,6 @@ export const getImageSize = (path: string) => new Promise<ParsedImg>((resolve) =
     const check = () => {
         if (img.width > 0 || img.height > 0) {
             return resolve({
-                src: path,
                 w: img.width,
                 h: img.height,
             })
@@ -52,12 +50,16 @@ export const getImageSize = (path: string) => new Promise<ParsedImg>((resolve) =
     check()
 })
 
-type FindIndex = <T>(array: T[], fn: (item: T, idx: number) => boolean) => number
-
-export const findIndex: FindIndex = (array, fn) => {
+/**
+ * returns the index of the first element predicate returns truthy
+ * @param array the array to search
+ * @param predicate the function invoked per iteration.
+ * @return return the index of the found element, else -1.
+ */
+export const findIndex: FindIndex = (array, predicate) => {
     let index = -1
     array.some((item, idx) => {
-        const result = fn(item, idx)
+        const result = predicate(item, idx)
         if (result) index = idx
         return result
     })
@@ -66,6 +68,7 @@ export const findIndex: FindIndex = (array, fn) => {
 
 /**
  * parse picture index and gallery index from URL (#&pid=1&gid=2)
+ * @return return parsed hash, eg: { pid: 1, gid: 2 }
  */
 export const parseHash = () => {
     const hash = window.location.hash.substring(1)
@@ -85,23 +88,35 @@ export const parseHash = () => {
     return params
 }
 
+/**
+ * invoke querySelectorAll with specified context
+ * @param selector css selector
+ * @param context the query context
+ * @return return the list of queries
+ */
 export const querySelectorList = <T extends HTMLElement>(
     selector: string,
     context: HTMLElement | Document = document,
 ) => [...context.querySelectorAll(selector)] as T[]
 
-type Closest = (el: Node | null, fn: (el: HTMLElement) => boolean) => HTMLElement | false
-
 /**
  * find nearest parent element
+ * @param el begin element
+ * @param predicate the function invoked from begin element to body
+ * @returns return the found element or false
  */
-export const closest: Closest = (el, fn) =>
+export const closest: Closest = (el, predicate) =>
     !!el &&
     isEle(el) &&
-    (fn(el) ? el : closest(el.parentNode, fn))
+    (predicate(el) ? el : closest(el.parentNode, predicate))
 
-type Get = <T>(context: Record<string, any>, path: string, defaultValue: T) => T
-
+/**
+ * gets the property value at path of object
+ * @param context the object to query
+ * @param path the path of the property to get
+ * @param defaultValue the value returned if the resolved value is undefined or cant resolved
+ * @return return the resolved value.
+ */
 export const get: Get = (context, path, defaultValue) => {
     try {
         const result = path.split('.').reduce<any>((acc, cur) => acc[cur], context)
@@ -113,28 +128,52 @@ export const get: Get = (context, path, defaultValue) => {
     }
 }
 
-type Single = <T>(fn: Function) => (...args: any[]) => T
-
+/**
+ * singleton pattern
+ * @param fn the function should be invoked only once
+ * @return wrapped function
+ */
 export const single: Single = (fn) => {
     let result: any
-    return function (this: any, ...args: any[]) { // eslint-disable-line
-        return result || (result = fn.apply(this, args)) // eslint-disable-line
+    // eslint-disable-next-line func-names
+    return function (this: any, ...args: any[]) {
+        return result || (result = fn.apply(this, args))
     }
 }
 
+/**
+ * append element to document.body
+ * @param el the element to be append to body
+ * @return return appended element
+ */
 const append = (el: HTMLElement) => document.body.appendChild(el)
 
+/**
+ * append element to body only once
+ */
 export const appendOnce = single<HTMLElement>(append)
 
+/**
+ * set data-pswp-size to element
+ * @param el the element to set data-pswp-size
+ * @param size the size object contains w and h property
+ */
 export const setSize = (el: HTMLElement, { w, h }: Size) => el.dataset.pswpSize = `${w}x${h}` // eslint-disable-line
 
+/**
+ * get the image src according to auto
+ * @param target the element to get the src
+ * @param auto is it in auto mode
+ */
 export const getSrc = (target: HTMLImageElement | HTMLElement, auto: boolean): string => (
     auto && isImg(target)
         ? target.src
         : target.dataset.pswpSrc || ''
 )
 
-// prevent uncessary click event be handle
+/**
+ * determine whether el is a valid element based on auto and filter
+ */
 export const relevant = (
     el: HTMLElement,
     auto: boolean,
@@ -145,28 +184,42 @@ export const relevant = (
         : !!el.dataset.pswpSrc
 )
 
+/**
+ * Convert the first letter to uppercase
+ */
 const upperFirst = (str: string) => str.replace(/^\S/, match => match.toUpperCase())
 
+/**
+ * convert property to pswp property, eg: src => pswpSrc
+ */
 const getPswpDataKey = (property: string) => `pswp${upperFirst(property)}`
 
-type OptionKeys = keyof PswpItemOptions
-
-export const setPswpData = (options: PswpItemOptions, el: HTMLElement) => {
-    (Object.keys(options) as OptionKeys[]).forEach((key: OptionKeys) => {
+/**
+ * Set pswp data to the data attribute of the specified element
+ */
+export const setPswpData = (options: PswpDirectiveOptions, el: HTMLElement) => {
+    (Object.keys(options) as (keyof PswpDirectiveOptions)[]).forEach((key) => {
         el.dataset[getPswpDataKey(key)] = options[key] // eslint-disable-line
     })
 }
 
-export const setPswpDataByCond = (el: HTMLElement, value: string | PswpItemOptions) => {
+/**
+ * Set the pswp data according to the type of the parameter
+ */
+export const setPswpDataByCond = (el: HTMLElement, value: string | PswpDirectiveOptions) => {
     if (isStr(value)) setPswpData({ src: value }, el)
-    if (isObj(value)) setPswpData((value as PswpItemOptions), el)
+    if (isObj(value)) setPswpData((value as PswpDirectiveOptions), el)
 }
 
+/**
+ * JSON.stringify to determine whether it is equal
+ */
 export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON.stringify(val2)
 
-type SetSizeType = 'src' | 'msrc'
-
-export const setSizeToTarget = (item: ParsedItem, type: SetSizeType): void => {
+/**
+ * set the size of specified src to target item
+ */
+export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     /* eslint-disable no-param-reassign */
     const src = item[type]
     if (!src) return
@@ -176,6 +229,6 @@ export const setSizeToTarget = (item: ParsedItem, type: SetSizeType): void => {
     item.w = width
     item.h = height
     if (type === 'src' && width && height) {
-        item.el.dataset.pswpSize = `${width}x${height}`
+        setSize(item.el, { w: width, h: height })
     }
 }

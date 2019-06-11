@@ -39,5 +39,6 @@
   },
   "main": "dist/Photoswipe.umd.min.js",
   "description": "a vue plugin for photoswipe",
-  "author": "guoqichen"
+  "author": "guoqichen",
+  "types": "types/index.d.ts"
 }

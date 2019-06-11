@@ -19,7 +19,8 @@ module.exports = {
     'no-nested-ternary': 'off',
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
-    'camelcase': 'off'
+    'camelcase': 'off',
+    'import/no-extraneous-dependencies': 'off'
   },
   parserOptions: {
     parser: 'typescript-eslint-parser'

@@ -24,6 +24,7 @@
     ]
   },
   "include": [
+    "types/**/*.ts",
     "example/**/*.ts",
     "example/**/*.vue",
     "src/**/*.ts",

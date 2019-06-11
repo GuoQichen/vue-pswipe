@@ -1,8 +1,8 @@
-import { Options } from './type/index.d'
+import { PswpOptions } from '@/type'
 import { isMobile, appendOnce } from './utils'
 import Pswp from './components/pswp.vue'
 
-export const defualtGlobalOption: Options = {
+export const defualtGlobalOption: PswpOptions = {
     // in spa no need history mode
     history: false,
     shareEl: !isMobile(),
@@ -13,14 +13,13 @@ export const defualtGlobalOption: Options = {
     ],
 }
 
-export const getGlobalMixin = (pswp: Pswp, options?: Options) => ({
+export const getGlobalMixin = (pswp: Pswp, options?: PswpOptions) => ({
     data() {
         return {
             globalOptions: options,
         }
     },
-    created() {
-        // @ts-ignore
+    created(this: any) {
         this.pswpElement = appendOnce(pswp.$el)
     },
 })

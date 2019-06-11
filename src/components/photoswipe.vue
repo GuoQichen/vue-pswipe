@@ -9,14 +9,18 @@
 </template>
 
 <script lang="ts">
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import PhotoSwipe from 'photoswipe'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
-
 import { defualtGlobalOption } from '@/config'
-import { Filter, Options, ParsedItem } from '@/type/index.d'
-
+import {
+    PswpOptions,
+    PswpItem,
+    BeforeOpen,
+    BeforeOpenEvent,
+    Filter,
+    OpenPhotoSwipeArgs,
+} from '@/type'
 import {
     findIndex,
     getImageSize,
@@ -32,38 +36,18 @@ import {
     setSizeToTarget,
 } from '../utils'
 
-interface ThumbBounds {
-    x: number
-    y: number
-    w: number
-}
-
-interface OpenArgs {
-    index: number
-    disableAnimation?: boolean
-    fromURL?: boolean
-    thumbEls?: HTMLElement[]
-}
-
-interface BeforeOpenEvent {
-    index: number
-    target: HTMLElement
-}
-
-type BeforeOpenNext = (continued?: boolean) => void
-
 @Component
 export default class Photoswipe extends Vue {
     gallery!: HTMLElement
     pswpElement!: HTMLElement
-    globalOptions!: Options
-    pswp!: PhotoSwipe<Options>
+    globalOptions!: PswpOptions
+    pswp!: PhotoSwipe<PswpOptions>
 
     $refs!: {
         gallery: HTMLElement
     }
 
-    @Prop(Object) options!: Options
+    @Prop(Object) options!: PswpOptions
     @Prop({ type: Boolean, default: false }) auto!: boolean
     @Prop({ type: Boolean, default: false }) bubble!: boolean
     @Prop({ type: Function, default: () => true }) filter!: Filter
@@ -74,7 +58,7 @@ export default class Photoswipe extends Vue {
             : querySelectorList('[data-pswp-src]', this.gallery)
     }
 
-    parseThumbEls(thumbEls = this.getThumbEls()): ParsedItem[] {
+    parseThumbEls(thumbEls = this.getThumbEls()): PswpItem[] {
         return thumbEls.map((el) => {
             const src = getSrc(el, this.auto) || ''
             const size = get(el, 'dataset.pswpSize', '').split('x')
@@ -106,19 +90,19 @@ export default class Photoswipe extends Vue {
 
         if (this.$listeners.beforeOpen && !skipHook) {
             const beforeOpenEvent: BeforeOpenEvent = { index, target: eTarget }
-            const beforeOpenNext: BeforeOpenNext = (continued: boolean = true) => {
+            const beforeOpen: BeforeOpen = (continued: boolean = true) => {
                 if (!continued) return
                 this.onThumbClick({ target: eTarget }, true)
             }
-            this.$emit('beforeOpen', beforeOpenEvent, beforeOpenNext)
+            this.$emit('beforeOpen', beforeOpenEvent, beforeOpen)
             return
         }
 
         this.openPhotoSwipe({ index, thumbEls })
     }
 
-    getThumbBoundsFn(parsedItems: ParsedItem[]) {
-        return (index: number): ThumbBounds => {
+    getThumbBoundsFn(parsedItems: PswpItem[]) {
+        return (index: number): { x: number, y: number, w: number } => {
             const thumbEl = parsedItems[index].el
             const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
             const rect = thumbEl.getBoundingClientRect()
@@ -131,7 +115,7 @@ export default class Photoswipe extends Vue {
         }
     }
 
-    parseIndex(index: number, items: ParsedItem[], options: Options, fromURL?: boolean) {
+    parseIndex(index: number, items: PswpItem[], options: PswpOptions, fromURL?: boolean) {
         return fromURL
             ? options.galleryPIDs
                 ? findIndex(items, item => item.pid === index)
@@ -143,14 +127,14 @@ export default class Photoswipe extends Vue {
         index,
         fromURL,
         thumbEls,
-    }: OpenArgs) {
+    }: OpenPhotoSwipeArgs) {
         const items = this.parseThumbEls(thumbEls)
 
         const targetItem = items[index]
         const { w, h, msrc } = targetItem
         if (!w && !h && msrc) setSizeToTarget(targetItem, 'msrc')
 
-        const options: Options = {
+        const options: PswpOptions = {
             showHideOpacity: isBgImg(items[index].el),
             galleryUID: +(this.gallery.dataset.pswpUid || ''), // define gallery index (for URL)
             getThumbBoundsFn: this.getThumbBoundsFn(items),
@@ -173,13 +157,13 @@ export default class Photoswipe extends Vue {
     bindEvent() {
         this.pswp.listen('close', () => this.$emit('beforeClose'))
         this.pswp.listen('destroy', () => this.$emit('closed'))
-        this.pswp.listen('imageLoadComplete', (index, item: ParsedItem) => {
+        this.pswp.listen('imageLoadComplete', (index, item: PswpItem) => {
             if (item.el.dataset.pswpSize) return
             setSizeToTarget(item, 'src')
             if (this.pswp.getCurrentIndex() === index) this.pswp.invalidateCurrItems()
             this.pswp.updateSize(true)
         })
-        this.pswp.listen('gettingData', (index, item: ParsedItem) => {
+        this.pswp.listen('gettingData', (index, item: PswpItem) => {
             const { w, h, msrc } = item
             if (!msrc || w || h) return
             setSizeToTarget(item, 'msrc')
