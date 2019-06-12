@@ -51,6 +51,7 @@ export default class Photoswipe extends Vue {
     @Prop(Object) options!: PswpOptions
     @Prop({ type: Boolean, default: false }) auto!: boolean
     @Prop({ type: Boolean, default: false }) bubble!: boolean
+    @Prop({ type: Boolean, default: true }) lazy!: boolean
     @Prop({ type: Function, default: () => true }) filter!: Filter
 
     getThumbEls(): HTMLElement[] {
@@ -194,6 +195,7 @@ export default class Photoswipe extends Vue {
 
     mounted() {
         this.gallery = this.$refs.gallery
+        if (!this.lazy) this.setImageSize()
         this.openPswp()
     }
 }
