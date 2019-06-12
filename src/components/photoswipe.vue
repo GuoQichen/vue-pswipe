@@ -122,6 +122,7 @@ export default class Photoswipe extends Vue {
         return fromURL
             ? options.galleryPIDs
                 ? findIndex(items, item => item.pid === index)
+                // in URL indexes start from 1
                 : index - 1
             : index
     }
@@ -168,7 +169,7 @@ export default class Photoswipe extends Vue {
             // in history mode, it will be empty in first time access because cant get image size
             setTimeout(() => {
                 this.openPhotoSwipe({
-                    index: pid - 1,
+                    index: pid,
                     fromURL: true,
                 })
             })
