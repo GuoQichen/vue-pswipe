@@ -34,6 +34,7 @@ import {
     isNum,
     closest,
     setSizeToTarget,
+    createPhotoSwipe,
 } from '../utils'
 
 @Component
@@ -147,26 +148,11 @@ export default class Photoswipe extends Vue {
 
         Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
 
-        const pswp = new PhotoSwipe(this.pswpElement, defaultUI, items, options)
-        pswp.init()
-
-        this.pswp = pswp
-        this.bindEvent()
-    }
-
-    bindEvent() {
-        this.pswp.listen('close', () => this.$emit('beforeClose'))
-        this.pswp.listen('destroy', () => this.$emit('closed'))
-        this.pswp.listen('imageLoadComplete', (index, item: PswpItem) => {
-            if (item.el.dataset.pswpSize) return
-            setSizeToTarget(item, 'src')
-            if (this.pswp.getCurrentIndex() === index) this.pswp.invalidateCurrItems()
-            this.pswp.updateSize(true)
-        })
-        this.pswp.listen('gettingData', (index, item: PswpItem) => {
-            const { w, h, msrc } = item
-            if (!msrc || w || h) return
-            setSizeToTarget(item, 'msrc')
+        this.pswp = createPhotoSwipe({
+            pswpElement: this.pswpElement,
+            items,
+            options,
+            context: this,
         })
     }
 

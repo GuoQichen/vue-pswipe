@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import { Options, Item } from 'photoswipe/dist/photoswipe-ui-default'
 
 /**
@@ -53,6 +54,18 @@ export interface Size {
     h: number
 }
 
+interface CreatePhotoSwipeArgs {
+    pswpElement: HTMLElement
+    items: PswpItem[]
+    options: PswpOptions
+    context: Vue
+}
+
+// types
+export type Fn = (...args: any[]) => void
+
+type Pswp = PhotoSwipe<PswpOptions>
+
 export type BeforeOpen = (continued?: boolean) => void
 
 export type Filter = (img: HTMLImageElement) => boolean
@@ -74,3 +87,9 @@ export type Get = <T>(
 ) => T
 
 export type Single = <T>(fn: Function) => (...args: any[]) => T
+
+export type BindEvent = (context: Vue, pswp: Pswp) => void
+
+export type CreatePhotoSwipe = (arg: CreatePhotoSwipeArgs) => Pswp
+
+export type HandleWithoutSize = (pswp: Pswp) => void

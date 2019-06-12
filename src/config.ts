@@ -2,6 +2,8 @@ import { PswpOptions } from '@/type'
 import { isMobile, appendOnce } from './utils'
 import Pswp from './components/pswp.vue'
 
+export const customEvents: string[] = ['beforeOpen']
+
 export const defualtGlobalOption: PswpOptions = {
     // in spa no need history mode
     history: false,

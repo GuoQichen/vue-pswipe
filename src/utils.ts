@@ -1,4 +1,18 @@
-import { PswpItem, Size, FindIndex, Closest, Get, Single, PswpDirectiveOptions } from '@/type'
+import PhotoSwipe from 'photoswipe'
+import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
+import {
+    PswpItem,
+    Size,
+    FindIndex,
+    Closest,
+    Get,
+    Single,
+    PswpDirectiveOptions,
+    CreatePhotoSwipe,
+    BindEvent,
+    HandleWithoutSize,
+} from '@/type'
+import { customEvents } from './config'
 
 export const isMobile = (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -7,6 +21,8 @@ export const isNum = (value: any): value is number => typeof value === 'number'
 export const isStr = (value: any): value is string => typeof value === 'string'
 
 export const isObj = (value: any): value is object => Object.prototype.toString.call(value) === '[object Object]'
+
+export const isFunction = (value: any): value is Function => Object.prototype.toString.call(value) === '[object Function]'
 
 const isDef = (value: any): boolean => (value !== undefined) && (value !== null)
 
@@ -231,4 +247,54 @@ export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     if (type === 'src' && width && height) {
         setSize(item.el, { w: width, h: height })
     }
+}
+
+/**
+ * allow listen original PhotoSwipe event in Photoswipe component
+ * @param context Photoswipe component
+ * @param pswp original PhotoSwipe
+ */
+const bindEvent: BindEvent = (context, pswp) => {
+    Object.keys(context.$listeners)
+        .filter(event => !customEvents.includes(event))
+        .forEach((event) => {
+            const fn = context.$listeners[event]
+            if (isFunction(fn)) {
+                pswp.listen(event, (...args: any[]) => {
+                    context.$emit(event, ...args)
+                })
+            }
+        })
+}
+
+/**
+ * handle item without set size, use msrc first
+ * @param pswp original PhotoSwipe
+ */
+const handleWithoutSize: HandleWithoutSize = (pswp) => {
+    pswp.listen('imageLoadComplete', (index, item: PswpItem) => {
+        if (item.el.dataset.pswpSize) return
+        setSizeToTarget(item, 'src')
+        if (pswp.getCurrentIndex() === index) pswp.invalidateCurrItems()
+        pswp.updateSize(true)
+    })
+    pswp.listen('gettingData', (index, item: PswpItem) => {
+        const { w, h, msrc } = item
+        if (!msrc || w || h) return
+        setSizeToTarget(item, 'msrc')
+    })
+}
+
+/**
+ * create PhotoSwipe instance, setup listener, init PhotoSwipe
+ * @return return created original PhotoSwipe instance
+ */
+export const createPhotoSwipe: CreatePhotoSwipe = ({
+    pswpElement, items, options, context,
+}) => {
+    const pswp = new PhotoSwipe(pswpElement, defaultUI, items, options)
+    bindEvent(context, pswp)
+    handleWithoutSize(pswp)
+    pswp.init()
+    return pswp
 }
