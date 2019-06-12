@@ -65,15 +65,16 @@ export default class Photoswipe extends Vue {
             const src = getSrc(el, this.auto) || ''
             const size = get(el, 'dataset.pswpSize', '').split('x')
             const title = get(el, 'dataset.pswpTitle', '')
-            const msrc = get(el, 'dataset.pswpMsrc', '')
+            const msrc = get(el, 'dataset.pswpMsrc', src)
 
-            return Object.assign({
+            return {
+                msrc,
                 src,
                 el,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),
                 title,
-            }, msrc && { msrc })
+            }
         })
     }
 
@@ -132,9 +133,7 @@ export default class Photoswipe extends Vue {
     }: OpenPhotoSwipeArgs) {
         const items = this.parseThumbEls(thumbEls)
 
-        const targetItem = items[index]
-        const { w, h, msrc, src } = targetItem
-        if (!w && !h) setSizeToTarget(targetItem, msrc ? 'msrc' : 'src')
+        setSizeToTarget(items[index], 'msrc')
 
         const options: PswpOptions = {
             showHideOpacity: isBgImg(items[index].el),

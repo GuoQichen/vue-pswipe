@@ -238,6 +238,10 @@ export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON
  */
 export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     /* eslint-disable no-param-reassign */
+    if (
+        (item.w || item.h)
+        && type !== 'src'
+    ) return
     const src = item[type]
     if (!src) return
     const img = new Image()
@@ -245,7 +249,11 @@ export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     const { width, height } = img
     item.w = width
     item.h = height
-    if (type === 'src' && width && height) {
+    if (
+        (type === 'src' || item.src === item.msrc)
+        && width
+        && height
+    ) {
         setSize(item.el, { w: width, h: height })
     }
 }
@@ -280,8 +288,6 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
         pswp.updateSize(true)
     })
     pswp.listen('gettingData', (index, item: PswpItem) => {
-        const { w, h, msrc } = item
-        if (!msrc || w || h) return
         setSizeToTarget(item, 'msrc')
     })
 }
