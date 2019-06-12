@@ -90,9 +90,9 @@ module.exports =
 /***/ "14fd":
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe Default UI - 4.1.2 - 2017-04-05
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe Default UI - 4.1.3 - 2019-01-08
 * http://photoswipe.com
-* Copyright (c) 2017 Dmitry Semenov; */
+* Copyright (c) 2019 Dmitry Semenov; */
 /**
 *
 * UI on top of main sliding area (caption, arrows, close button, etc.).
@@ -1355,7 +1355,7 @@ var update = add("74b42241", content, true, {"sourceMap":false,"shadowMode":fals
 
 "use strict";
 /**
-  * vue-class-component v6.2.0
+  * vue-class-component v6.3.2
   * (c) 2015-present Evan You
   * @license MIT
   */
@@ -1367,7 +1367,35 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var Vue = _interopDefault(__webpack_require__("8bbf"));
 
-var hasProto = { __proto__: [] } instanceof Array;
+var reflectionIsSupported = typeof Reflect !== 'undefined' && Reflect.defineMetadata;
+function copyReflectionMetadata(to, from) {
+    forwardMetadata(to, from);
+    Object.getOwnPropertyNames(from.prototype).forEach(function (key) {
+        forwardMetadata(to.prototype, from.prototype, key);
+    });
+    Object.getOwnPropertyNames(from).forEach(function (key) {
+        forwardMetadata(to, from, key);
+    });
+}
+function forwardMetadata(to, from, propertyKey) {
+    var metaKeys = propertyKey
+        ? Reflect.getOwnMetadataKeys(from, propertyKey)
+        : Reflect.getOwnMetadataKeys(from);
+    metaKeys.forEach(function (metaKey) {
+        var metadata = propertyKey
+            ? Reflect.getOwnMetadata(metaKey, from, propertyKey)
+            : Reflect.getOwnMetadata(metaKey, from);
+        if (propertyKey) {
+            Reflect.defineMetadata(metaKey, metadata, to, propertyKey);
+        }
+        else {
+            Reflect.defineMetadata(metaKey, metadata, to);
+        }
+    });
+}
+
+var fakeArray = { __proto__: [] };
+var hasProto = fakeArray instanceof Array;
 function createDecorator(factory) {
     return function (target, key, index) {
         var Ctor = typeof target === 'function'
@@ -1391,7 +1419,7 @@ function mixins() {
 }
 function isPrimitive(value) {
     var type = typeof value;
-    return value == null || (type !== "object" && type !== "function");
+    return value == null || (type !== 'object' && type !== 'function');
 }
 function warn(message) {
     if (typeof console !== 'undefined') {
@@ -1418,7 +1446,7 @@ function collectDataFromConstructor(vm, Component) {
             if (key.charAt(0) !== '_') {
                 Object.defineProperty(_this, key, {
                     get: function () { return vm[key]; },
-                    set: function (value) { return vm[key] = value; },
+                    set: function (value) { vm[key] = value; },
                     configurable: true
                 });
             }
@@ -1469,9 +1497,20 @@ function componentFactory(Component, options) {
             return;
         }
         var descriptor = Object.getOwnPropertyDescriptor(proto, key);
-        if (typeof descriptor.value === 'function') {
+        if (descriptor.value !== void 0) {
             // methods
-            (options.methods || (options.methods = {}))[key] = descriptor.value;
+            if (typeof descriptor.value === 'function') {
+                (options.methods || (options.methods = {}))[key] = descriptor.value;
+            }
+            else {
+                // typescript decorated data
+                (options.mixins || (options.mixins = [])).push({
+                    data: function () {
+                        var _a;
+                        return _a = {}, _a[key] = descriptor.value, _a;
+                    }
+                });
+            }
         }
         else if (descriptor.get || descriptor.set) {
             // computed properties
@@ -1499,6 +1538,9 @@ function componentFactory(Component, options) {
         : Vue;
     var Extended = Super.extend(options);
     forwardStaticMembers(Extended, Component, Super);
+    if (reflectionIsSupported) {
+        copyReflectionMetadata(Extended, Component);
+    }
     return Extended;
 }
 var reservedPropertyNames = [
@@ -1544,9 +1586,9 @@ function forwardStaticMembers(Extended, Original, Super) {
                 return;
             }
             var superDescriptor = Object.getOwnPropertyDescriptor(Super, key);
-            if (!isPrimitive(descriptor.value)
-                && superDescriptor
-                && superDescriptor.value === descriptor.value) {
+            if (!isPrimitive(descriptor.value) &&
+                superDescriptor &&
+                superDescriptor.value === descriptor.value) {
                 return;
             }
         }
@@ -1564,15 +1606,11 @@ function Component(options) {
         return componentFactory(Component, options);
     };
 }
-(function (Component) {
-    function registerHooks(keys) {
-        $internalHooks.push.apply($internalHooks, keys);
-    }
-    Component.registerHooks = registerHooks;
-})(Component || (Component = {}));
-var Component$1 = Component;
+Component.registerHooks = function registerHooks(keys) {
+    $internalHooks.push.apply($internalHooks, keys);
+};
 
-exports.default = Component$1;
+exports.default = Component;
 exports.createDecorator = createDecorator;
 exports.mixins = mixins;
 
@@ -1619,9 +1657,9 @@ module.exports = function escape(url) {
 /***/ "b24f":
 /***/ (function(module, exports, __webpack_require__) {
 
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe - v4.1.2 - 2017-04-05
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! PhotoSwipe - v4.1.3 - 2019-01-08
 * http://photoswipe.com
-* Copyright (c) 2017 Dmitry Semenov; */
+* Copyright (c) 2019 Dmitry Semenov; */
 (function (root, factory) { 
 	if (true) {
 		!(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
@@ -1778,7 +1816,7 @@ var framework = {
 			features.caf = window.cancelAnimationFrame;
 		}
 
-		features.pointerEvent = navigator.pointerEnabled || navigator.msPointerEnabled;
+		features.pointerEvent = !!(window.PointerEvent) || navigator.msPointerEnabled;
 
 		// fix false-positive detection of old Android in new IE
 		// (IE11 ua string contains "Android 4.0")
@@ -3608,9 +3646,7 @@ var _gestureStartTime,
 			if(pointerIndex > -1) {
 				releasePoint = _currPointers.splice(pointerIndex, 1)[0];
 
-				if(navigator.pointerEnabled) {
-					releasePoint.type = e.pointerType || 'mouse';
-				} else {
+				if(navigator.msPointerEnabled) {
 					var MSPOINTER_TYPES = {
 						4: 'mouse', // event.MSPOINTER_TYPE_MOUSE
 						2: 'touch', // event.MSPOINTER_TYPE_TOUCH 
@@ -3621,6 +3657,8 @@ var _gestureStartTime,
 					if(!releasePoint.type) {
 						releasePoint.type = e.pointerType || 'mouse';
 					}
+				} else {
+					releasePoint.type = e.pointerType || 'mouse';
 				}
 
 			}
@@ -4073,11 +4111,11 @@ _registerModule('Gestures', {
 			}
 
 			if(_pointerEventEnabled) {
-				if(navigator.pointerEnabled) {
-					addEventNames('pointer', 'down', 'move', 'up', 'cancel');
-				} else {
+				if(navigator.msPointerEnabled) {
 					// IE10 pointer events are case-sensitive
 					addEventNames('MSPointer', 'Down', 'Move', 'Up', 'Cancel');
+				} else {
+					addEventNames('pointer', 'down', 'move', 'up', 'cancel');
 				}
 			} else if(_features.touch) {
 				addEventNames('touch', 'start', 'move', 'end', 'cancel');
@@ -5378,6 +5416,49 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjY0IiBoZWlnaHQ9Ijg4
 
 /***/ }),
 
+/***/ "f6fd":
+/***/ (function(module, exports) {
+
+// document.currentScript polyfill by Adam Miller
+
+// MIT license
+
+(function(document){
+  var currentScript = "currentScript",
+      scripts = document.getElementsByTagName('script'); // Live NodeList collection
+
+  // If browser needs currentScript polyfill, add get currentScript() to the document object
+  if (!(currentScript in document)) {
+    Object.defineProperty(document, currentScript, {
+      get: function(){
+
+        // IE 6-10 supports script readyState
+        // IE 10+ support stack trace
+        try { throw new Error(); }
+        catch (err) {
+
+          // Find the second match for the "at" string to get file src url from stack.
+          // Specifically works with the format of stack traces in IE.
+          var i, res = ((/.*at [^\(]*\((.*):.+:.+\)$/ig).exec(err.stack) || [false])[1];
+
+          // For all scripts on the page, if src matches or if ready state is interactive, return the script tag
+          for(i in scripts){
+            if(scripts[i].src == res || scripts[i].readyState == "interactive"){
+              return scripts[i];
+            }
+          }
+
+          // If no match, return null
+          return null;
+        }
+      }
+    });
+  }
+})(document);
+
+
+/***/ }),
+
 /***/ "fa4e":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5404,6 +5485,10 @@ __webpack_require__.r(__webpack_exports__);
 // This file is imported into lib/wc client bundles.
 
 if (typeof window !== 'undefined') {
+  if (true) {
+    __webpack_require__("f6fd")
+  }
+
   var i
   if ((i = window.document.currentScript) && (i = i.src.match(/(.+\/)[^/]+\.js(\?.*)?$/))) {
     __webpack_require__.p = i[1] // eslint-disable-line
@@ -5412,6 +5497,14 @@ if (typeof window !== 'undefined') {
 
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
+
+// EXTERNAL MODULE: ./node_modules/photoswipe/dist/photoswipe.js
+var photoswipe = __webpack_require__("b24f");
+var photoswipe_default = /*#__PURE__*/__webpack_require__.n(photoswipe);
+
+// EXTERNAL MODULE: ./node_modules/photoswipe/dist/photoswipe-ui-default.js
+var photoswipe_ui_default = __webpack_require__("14fd");
+var photoswipe_ui_default_default = /*#__PURE__*/__webpack_require__.n(photoswipe_ui_default);
 
 // CONCATENATED MODULE: ./src/utils.ts
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -5430,11 +5523,23 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
+
+
+
 var isMobile = function isMobile() {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 };
 var isNum = function isNum(value) {
   return typeof value === 'number';
+};
+var isStr = function isStr(value) {
+  return typeof value === 'string';
+};
+var isObj = function isObj(value) {
+  return Object.prototype.toString.call(value) === '[object Object]';
+};
+var isFunction = function isFunction(value) {
+  return Object.prototype.toString.call(value) === '[object Function]';
 };
 
 var isDef = function isDef(value) {
@@ -5452,9 +5557,20 @@ var isEle = function isEle(node) {
 var isBgImg = function isBgImg(el) {
   return !isImg(el) && !!el.dataset.pswpSrc;
 };
+/**
+ * default error handle method
+ * @param hint error hint
+ */
+
 var errorHandler = function errorHandler(hint) {
   throw new Error("[vue-pswipe] ".concat(hint));
 };
+/**
+ * get image size by polling
+ * @param path the image src to get size
+ * @return return promise
+ */
+
 var getImageSize = function getImageSize(path) {
   return new Promise(function (resolve) {
     var img = new Image();
@@ -5467,7 +5583,6 @@ var getImageSize = function getImageSize(path) {
     var check = function check() {
       if (img.width > 0 || img.height > 0) {
         return resolve({
-          src: path,
           w: img.width,
           h: img.height
         });
@@ -5479,10 +5594,17 @@ var getImageSize = function getImageSize(path) {
     check();
   });
 };
-var findIndex = function findIndex(array, fn) {
+/**
+ * returns the index of the first element predicate returns truthy
+ * @param array the array to search
+ * @param predicate the function invoked per iteration.
+ * @return return the index of the found element, else -1.
+ */
+
+var findIndex = function findIndex(array, predicate) {
   var index = -1;
   array.some(function (item, idx) {
-    var result = fn(item, idx);
+    var result = predicate(item, idx);
     if (result) index = idx;
     return result;
   });
@@ -5490,6 +5612,7 @@ var findIndex = function findIndex(array, fn) {
 };
 /**
  * parse picture index and gallery index from URL (#&pid=1&gid=2)
+ * @return return parsed hash, eg: { pid: 1, gid: 2 }
  */
 
 var parseHash = function parseHash() {
@@ -5510,18 +5633,36 @@ var parseHash = function parseHash() {
   }, params);
   return params;
 };
+/**
+ * invoke querySelectorAll with specified context
+ * @param selector css selector
+ * @param context the query context
+ * @return return the list of queries
+ */
+
 var querySelectorList = function querySelectorList(selector) {
   var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
   return _toConsumableArray(context.querySelectorAll(selector));
 };
 /**
  * find nearest parent element
+ * @param el begin element
+ * @param predicate the function invoked from begin element to body
+ * @returns return the found element or false
  */
 
-var closest = function closest(el, fn) {
-  return !!el && isEle(el) && (fn(el) ? el : closest(el.parentNode, fn));
+var closest = function closest(el, predicate) {
+  return !!el && isEle(el) && (predicate(el) ? el : closest(el.parentNode, predicate));
 };
-var get = function get(context, path, defaultValue) {
+/**
+ * gets the property value at path of object
+ * @param context the object to query
+ * @param path the path of the property to get
+ * @param defaultValue the value returned if the resolved value is undefined or cant resolved
+ * @return return the resolved value.
+ */
+
+var utils_get = function get(context, path, defaultValue) {
   try {
     var result = path.split('.').reduce(function (acc, cur) {
       return acc[cur];
@@ -5531,37 +5672,223 @@ var get = function get(context, path, defaultValue) {
     return defaultValue;
   }
 };
+/**
+ * singleton pattern
+ * @param fn the function should be invoked only once
+ * @return wrapped function
+ */
+
 var single = function single(fn) {
-  var result;
+  var result; // eslint-disable-next-line func-names
+
   return function () {
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    return result || (result = fn.apply(this, args)); // eslint-disable-line
+    return result || (result = fn.apply(this, args));
   };
 };
+/**
+ * append element to document.body
+ * @param el the element to be append to body
+ * @return return appended element
+ */
 
 var append = function append(el) {
   return document.body.appendChild(el);
 };
+/**
+ * append element to body only once
+ */
+
 
 var appendOnce = single(append);
+/**
+ * set data-pswp-size to element
+ * @param el the element to set data-pswp-size
+ * @param size the size object contains w and h property
+ */
+
 var setSize = function setSize(el, _ref) {
   var w = _ref.w,
       h = _ref.h;
   return el.dataset.pswpSize = "".concat(w, "x").concat(h);
 }; // eslint-disable-line
 
+/**
+ * get the image src according to auto
+ * @param target the element to get the src
+ * @param auto is it in auto mode
+ */
+
 var getSrc = function getSrc(target, auto) {
   return auto && isImg(target) ? target.src : target.dataset.pswpSrc || '';
-}; // prevent uncessary click event be handle
+};
+/**
+ * determine whether el is a valid element based on auto and filter
+ */
 
 var relevant = function relevant(el, auto, filter) {
   return auto ? isImg(el) && filter(el) : !!el.dataset.pswpSrc;
 };
+/**
+ * Convert the first letter to uppercase
+ */
+
+var upperFirst = function upperFirst(str) {
+  return str.replace(/^\S/, function (match) {
+    return match.toUpperCase();
+  });
+};
+/**
+ * convert property to pswp property, eg: src => pswpSrc
+ */
+
+
+var getPswpDataKey = function getPswpDataKey(property) {
+  return "pswp".concat(upperFirst(property));
+};
+/**
+ * Set pswp data to the data attribute of the specified element
+ */
+
+
+var setPswpData = function setPswpData(options, el) {
+  Object.keys(options).forEach(function (key) {
+    el.dataset[getPswpDataKey(key)] = options[key]; // eslint-disable-line
+  });
+};
+/**
+ * Set the pswp data according to the type of the parameter
+ */
+
+var setPswpDataByCond = function setPswpDataByCond(el, value) {
+  if (isStr(value)) setPswpData({
+    src: value
+  }, el);
+  if (isObj(value)) setPswpData(value, el);
+};
+/**
+ * JSON.stringify to determine whether it is equal
+ */
+
+var jsonEqual = function jsonEqual(val1, val2) {
+  return JSON.stringify(val1) === JSON.stringify(val2);
+};
+/**
+ * set the size of specified src to target item
+ */
+
+var setSizeToTarget = function setSizeToTarget(item, type) {
+  /* eslint-disable no-param-reassign */
+  var src = item[type];
+  if (!src) return;
+  var img = new Image();
+  img.src = src;
+  var width = img.width,
+      height = img.height;
+  item.w = width;
+  item.h = height;
+
+  if (type === 'src' && width && height) {
+    setSize(item.el, {
+      w: width,
+      h: height
+    });
+  }
+};
+/**
+ * allow listen original PhotoSwipe event in Photoswipe component
+ * @param context Photoswipe component
+ * @param pswp original PhotoSwipe
+ */
+
+var utils_bindEvent = function bindEvent(context, pswp) {
+  Object.keys(context.$listeners).filter(function (event) {
+    return !customEvents.includes(event);
+  }).forEach(function (event) {
+    var fn = context.$listeners[event];
+
+    if (isFunction(fn)) {
+      pswp.listen(event, function () {
+        for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
+        }
+
+        context.$emit.apply(context, [event].concat(args));
+      });
+    }
+  });
+};
+/**
+ * handle item without set size, use msrc first
+ * @param pswp original PhotoSwipe
+ */
+
+
+var handleWithoutSize = function handleWithoutSize(pswp) {
+  pswp.listen('imageLoadComplete', function (index, item) {
+    if (item.el.dataset.pswpSize) return;
+    setSizeToTarget(item, 'src');
+    if (pswp.getCurrentIndex() === index) pswp.invalidateCurrItems();
+    pswp.updateSize(true);
+  });
+  pswp.listen('gettingData', function (index, item) {
+    var w = item.w,
+        h = item.h,
+        msrc = item.msrc;
+    if (!msrc || w || h) return;
+    setSizeToTarget(item, 'msrc');
+  });
+};
+/**
+ * get current active PhotoSwipe, else null
+ */
+
+
+var CurrentPswp;
+
+(function (CurrentPswp) {
+  /* eslint-disable no-shadow */
+  var curerntPswp = null;
+
+  CurrentPswp.get = function () {
+    return curerntPswp;
+  };
+
+  var setupClean = function setupClean(pswp) {
+    pswp.listen('destroy', function () {
+      curerntPswp = null;
+    });
+  };
+
+  CurrentPswp.set = function (pswp) {
+    curerntPswp = pswp;
+    if (pswp) setupClean(pswp);
+  };
+})(CurrentPswp || (CurrentPswp = {}));
+/**
+ * create PhotoSwipe instance, setup listener, init PhotoSwipe
+ * @return return created original PhotoSwipe instance
+ */
+
+
+var utils_createPhotoSwipe = function createPhotoSwipe(_ref2) {
+  var pswpElement = _ref2.pswpElement,
+      items = _ref2.items,
+      options = _ref2.options,
+      context = _ref2.context;
+  var pswp = new photoswipe_default.a(pswpElement, photoswipe_ui_default_default.a, items, options);
+  utils_bindEvent(context, pswp);
+  handleWithoutSize(pswp);
+  CurrentPswp.set(pswp);
+  pswp.init();
+  return pswp;
+};
 // CONCATENATED MODULE: ./src/config.ts
 
+var customEvents = ['beforeOpen'];
 var defualtGlobalOption = {
   // in spa no need history mode
   history: false,
@@ -5581,17 +5908,16 @@ var config_getGlobalMixin = function getGlobalMixin(pswp, options) {
       };
     },
     created: function created() {
-      // @ts-ignore
       this.pswpElement = appendOnce(pswp.$el);
     }
   };
 };
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"34d04551-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=1bccf265&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c571cd2e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=544751fb&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"gallery",staticClass:"pswipe-gallery",on:{"click":_vm.onThumbClick}},[_vm._t("default")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=1bccf265&
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=544751fb&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -5790,7 +6116,7 @@ var vue_class_component_common = __webpack_require__("65d9");
 var vue_class_component_common_default = /*#__PURE__*/__webpack_require__.n(vue_class_component_common);
 
 // CONCATENATED MODULE: ./node_modules/vue-property-decorator/lib/vue-property-decorator.js
-/** vue-property-decorator verson 7.0.0 MIT LICENSE copyright 2018 kaorun343 */
+/** vue-property-decorator verson 7.3.0 MIT LICENSE copyright 2018 kaorun343 */
 
 
 
@@ -5868,7 +6194,14 @@ function Watch(path, options) {
         if (typeof componentOptions.watch !== 'object') {
             componentOptions.watch = Object.create(null);
         }
-        componentOptions.watch[path] = { handler: handler, deep: deep, immediate: immediate };
+        var watch = componentOptions.watch;
+        if (typeof watch[path] === 'object' && !Array.isArray(watch[path])) {
+            watch[path] = [watch[path]];
+        }
+        else if (typeof watch[path] === 'undefined') {
+            watch[path] = [];
+        }
+        watch[path].push({ handler: handler, deep: deep, immediate: immediate });
     });
 }
 // Code copied from Vue/src/shared/util.js
@@ -5880,27 +6213,35 @@ var hyphenate = function (str) { return str.replace(hyphenateRE, '-$1').toLowerC
  * @return MethodDecorator
  */
 function Emit(event) {
-    return function (target, key, descriptor) {
+    return function (_target, key, descriptor) {
         key = hyphenate(key);
         var original = descriptor.value;
         descriptor.value = function emitter() {
+            var _this = this;
             var args = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 args[_i] = arguments[_i];
             }
-            if (original.apply(this, args) !== false)
-                this.$emit.apply(this, [event || key].concat(args));
+            var emit = function (returnValue) {
+                if (returnValue !== undefined)
+                    args.unshift(returnValue);
+                _this.$emit.apply(_this, [event || key].concat(args));
+            };
+            var returnValue = original.apply(this, args);
+            if (isPromise(returnValue)) {
+                returnValue.then(function (returnValue) {
+                    emit(returnValue);
+                });
+            }
+            else {
+                emit(returnValue);
+            }
         };
     };
 }
-
-// EXTERNAL MODULE: ./node_modules/photoswipe/dist/photoswipe.js
-var photoswipe = __webpack_require__("b24f");
-var photoswipe_default = /*#__PURE__*/__webpack_require__.n(photoswipe);
-
-// EXTERNAL MODULE: ./node_modules/photoswipe/dist/photoswipe-ui-default.js
-var photoswipe_ui_default = __webpack_require__("14fd");
-var photoswipe_ui_default_default = /*#__PURE__*/__webpack_require__.n(photoswipe_ui_default);
+function isPromise(obj) {
+    return obj instanceof Promise || (obj && typeof obj.then === 'function');
+}
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=script&lang=ts&
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -5920,8 +6261,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
 
 
 
@@ -5950,18 +6289,20 @@ function (_Vue) {
       var _this = this;
 
       var thumbEls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getThumbEls();
-      return thumbEls.map(function (wrapperEl) {
-        var src = getSrc(wrapperEl, _this.auto) || '';
-        var size = get(wrapperEl, 'dataset.pswpSize', '').split('x');
-        var title = get(wrapperEl, 'dataset.pswpTitle', '');
-        return {
+      return thumbEls.map(function (el) {
+        var src = getSrc(el, _this.auto) || '';
+        var size = utils_get(el, 'dataset.pswpSize', '').split('x');
+        var title = utils_get(el, 'dataset.pswpTitle', '');
+        var msrc = utils_get(el, 'dataset.pswpMsrc', '');
+        return Object.assign({
           src: src,
-          msrc: src,
-          el: wrapperEl,
+          el: el,
           w: Number(size[0] || 0),
           h: Number(size[1] || 0),
           title: title
-        };
+        }, msrc && {
+          msrc: msrc
+        });
       });
     }
   }, {
@@ -5973,20 +6314,9 @@ function (_Vue) {
         return !!el.dataset.pswpSrc;
       }) || e.target;
       if (!relevant(eTarget, this.auto, this.filter)) return;
-      var size = eTarget.dataset.pswpSize;
       var thumbEls = this.getThumbEls();
-
-      if (!size) {
-        this.setImageSize(thumbEls).then(function () {
-          _this2.onThumbClick({
-            target: eTarget
-          });
-        });
-        return;
-      }
-
-      var index = findIndex(thumbEls, function (child) {
-        return child === eTarget;
+      var index = findIndex(thumbEls, function (el) {
+        return el === eTarget;
       });
       if (index === -1) return;
 
@@ -5996,7 +6326,7 @@ function (_Vue) {
           target: eTarget
         };
 
-        var beforeOpenNext = function beforeOpenNext() {
+        var beforeOpen = function beforeOpen() {
           var continued = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
           if (!continued) return;
 
@@ -6005,7 +6335,7 @@ function (_Vue) {
           }, true);
         };
 
-        this.$emit('beforeOpen', beforeOpenEvent, beforeOpenNext);
+        this.$emit('beforeOpen', beforeOpenEvent, beforeOpen);
         return;
       }
 
@@ -6039,10 +6369,14 @@ function (_Vue) {
     key: "openPhotoSwipe",
     value: function openPhotoSwipe(_ref) {
       var index = _ref.index,
-          disableAnimation = _ref.disableAnimation,
           fromURL = _ref.fromURL,
           thumbEls = _ref.thumbEls;
       var items = this.parseThumbEls(thumbEls);
+      var targetItem = items[index];
+      var w = targetItem.w,
+          h = targetItem.h,
+          msrc = targetItem.msrc;
+      if (!w && !h && msrc) setSizeToTarget(targetItem, 'msrc');
       var options = {
         showHideOpacity: isBgImg(items[index].el),
         galleryUID: +(this.gallery.dataset.pswpUid || ''),
@@ -6051,33 +6385,23 @@ function (_Vue) {
       var parsedIndex = this.parseIndex(index, items, options, fromURL);
       if (parsedIndex >= 0) options.index = parsedIndex;
       if (!isNum(options.index) || Number.isNaN(options.index)) return;
-      if (disableAnimation) options.showAnimationDuration = 0;
+      if (fromURL) options.showAnimationDuration = 0;
       Object.assign(options, defualtGlobalOption, this.globalOptions, this.options);
-      var pswp = new photoswipe_default.a(this.pswpElement, photoswipe_ui_default_default.a, items, options);
-      pswp.init();
-      this.pswp = pswp;
-      this.bindEvent();
-    }
-  }, {
-    key: "bindEvent",
-    value: function bindEvent() {
-      var _this3 = this;
-
-      this.pswp.listen('close', function () {
-        return _this3.$emit('beforeClose');
-      });
-      this.pswp.listen('destroy', function () {
-        return _this3.$emit('closed');
+      this.pswp = utils_createPhotoSwipe({
+        pswpElement: this.pswpElement,
+        items: items,
+        options: options,
+        context: this
       });
     }
   }, {
     key: "initPhotoSwipeFromDOM",
     value: function initPhotoSwipeFromDOM(gallerySelector) {
-      var _this4 = this;
+      var _this3 = this;
 
       var galleryEls = querySelectorList(gallerySelector);
       var galleryIndex = findIndex(galleryEls, function (el) {
-        return el === _this4.gallery;
+        return el === _this3.gallery;
       });
       var currentGid = galleryIndex + 1;
       this.gallery.dataset.pswpUid = "".concat(currentGid); // Parse URL and open gallery if it contains #&pid=3&gid=1
@@ -6089,9 +6413,8 @@ function (_Vue) {
       if (pid && gid && gid === currentGid) {
         // in history mode, it will be empty in first time access because cant get image size
         setTimeout(function () {
-          _this4.openPhotoSwipe({
+          _this3.openPhotoSwipe({
             index: pid - 1,
-            disableAnimation: true,
             fromURL: true
           });
         });
@@ -6112,21 +6435,20 @@ function (_Vue) {
   }, {
     key: "setImageSize",
     value: function setImageSize() {
-      var _this5 = this;
+      var _this4 = this;
 
       var thumbEls = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getThumbEls();
       return Promise.all(thumbEls.filter(function (thumbEl) {
         return !thumbEl.dataset.pswpSize;
       }).map(function (thumbEl) {
-        return _this5.setImageSizeSeparately(thumbEl);
+        return _this4.setImageSizeSeparately(thumbEl);
       }));
     }
   }, {
     key: "mounted",
     value: function mounted() {
       this.gallery = this.$refs.gallery;
-      this.setImageSize(); // eslint-disable-line
-
+      if (!this.lazy) this.setImageSize();
       this.openPswp();
     }
   }]);
@@ -6145,6 +6467,11 @@ __decorate([Prop({
   type: Boolean,
   default: false
 })], photoswipevue_type_script_lang_ts_Photoswipe.prototype, "bubble", void 0);
+
+__decorate([Prop({
+  type: Boolean,
+  default: true
+})], photoswipevue_type_script_lang_ts_Photoswipe.prototype, "lazy", void 0);
 
 __decorate([Prop({
   type: Function,
@@ -6275,9 +6602,8 @@ var component = normalizeComponent(
   
 )
 
-component.options.__file = "photoswipe.vue"
 /* harmony default export */ var components_photoswipe = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"34d04551-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=template&id=76958fa8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c571cd2e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=template&id=76958fa8&
 var pswpvue_type_template_id_76958fa8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
 var pswpvue_type_template_id_76958fa8_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('button',{staticClass:"pswp__button pswp__button--share",attrs:{"title":"Share"}}),_c('button',{staticClass:"pswp__button pswp__button--fs",attrs:{"title":"Toggle fullscreen"}}),_c('button',{staticClass:"pswp__button pswp__button--zoom",attrs:{"title":"Zoom in/out"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
 
@@ -6341,9 +6667,9 @@ var pswp_component = normalizeComponent(
   
 )
 
-pswp_component.options.__file = "pswp.vue"
 /* harmony default export */ var components_pswp = (pswp_component.exports);
 // CONCATENATED MODULE: ./src/main.ts
+
 
 
 
@@ -6352,6 +6678,23 @@ var main_install = function install(Vue, options) {
   var pswp = new Vue(components_pswp).$mount();
   components_photoswipe.mixin(config_getGlobalMixin(pswp, options));
   Vue.component('Photoswipe', components_photoswipe);
+  Vue.directive('pswp', {
+    bind: function bind(el, _ref) {
+      var value = _ref.value;
+      setPswpDataByCond(el, value);
+    },
+    update: function update(el, _ref2) {
+      var value = _ref2.value,
+          oldValue = _ref2.oldValue;
+      if (jsonEqual(value, oldValue)) return;
+      setPswpDataByCond(el, value);
+    }
+  });
+  Object.defineProperty(Vue.prototype, '$Pswp', {
+    get: function get() {
+      return CurrentPswp.get();
+    }
+  });
 };
 
 /* harmony default export */ var main = ({
