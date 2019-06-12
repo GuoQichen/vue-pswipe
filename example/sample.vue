@@ -19,6 +19,15 @@
                 style="display: inline-block;"
             />
 
+            <h2>use batch</h2>
+            <div
+                v-for="(item, index) in getBatchImages(100)"
+                v-pswp="item"
+                :key="`batch-bg-${index}`"
+                :style="getImageItemStyle(imageList[0])"
+                style="display: inline-block;"
+            />
+
             <h2>use bubble mode</h2>
             <div
                 v-pswp="imageList[0]"
