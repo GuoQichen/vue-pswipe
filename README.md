@@ -71,7 +71,6 @@ interface PswpDirectiveOptions {
 ```
 
 ## event
-Photoswipe 
 
 ### `beforeOpen`
 emit after click thumbnail, if listen to this event, `next` function must be called to resolve this hook
