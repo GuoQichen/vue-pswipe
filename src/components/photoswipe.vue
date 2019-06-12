@@ -133,8 +133,8 @@ export default class Photoswipe extends Vue {
         const items = this.parseThumbEls(thumbEls)
 
         const targetItem = items[index]
-        const { w, h, msrc } = targetItem
-        if (!w && !h && msrc) setSizeToTarget(targetItem, 'msrc')
+        const { w, h, msrc, src } = targetItem
+        if (!w && !h) setSizeToTarget(targetItem, msrc ? 'msrc' : 'src')
 
         const options: PswpOptions = {
             showHideOpacity: isBgImg(items[index].el),
