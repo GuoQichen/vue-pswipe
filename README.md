@@ -1,7 +1,7 @@
 # vue-pswipe
-a Vue plugin for photoswipe without set image size
+a Vue plugin for PhotoSwipe without set image size
 
-## example online
+## online example
 [![Edit Vue Template](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/619x48656r)
 
 ## install
@@ -17,50 +17,14 @@ import Photoswipe from 'vue-pswipe'
 
 Vue.use(Photoswipe, options)
 ```
-[complete options](http://photoswipe.com/documentation/options.html)
+see [complete options](http://photoswipe.com/documentation/options.html)
 
-you should set `v-pswp` to prefetch image size
+you can set `v-pswp` directive in element to mark as clickable
 ```vue
 <Photoswipe>
     <img 
         :src="imageSrc"
         v-pswp="imageSrc"
-    />
-</Photoswipe>
-```
-
-or you can use background-image instead of img tag
-```vue
-<Photoswipe>
-    <div 
-        v-pswp="imageSrc"
-        :style="getBgImgStyle(imageSrc)"
-    >
-</Photoswipe>
-```
-
-or you can set auto props, then vue-pswipe will collect all img tag
-```vue
-<Photoswipe auto>
-    <img :src="imageSrc" />
-</Photoswipe>
-```
-
-if you dont want collect all img under auto mode, you can use beforeOpen hook
-```vue
-<Photoswipe auto @beforeOpen="({ target }, next) => next(target.parentNode.tagName !== 'A')">
-    <img :src="imageSrc" />
-</Photoswipe>
-```
-
-The above example filters the all img in a tags
-
-if you need image caption, you can set `v-pswp` as object with title property
-```vue
-<Photoswipe>
-    <img 
-        :src="imageSrc"
-        v-pswp="{ src: imageSrc, title: imageTitle }"
     />
 </Photoswipe>
 ```
@@ -68,29 +32,73 @@ if you need image caption, you can set `v-pswp` as object with title property
 ## props
 Photoswipe 
 
-| property | type | explain |
-| --- | --- | --- |
-| options | object | original photoswipe options |
-| auto | boolean | auto initial without data-pswp-src |
-| bubble | boolean | allow click event bubbling, default is false |
-| ❗️ ️filter | function | a filter function that accept img as argument, only work in auto mode. you should use beforeOpen instead. (deprecated) |
+| Property | Type | Description | Default |
+| --- | --- | --- | --- |
+| options | object | original PhotoSwipe options, see [complete options](http://photoswipe.com/documentation/options.html) | - | 
+| auto | boolean | automatically collect all img tags without the need for the `v-pswp` directive | false |
+| bubble | boolean | allow click event bubbling | false |
+| lazy | boolean | lazy loading image, you can set to false to preload all image | true |
 
-[complete options](http://photoswipe.com/documentation/options.html)
+## directive
+
+### `v-pswp: object|string`
+use for mark current element as gallery item, accept image src or options object
+
+Directive Options:
+```typescript
+interface PswpDirectiveOptions {
+    /**
+     * path to image
+     */
+    src: string
+    /**
+     * image size, 'width x height', eg: '100x100'
+     */
+    size?: string
+    /**
+     * small image placeholder,
+     * main (large) image loads on top of it,
+     * if you skip this parameter - grey rectangle will be displayed,
+     * try to define this property only when small image was loaded before
+     */
+    msrc?: string
+    /**
+     * used by Default PhotoSwipe UI
+     * if you skip it, there won't be any caption
+     */
+    title?: string
+}
+```
 
 ## event
+Photoswipe 
 
-### beforeOpen
-emit after click thumbnail, beforeOpen function receives two arguments:
+### `beforeOpen`
+emit after click thumbnail, if listen to this event, `next` function must be called to resolve this hook
+
+Parameters: 
 - `event`:
     - `index`: current image index
-    - `target`: target that triggers effective click event
-- `next`: this function must be called to resolve the hook. `next(false)` will abort open photoswipe
+    - `target`: the target that triggers effective click event
+- `next`: 
 
-### beforeClose
-gallery starts closing
+    must be called to resolve the hook. `next(false)` will abort open PhotoSwipe
 
-### closed
-after gallery is closed and closing animation finished. Clean up your stuff here.
+### original PhotoSwipe event
+support all original PhotoSwipe events, see [original event](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#events), eg: 
+```vue
+<Photoswipe @beforeChange="handleBeforeChange">
+    <img 
+        :src="imageSrc"
+        v-pswp="imageSrc"
+    />
+</Photoswipe>
+```
+
+## instance methods
+
+### `this.$Pswp`
+Access the currently active PhotoSwipe instance, or null if there is currently no active PhotoSwipe. you can call the origin PhotoSwipe method or access the origin PhotoSwipe property by this. see [Methods](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#methods) and [Properties](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#methods).
 
 ## example
 ```
