@@ -30,7 +30,6 @@ you can set `v-pswp` directive in element to mark as clickable
 ```
 
 ## props
-Photoswipe 
 
 | Property | Type | Description | Default |
 | --- | --- | --- | --- |
