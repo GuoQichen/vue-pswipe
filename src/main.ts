@@ -1,7 +1,7 @@
 import { PluginFunction } from 'vue' // eslint-disable-line
 import { PswpOptions } from '@/type'
 import { getGlobalMixin } from './config'
-import { setPswpDataByCond, jsonEqual } from './utils'
+import { setPswpDataByCond, jsonEqual, CurrentPswp } from './utils'
 import Photoswipe from './components/photoswipe.vue'
 import Pswp from './components/pswp.vue'
 
@@ -11,6 +11,7 @@ const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
     Photoswipe.mixin(getGlobalMixin(pswp, options))
 
     Vue.component('Photoswipe', Photoswipe)
+
     Vue.directive('pswp', {
         bind(el: HTMLElement, { value }: any) {
             setPswpDataByCond(el, value)
@@ -18,6 +19,12 @@ const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
         update(el: HTMLElement, { value, oldValue }: any) {
             if (jsonEqual(value, oldValue)) return
             setPswpDataByCond(el, value)
+        },
+    })
+
+    Object.defineProperty(Vue.prototype, '$Pswp', {
+        get() {
+            return CurrentPswp.get()
         },
     })
 }

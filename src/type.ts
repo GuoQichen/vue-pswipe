@@ -64,7 +64,7 @@ interface CreatePhotoSwipeArgs {
 // types
 export type Fn = (...args: any[]) => void
 
-type Pswp = PhotoSwipe<PswpOptions>
+export type Pswp = PhotoSwipe<PswpOptions>
 
 export type BeforeOpen = (continued?: boolean) => void
 

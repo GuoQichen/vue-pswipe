@@ -11,6 +11,7 @@ import {
     CreatePhotoSwipe,
     BindEvent,
     HandleWithoutSize,
+    Pswp,
 } from '@/type'
 import { customEvents } from './config'
 
@@ -286,6 +287,24 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
 }
 
 /**
+ * get current active PhotoSwipe, else null
+ */
+export namespace CurrentPswp {
+    /* eslint-disable no-shadow */
+    let curerntPswp: Pswp | null = null
+    export const get = () => curerntPswp
+    const setupClean = (pswp: Pswp) => {
+        pswp.listen('destroy', () => {
+            curerntPswp = null
+        })
+    }
+    export const set = (pswp: Pswp | null) => {
+        curerntPswp = pswp
+        if (pswp) setupClean(pswp)
+    }
+}
+
+/**
  * create PhotoSwipe instance, setup listener, init PhotoSwipe
  * @return return created original PhotoSwipe instance
  */
@@ -295,6 +314,7 @@ export const createPhotoSwipe: CreatePhotoSwipe = ({
     const pswp = new PhotoSwipe(pswpElement, defaultUI, items, options)
     bindEvent(context, pswp)
     handleWithoutSize(pswp)
+    CurrentPswp.set(pswp)
     pswp.init()
     return pswp
 }
