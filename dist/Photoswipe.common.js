@@ -5782,6 +5782,7 @@ var jsonEqual = function jsonEqual(val1, val2) {
 
 var setSizeToTarget = function setSizeToTarget(item, type) {
   /* eslint-disable no-param-reassign */
+  if ((item.w || item.h) && type !== 'src') return;
   var src = item[type];
   if (!src) return;
   var img = new Image();
@@ -5791,7 +5792,7 @@ var setSizeToTarget = function setSizeToTarget(item, type) {
   item.w = width;
   item.h = height;
 
-  if (type === 'src' && width && height) {
+  if ((type === 'src' || item.src === item.msrc) && width && height) {
     setSize(item.el, {
       w: width,
       h: height
@@ -5835,10 +5836,6 @@ var handleWithoutSize = function handleWithoutSize(pswp) {
     pswp.updateSize(true);
   });
   pswp.listen('gettingData', function (index, item) {
-    var w = item.w,
-        h = item.h,
-        msrc = item.msrc;
-    if (!msrc || w || h) return;
     setSizeToTarget(item, 'msrc');
   });
 };
@@ -5912,12 +5909,12 @@ var config_getGlobalMixin = function getGlobalMixin(pswp, options) {
     }
   };
 };
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c571cd2e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=544751fb&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7bf0b67a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=78d75ca6&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"gallery",staticClass:"pswipe-gallery",on:{"click":_vm.onThumbClick}},[_vm._t("default")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=544751fb&
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=78d75ca6&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -6293,16 +6290,15 @@ function (_Vue) {
         var src = getSrc(el, _this.auto) || '';
         var size = utils_get(el, 'dataset.pswpSize', '').split('x');
         var title = utils_get(el, 'dataset.pswpTitle', '');
-        var msrc = utils_get(el, 'dataset.pswpMsrc', '');
-        return Object.assign({
+        var msrc = utils_get(el, 'dataset.pswpMsrc', src);
+        return {
+          msrc: msrc,
           src: src,
           el: el,
           w: Number(size[0] || 0),
           h: Number(size[1] || 0),
           title: title
-        }, msrc && {
-          msrc: msrc
-        });
+        };
       });
     }
   }, {
@@ -6372,11 +6368,7 @@ function (_Vue) {
           fromURL = _ref.fromURL,
           thumbEls = _ref.thumbEls;
       var items = this.parseThumbEls(thumbEls);
-      var targetItem = items[index];
-      var w = targetItem.w,
-          h = targetItem.h,
-          msrc = targetItem.msrc;
-      if (!w && !h && msrc) setSizeToTarget(targetItem, 'msrc');
+      setSizeToTarget(items[index], 'msrc');
       var options = {
         showHideOpacity: isBgImg(items[index].el),
         galleryUID: +(this.gallery.dataset.pswpUid || ''),
@@ -6603,7 +6595,7 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_photoswipe = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c571cd2e-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=template&id=76958fa8&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7bf0b67a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=template&id=76958fa8&
 var pswpvue_type_template_id_76958fa8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
 var pswpvue_type_template_id_76958fa8_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('button',{staticClass:"pswp__button pswp__button--share",attrs:{"title":"Share"}}),_c('button',{staticClass:"pswp__button pswp__button--fs",attrs:{"title":"Toggle fullscreen"}}),_c('button',{staticClass:"pswp__button pswp__button--zoom",attrs:{"title":"Zoom in/out"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
 
