@@ -79,6 +79,7 @@
 <script lang="ts">
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Vue, Component } from 'vue-property-decorator'
+import { BeforeOpenEvent, BeforeOpen, Pswp } from '@/type'
 
 const getRandomSize = () => Math.floor((Math.random() * 1e3) + 1e2)
 
@@ -87,13 +88,6 @@ const getRandomImgSrc = () => {
     const height: number = getRandomSize()
     return `https://placeimg.com/${width}/${height}/any`
 }
-
-interface BeforeOpenEvent {
-    index: number
-    target: HTMLElement
-}
-
-type BeforeOpenNext = (continued?: boolean) => void
 
 @Component({ name: 'sample' })
 export default class Sample extends Vue {
@@ -142,7 +136,7 @@ export default class Sample extends Vue {
 
     handleBeforeOpen({
         index, target,
-    }: BeforeOpenEvent, next: BeforeOpenNext) {
+    }: BeforeOpenEvent, next: BeforeOpen) {
         if (target.parentElement && target.parentElement.tagName !== 'A') {
             next()
         }

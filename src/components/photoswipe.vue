@@ -78,7 +78,7 @@ export default class Photoswipe extends Vue {
         })
     }
 
-    onThumbClick(e: { target: HTMLElement }, skipHook?: boolean) {
+    onThumbClick(e: { target: HTMLElement }) {
         const eTarget = (
             !this.auto
             && this.bubble
@@ -90,16 +90,6 @@ export default class Photoswipe extends Vue {
         const thumbEls = this.getThumbEls()
         const index = findIndex(thumbEls, el => el === eTarget)
         if (index === -1) return
-
-        if (this.$listeners.beforeOpen && !skipHook) {
-            const beforeOpenEvent: BeforeOpenEvent = { index, target: eTarget }
-            const beforeOpen: BeforeOpen = (continued: boolean = true) => {
-                if (!continued) return
-                this.onThumbClick({ target: eTarget }, true)
-            }
-            this.$emit('beforeOpen', beforeOpenEvent, beforeOpen)
-            return
-        }
 
         this.openPhotoSwipe({ index, thumbEls })
     }
@@ -149,12 +139,30 @@ export default class Photoswipe extends Vue {
 
         Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
 
-        this.pswp = createPhotoSwipe({
-            pswpElement: this.pswpElement,
-            items,
-            options,
-            context: this,
-        })
+        const open = () => {
+            this.pswp = createPhotoSwipe({
+                pswpElement: this.pswpElement,
+                items,
+                options,
+                context: this,
+            })
+        }
+
+        if (this.$listeners.beforeOpen) {
+            const beforeOpenEvent: BeforeOpenEvent = {
+                index,
+                items,
+                options,
+                target: items[index].el,
+            }
+            const beforeOpen: BeforeOpen = (continued: boolean = true) => {
+                if (!continued) return
+                open()
+            }
+            this.$emit('beforeOpen', beforeOpenEvent, beforeOpen)
+            return
+        }
+        open()
     }
 
     initPhotoSwipeFromDOM(gallerySelector: string) {

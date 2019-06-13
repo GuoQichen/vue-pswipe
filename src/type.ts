@@ -47,6 +47,8 @@ export interface OpenPhotoSwipeArgs {
 export interface BeforeOpenEvent {
     index: number
     target: HTMLElement
+    items: PswpItem[]
+    options: PswpOptions
 }
 
 export interface Size {
