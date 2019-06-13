@@ -146,6 +146,7 @@ export default class Photoswipe extends Vue {
                 options,
                 context: this,
             })
+            this.$emit('opened', this.pswp)
         }
 
         if (this.$listeners.beforeOpen) {
