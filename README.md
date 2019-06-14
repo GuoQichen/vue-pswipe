@@ -93,11 +93,6 @@ support all original PhotoSwipe events, see [original event](https://github.com/
 </Photoswipe>
 ```
 
-## instance methods
-
-### `this.$Pswp`
-Access the currently active PhotoSwipe instance, or null if there is currently no active PhotoSwipe. you can call the origin PhotoSwipe method or access the origin PhotoSwipe property by this. see [Methods](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#methods) and [Properties](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#methods).
-
 ## example
 ```
 npm run dev
