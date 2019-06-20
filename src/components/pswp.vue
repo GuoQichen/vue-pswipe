@@ -91,6 +91,7 @@ export default class Pswp extends Vue {
         const currentItem = this.$Pswp.currItem as CurrentPswpItem
         const img = currentItem.container.lastChild as HTMLImageElement
 
+        if (!currentItem.loaded) return
         const containerWidth = container.clientWidth
         const containerHeight = currentItem.vGap
             ? container.clientHeight - currentItem.vGap.top - currentItem.vGap.bottom

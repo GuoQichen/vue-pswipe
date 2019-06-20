@@ -36,6 +36,7 @@ export interface PswpItem extends Item {
 
 export interface CurrentPswpItem extends PswpItem {
     container: HTMLElement
+    loaded: Boolean
 }
 
 export interface PswpOptions extends Options {
