@@ -8,7 +8,7 @@ import Pswp from './components/pswp.vue'
 const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
     const pswp = new Vue(Pswp).$mount()
 
-    Photoswipe.mixin(getGlobalMixin(pswp, options))
+    Photoswipe.mixin(getGlobalMixin(<Pswp>pswp, options))
 
     Vue.component('Photoswipe', Photoswipe)
 
