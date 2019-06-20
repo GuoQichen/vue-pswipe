@@ -28,7 +28,7 @@ export const isFunction = (value: any): value is Function => Object.prototype.to
 
 const isDef = (value: any): boolean => (value !== undefined) && (value !== null)
 
-export const isImg = (el: HTMLElement): el is HTMLImageElement => el.tagName === 'IMG'
+export const isImg = (value: any): value is HTMLImageElement => value && value.tagName === 'IMG'
 
 const isEle = (node: Node): node is HTMLElement => node.nodeType === 1
 
@@ -235,27 +235,20 @@ export const setPswpDataByCond = (el: HTMLElement, value: string | PswpDirective
 export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON.stringify(val2)
 
 /**
- * set the size of specified src to target item
+ * preset loaded msrc size to PswpItem
  */
-export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
+export const presetSize = (item: PswpItem): void => {
     /* eslint-disable no-param-reassign */
-    if (
-        (item.w || item.h)
-        && type !== 'src'
-    ) return
-    const src = item[type]
-    if (!src) return
+    const { src, msrc, el } = item
+    if (item.w || item.h || !msrc) return
+
     let img: HTMLImageElement | null = new Image()
-    img.src = src
-    const { width, height } = img
-    item.w = width
-    item.h = height
-    if (
-        (type === 'src' || item.src === item.msrc)
-        && width
-        && height
-    ) {
-        setSize(item.el, { w: width, h: height })
+    img.src = msrc
+    const { width: w, height: h } = img
+    if (w && h) {
+        item.w = w
+        item.h = h
+        src === msrc && setSize(el, { w, h })
     }
     img = null
 }
@@ -279,21 +272,45 @@ const bindEvent: BindEvent = (context, pswp) => {
 }
 
 /**
+ * set the size of the image after src is loaded
+ * @param item the item that will be proxy
+ * @param pswp original Photoswipe
+ */
+const hackItemImg = (item: PswpItem, pswp: Pswp) => {
+    let img: HTMLImageElement | null = null
+    Object.defineProperty(item, 'img', {
+        get() {
+            return img
+        },
+        set(value) {
+            if (isImg(value)) {
+                value.addEventListener('load', () => {
+                    const { naturalWidth: w, naturalHeight: h } = value
+                    item.w = w
+                    item.h = h
+                    setSize(item.el, { w, h })
+                    pswp.updateSize(true)
+                })
+            }
+            img = value
+        },
+    })
+}
+
+/**
  * handle item without set size, use msrc first
  * @param pswp original PhotoSwipe
  */
 const handleWithoutSize: HandleWithoutSize = (pswp) => {
-    pswp.listen('imageLoadComplete', (index, item: PswpItem) => {
-        if (item.el.dataset.pswpSize) return
-        setSizeToTarget(item, 'src')
-        if (pswp.getCurrentIndex() === index) {
-            pswp.invalidateCurrItems()
-            pswp.shout('currItemLoaded')
-        }
-        pswp.updateSize(true)
-    })
     pswp.listen('gettingData', (index, item: PswpItem) => {
-        setSizeToTarget(item, 'msrc')
+        presetSize(item)
+
+        if (
+            item.el.dataset.pswpSize
+            || Object.getOwnPropertyDescriptor(item, 'img')
+        ) return
+
+        hackItemImg(item, pswp)
     })
 }
 

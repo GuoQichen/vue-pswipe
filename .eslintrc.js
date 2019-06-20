@@ -20,7 +20,8 @@ module.exports = {
     'consistent-return': 'off',
     'class-methods-use-this': 'off',
     'camelcase': 'off',
-    'import/no-extraneous-dependencies': 'off'
+    'import/no-extraneous-dependencies': 'off',
+    'no-unused-expressions': 'off'
   },
   parserOptions: {
     parser: 'typescript-eslint-parser'

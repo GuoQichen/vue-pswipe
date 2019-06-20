@@ -33,7 +33,6 @@ import {
     isBgImg,
     isNum,
     closest,
-    setSizeToTarget,
     createPhotoSwipe,
 } from '../utils'
 
@@ -123,8 +122,6 @@ export default class Photoswipe extends Vue {
         thumbEls,
     }: OpenPhotoSwipeArgs) {
         const items = this.parseThumbEls(thumbEls)
-
-        setSizeToTarget(items[index], 'msrc')
 
         const options: PswpOptions = {
             showHideOpacity: isBgImg(items[index].el),
