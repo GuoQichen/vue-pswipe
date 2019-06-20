@@ -35,6 +35,20 @@
 
                     <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
+                    <button
+                        class="pswp__button pswp__button--rotation pswp__button--rotation--right"
+                        title="Rotate Right"
+                        @click="handleRotate('right')"
+                        @touchstart="handleRotate('right')"
+                    />
+
+                    <button
+                        class="pswp__button pswp__button--rotation pswp__button--rotation--left"
+                        title="Rotate Left"
+                        @click="handleRotate('left')"
+                        @touchstart="handleRotate('left')"
+                    />
+
                     <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
                     <!-- element will get class pswp__preloader--active when preloader is running -->
                     <div class="pswp__preloader">
@@ -65,7 +79,51 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { Pswp as PswpType, RotateDirection, CurrentPswpItem } from '@/type'
+import { getTransformStyle } from '@/utils'
 
 @Component({ name: 'Pswp' })
-export default class Pswp extends Vue {}
+export default class Pswp extends Vue {
+    $Pswp!: PswpType
+
+    handleRotate(direction: 'left' | 'right') {
+        const { container } = this.$Pswp
+        const currentItem = this.$Pswp.currItem as CurrentPswpItem
+        const img = currentItem.container.lastChild as HTMLImageElement
+
+        const containerWidth = container.clientWidth
+        const containerHeight = currentItem.vGap
+            ? container.clientHeight - currentItem.vGap.top - currentItem.vGap.bottom
+            : container.clientHeight
+
+        const deg = Number(img.dataset.rotateDeg) || 0
+        const offsets = direction === 'left' ? -90 : 90
+        const transformDeg = deg + offsets
+
+        img.dataset.rotateDeg = `${transformDeg}`
+        img.style.transform = getTransformStyle(
+            { w: containerWidth, h: containerHeight },
+            img,
+            transformDeg,
+        )
+    }
+}
 </script>
+<style>
+.pswp__button--rotation--left {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAASBJREFUeNqk00FLAkEYxnFHuwidypQ6eOkcgVcvWtkp7CiiR+ki9AUEP0mIXf0A1SUkhEAkwnOGQaghCtJF8OD2f2UWh0Fpy4Hfws7su+8y86xyHMe3yfCvmNvGNZ4whnTooYY0lPmwsr7gDLc4wCseMEEIp4jhGTl8LCrkBVoaM7wjacybEvhEH4eL5lwqOMc3OoisKXbto4smlEy86c5TXP1S7JKGMjJy03CWY46Cx5e0cS+n8KU3sIML3Hg8wTqO/bqwjCPc/SECQ+xucSlh/o8MhSUnaoMkttH3edwwW0pvetZeiCPsMQctBMyFHQx1EhNrik90EgduEu09SKKKKF7wiBH2rH8hj679L7iCKKKOiU6pdK3hUuJrPv8jwAASlMcqHuTzOgAAAABJRU5ErkJggg==');
+}
+.pswp__button--rotation--right {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAASBJREFUeNqk00FLAkEYxnFHuwidypQ6eOkcgVcvWtkp7CiiR+ki9AUEP0mIXf0A1SUkhEAkwnOGQaghCtJF8OD2f2UWh0Fpy4Hfws7su+8y86xyHMe3yfCvmNvGNZ4whnTooYY0lPmwsr7gDLc4wCseMEEIp4jhGTl8LCrkBVoaM7wjacybEvhEH4eL5lwqOMc3OoisKXbto4smlEy86c5TXP1S7JKGMjJy03CWY46Cx5e0cS+n8KU3sIML3Hg8wTqO/bqwjCPc/SECQ+xucSlh/o8MhSUnaoMkttH3edwwW0pvetZeiCPsMQctBMyFHQx1EhNrik90EgduEu09SKKKKF7wiBH2rH8hj679L7iCKKKOiU6pdK3hUuJrPv8jwAASlMcqHuTzOgAAAABJRU5ErkJggg==');
+    transform: rotateY(180deg);
+}
+.pswp__button--rotation {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+}
+.pswp__img {
+   transition: transform .3s;
+}
+</style>
+

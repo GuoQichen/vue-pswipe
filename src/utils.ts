@@ -12,6 +12,7 @@ import {
     BindEvent,
     HandleWithoutSize,
     Pswp,
+    GetContainSize,
 } from '@/type'
 import { customEvents } from './config'
 
@@ -244,7 +245,7 @@ export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     ) return
     const src = item[type]
     if (!src) return
-    const img = new Image()
+    let img: HTMLImageElement | null = new Image()
     img.src = src
     const { width, height } = img
     item.w = width
@@ -256,6 +257,7 @@ export const setSizeToTarget = (item: PswpItem, type: 'src' | 'msrc'): void => {
     ) {
         setSize(item.el, { w: width, h: height })
     }
+    img = null
 }
 
 /**
@@ -284,7 +286,10 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
     pswp.listen('imageLoadComplete', (index, item: PswpItem) => {
         if (item.el.dataset.pswpSize) return
         setSizeToTarget(item, 'src')
-        if (pswp.getCurrentIndex() === index) pswp.invalidateCurrItems()
+        if (pswp.getCurrentIndex() === index) {
+            pswp.invalidateCurrItems()
+            pswp.shout('currItemLoaded')
+        }
         pswp.updateSize(true)
     })
     pswp.listen('gettingData', (index, item: PswpItem) => {
@@ -323,4 +328,59 @@ export const createPhotoSwipe: CreatePhotoSwipe = ({
     CurrentPswp.set(pswp)
     pswp.init()
     return pswp
+}
+
+/**
+ * emulate background-size: contain, get calculated image size
+ * @param areaWidth container width
+ * @param areaHeight container height
+ * @param width image width
+ * @param height image height
+ * @return calculated image size
+ */
+export const getContainSize: GetContainSize = (
+    areaWidth, areaHeight, width, height,
+) => {
+    if (width <= areaWidth && height <= areaHeight) return { w: width, h: height }
+    const ratio = width / height
+    const areaRatio = areaWidth / areaHeight
+    return areaRatio < ratio
+        ? { w: areaWidth, h: areaWidth / ratio }
+        : { w: areaHeight * ratio, h: areaHeight }
+}
+
+/**
+ * get transform style according container and image
+ * @param containerSize container size
+ * @param img current image element
+ * @param transformDeg calcualted transform deg according direction
+ * @return calculated transform style string
+ */
+export const getTransformStyle = (
+    containerSize: Size,
+    img: HTMLImageElement,
+    transformDeg: number,
+): string => {
+    const {
+        naturalWidth,
+        naturalHeight,
+        width: imgWidth,
+        height: imgHeight,
+    } = img
+
+    const rotate = `rotate(${transformDeg}deg)`
+    if (transformDeg % 180 === 0) return rotate
+
+    const { w: scaledWidth, h: scaledHeight } = getContainSize(
+        containerSize.w,
+        containerSize.h,
+        naturalHeight,
+        naturalWidth,
+    )
+
+    const requireScale = imgWidth < naturalWidth || imgHeight < naturalHeight
+    const scale = requireScale
+        ? `scale(${scaledHeight / imgWidth}, ${scaledWidth / imgHeight})`
+        : ''
+    return rotate + scale
 }

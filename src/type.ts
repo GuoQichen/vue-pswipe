@@ -34,6 +34,10 @@ export interface PswpItem extends Item {
     pid?: number
 }
 
+export interface CurrentPswpItem extends PswpItem {
+    container: HTMLElement
+}
+
 export interface PswpOptions extends Options {
     galleryPIDs?: number
 }
@@ -95,3 +99,12 @@ export type BindEvent = (context: Vue, pswp: Pswp) => void
 export type CreatePhotoSwipe = (arg: CreatePhotoSwipeArgs) => Pswp
 
 export type HandleWithoutSize = (pswp: Pswp) => void
+
+export type GetContainSize = (
+    areaWidth: number,
+    areaHeight: number,
+    width: number,
+    height: number
+) => Size
+
+export type RotateDirection = 'left' | 'right'
