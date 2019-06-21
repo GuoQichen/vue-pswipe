@@ -114,6 +114,9 @@ export default class Pswp extends Vue {
     created() {
         Event.on('opened', (pswpProps: PswpProps) => {
             if (pswpProps.rotate) this.rotate = true
+            this.$Pswp.listen('destroy', () => {
+                this.rotate = false
+            })
         })
     }
 }
