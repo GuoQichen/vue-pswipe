@@ -1,6 +1,5 @@
 import { PswpOptions } from '@/type'
-import { isMobile, appendOnce } from './utils'
-import Pswp from './components/pswp.vue'
+import { isMobile } from '@/utils'
 
 export const customEvents: string[] = ['beforeOpen', 'opened']
 
@@ -15,14 +14,13 @@ export const defualtGlobalOption: PswpOptions = {
     ],
 }
 
-export const getGlobalMixin = (pswp: Pswp, options?: PswpOptions) => ({
-    data() {
-        return {
-            globalOptions: options,
-        }
-    },
-    created(this: any) {
-        this.pswpElement = appendOnce(pswp.$el)
-    },
-})
-
+export namespace GlobalOption {
+    let _options: PswpOptions = defualtGlobalOption
+    export const get = () => _options
+    export const set = (value: PswpOptions) => {
+        _options = value
+    }
+    export const extend = (...partials: Partial<PswpOptions>[]) => {
+        Object.assign(_options, ...partials)
+    }
+}

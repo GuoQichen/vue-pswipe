@@ -21,7 +21,8 @@ module.exports = {
     'class-methods-use-this': 'off',
     'camelcase': 'off',
     'import/no-extraneous-dependencies': 'off',
-    'no-unused-expressions': 'off'
+    'no-unused-expressions': 'off',
+    'no-underscore-dangle': 'off'
   },
   parserOptions: {
     parser: 'typescript-eslint-parser'

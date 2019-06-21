@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Photoswipe bubble>
+        <Photoswipe bubble rotate>
             <h2>use img tag</h2>
             <img
                 v-for="(src, index) in imageList"

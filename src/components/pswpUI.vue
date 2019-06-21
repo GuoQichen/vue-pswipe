@@ -35,19 +35,19 @@
 
                     <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
-                    <button
-                        class="pswp__button pswp__button--rotation pswp__button--rotation--right"
-                        title="Rotate Right"
-                        @click="handleRotate('right')"
-                        @touchstart="handleRotate('right')"
-                    />
+                    <template v-if="rotate">
+                        <button
+                            class="pswp__button pswp__button--rotation pswp__button--rotation--right"
+                            title="Rotate Right"
+                            @pswpTap="handleRotate('right')"
+                        />
 
-                    <button
-                        class="pswp__button pswp__button--rotation pswp__button--rotation--left"
-                        title="Rotate Left"
-                        @click="handleRotate('left')"
-                        @touchstart="handleRotate('left')"
-                    />
+                        <button
+                            class="pswp__button pswp__button--rotation pswp__button--rotation--left"
+                            title="Rotate Left"
+                            @pswpTap="handleRotate('left')"
+                        />
+                    </template>
 
                     <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
                     <!-- element will get class pswp__preloader--active when preloader is running -->
@@ -79,14 +79,16 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { Pswp as PswpType, RotateDirection, CurrentPswpItem } from '@/type'
-import { getTransformStyle } from '@/utils'
+import { Pswp as PswpType, RotateDirection, CurrentPswpItem, PswpProps } from '@/type'
+import { getTransformStyle, Event } from '@/utils'
 
 @Component({ name: 'Pswp' })
 export default class Pswp extends Vue {
     $Pswp!: PswpType
 
-    handleRotate(direction: 'left' | 'right') {
+    rotate: boolean = false
+
+    handleRotate(direction: RotateDirection) {
         const { container } = this.$Pswp
         const currentItem = this.$Pswp.currItem as CurrentPswpItem
         const img = currentItem.container.lastChild as HTMLImageElement
@@ -107,6 +109,12 @@ export default class Pswp extends Vue {
             img,
             transformDeg,
         )
+    }
+
+    created() {
+        Event.on('opened', (pswpProps: PswpProps) => {
+            if (pswpProps.rotate) this.rotate = true
+        })
     }
 }
 </script>

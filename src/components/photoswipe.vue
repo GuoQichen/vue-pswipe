@@ -12,7 +12,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import PhotoSwipe from 'photoswipe'
 import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
-import { defualtGlobalOption } from '@/config'
+import { GlobalOption } from '@/config'
 import {
     PswpOptions,
     PswpItem,
@@ -34,13 +34,13 @@ import {
     isNum,
     closest,
     createPhotoSwipe,
-} from '../utils'
+    UI,
+    Event,
+} from '@/utils'
 
 @Component
 export default class Photoswipe extends Vue {
     gallery!: HTMLElement
-    pswpElement!: HTMLElement
-    globalOptions!: PswpOptions
     pswp!: PhotoSwipe<PswpOptions>
 
     $refs!: {
@@ -52,6 +52,7 @@ export default class Photoswipe extends Vue {
     @Prop({ type: Boolean, default: false }) bubble!: boolean
     @Prop({ type: Boolean, default: true }) lazy!: boolean
     @Prop({ type: Function, default: () => true }) filter!: Filter
+    @Prop({ type: Boolean, default: false }) rotate!: boolean
 
     getThumbEls(): HTMLElement[] {
         return this.auto
@@ -134,16 +135,16 @@ export default class Photoswipe extends Vue {
         if (!isNum(options.index) || Number.isNaN(options.index)) return
         if (fromURL) options.showAnimationDuration = 0
 
-        Object.assign(options, defualtGlobalOption, this.globalOptions, this.options)
+        Object.assign(options, GlobalOption.get(), this.options)
 
         const open = () => {
             this.pswp = createPhotoSwipe({
-                pswpElement: this.pswpElement,
                 items,
                 options,
                 context: this,
             })
             this.$emit('opened', this.pswp)
+            Event.emit('opened', this.$props)
         }
 
         if (this.$listeners.beforeOpen) {
@@ -197,6 +198,10 @@ export default class Photoswipe extends Vue {
                 .filter(thumbEl => !thumbEl.dataset.pswpSize)
                 .map(thumbEl => this.setImageSizeSeparately(thumbEl)),
         )
+    }
+
+    created() {
+        UI.append()
     }
 
     mounted() {

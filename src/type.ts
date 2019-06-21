@@ -62,10 +62,18 @@ export interface Size {
 }
 
 interface CreatePhotoSwipeArgs {
-    pswpElement: HTMLElement
     items: PswpItem[]
     options: PswpOptions
     context: Vue
+}
+
+export interface PswpProps {
+    options: PswpOptions
+    auto: boolean
+    bubble: boolean
+    lazy: boolean
+    filter: Function
+    rotate: boolean
 }
 
 // types

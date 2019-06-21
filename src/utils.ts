@@ -14,7 +14,7 @@ import {
     Pswp,
     GetContainSize,
 } from '@/type'
-import { customEvents } from './config'
+import { customEvents } from '@/config'
 
 export const isMobile = (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -320,15 +320,28 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
 export namespace CurrentPswp {
     /* eslint-disable no-shadow */
     let curerntPswp: Pswp | null = null
-    export const get = () => curerntPswp
     const setupClean = (pswp: Pswp) => {
         pswp.listen('destroy', () => {
             curerntPswp = null
         })
     }
+    export const get = () => curerntPswp
     export const set = (pswp: Pswp | null) => {
         curerntPswp = pswp
         if (pswp) setupClean(pswp)
+    }
+}
+
+/**
+ * manipulate Photoswipe default UI element
+ */
+export namespace UI {
+    // eslint-disable-next-line import/no-mutable-exports
+    export let el: HTMLElement
+    export const append = () => {
+        if (el) {
+            appendOnce(el)
+        }
     }
 }
 
@@ -337,9 +350,9 @@ export namespace CurrentPswp {
  * @return return created original PhotoSwipe instance
  */
 export const createPhotoSwipe: CreatePhotoSwipe = ({
-    pswpElement, items, options, context,
+    items, options, context,
 }) => {
-    const pswp = new PhotoSwipe(pswpElement, defaultUI, items, options)
+    const pswp = new PhotoSwipe(UI.el, defaultUI, items, options)
     bindEvent(context, pswp)
     handleWithoutSize(pswp)
     CurrentPswp.set(pswp)
@@ -400,4 +413,37 @@ export const getTransformStyle = (
         ? `scale(${scaledHeight / imgWidth}, ${scaledWidth / imgHeight})`
         : ''
     return rotate + scale
+}
+
+/**
+ * custom event
+ */
+export namespace Event {
+    const event: Record<string, Function[]> = {}
+
+    export const off = (name: string, fn?: Function) => {
+        if (!fn) return event[name].length = 0
+        const pools = event[name]
+        const index = pools.indexOf(fn)
+        if (index !== -1) pools.splice(index, 1)
+    }
+
+    export const on = (name: string, fn: Function) => {
+        if (!event[name]) event[name] = []
+        event[name].push(fn)
+        return () => off(name, fn)
+    }
+
+    export const once = (name: string, fn: Function) => {
+        const teardown = on(name, (...args: any[]) => {
+            teardown()
+            fn(...args)
+        })
+    }
+
+    export const emit = (name: string, ...args: any[]) => {
+        const pools = event[name]
+        if (!Array.isArray(pools)) return
+        pools.forEach(fn => fn(...args))
+    }
 }

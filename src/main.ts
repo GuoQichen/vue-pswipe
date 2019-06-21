@@ -1,14 +1,15 @@
 import { PluginFunction } from 'vue' // eslint-disable-line
 import { PswpOptions } from '@/type'
-import { getGlobalMixin } from './config'
-import { setPswpDataByCond, CurrentPswp } from './utils'
-import Photoswipe from './components/photoswipe.vue'
-import Pswp from './components/pswp.vue'
+import { GlobalOption } from '@/config'
+import { setPswpDataByCond, CurrentPswp, UI } from '@/utils'
+import Photoswipe from '@/components/photoswipe.vue'
+import PswpUI from '@/components/pswpUI.vue'
 
 const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
-    const pswp = new Vue(Pswp).$mount()
+    if (options) GlobalOption.extend(options)
 
-    Photoswipe.mixin(getGlobalMixin(<Pswp>pswp, options))
+    const PswpUIComponent = new Vue(PswpUI).$mount()
+    UI.el = <HTMLElement>PswpUIComponent.$el
 
     Vue.component('Photoswipe', Photoswipe)
 
