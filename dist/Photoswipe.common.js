@@ -1072,6 +1072,17 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+/***/ "45a1":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pswpUI_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("c1e2");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pswpUI_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pswpUI_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+ /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_vue_style_loader_index_js_ref_8_oneOf_1_0_node_modules_css_loader_index_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_3_node_modules_sass_loader_lib_loader_js_ref_8_oneOf_1_4_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_pswpUI_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
 /***/ "499e":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5394,6 +5405,21 @@ _registerModule('History', {
 
 /***/ }),
 
+/***/ "c1e2":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("e46a");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__("499e").default
+var update = add("35f03c91", content, true, {"sourceMap":false,"shadowMode":false});
+
+/***/ }),
+
 /***/ "d86b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5403,6 +5429,21 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 // module
 exports.push([module.i, "/*! PhotoSwipe main CSS by Dmitry Semenov | photoswipe.com | MIT license */.pswp{display:none;position:absolute;width:100%;height:100%;left:0;top:0;overflow:hidden;-ms-touch-action:none;touch-action:none;z-index:1500;-webkit-text-size-adjust:100%;-webkit-backface-visibility:hidden;outline:none}.pswp *{-webkit-box-sizing:border-box;box-sizing:border-box}.pswp img{max-width:none}.pswp--animate_opacity{opacity:.001;will-change:opacity;-webkit-transition:opacity 333ms cubic-bezier(.4,0,.22,1);transition:opacity 333ms cubic-bezier(.4,0,.22,1)}.pswp--open{display:block}.pswp--zoom-allowed .pswp__img{cursor:-webkit-zoom-in;cursor:-moz-zoom-in;cursor:zoom-in}.pswp--zoomed-in .pswp__img{cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.pswp--dragging .pswp__img{cursor:-webkit-grabbing;cursor:-moz-grabbing;cursor:grabbing}.pswp__bg{background:#000;opacity:0;-webkit-transform:translateZ(0);transform:translateZ(0);-webkit-backface-visibility:hidden}.pswp__bg,.pswp__scroll-wrap{position:absolute;left:0;top:0;width:100%;height:100%}.pswp__scroll-wrap{overflow:hidden}.pswp__container,.pswp__zoom-wrap{-ms-touch-action:none;touch-action:none;position:absolute;left:0;right:0;top:0;bottom:0}.pswp__container,.pswp__img{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none}.pswp__zoom-wrap{position:absolute;width:100%;-webkit-transform-origin:left top;transform-origin:left top;-webkit-transition:-webkit-transform 333ms cubic-bezier(.4,0,.22,1);transition:-webkit-transform 333ms cubic-bezier(.4,0,.22,1);transition:transform 333ms cubic-bezier(.4,0,.22,1);transition:transform 333ms cubic-bezier(.4,0,.22,1),-webkit-transform 333ms cubic-bezier(.4,0,.22,1)}.pswp__bg{will-change:opacity;-webkit-transition:opacity 333ms cubic-bezier(.4,0,.22,1);transition:opacity 333ms cubic-bezier(.4,0,.22,1)}.pswp--animated-in .pswp__bg,.pswp--animated-in .pswp__zoom-wrap{-webkit-transition:none;transition:none}.pswp__container,.pswp__zoom-wrap{-webkit-backface-visibility:hidden}.pswp__item{right:0;bottom:0;overflow:hidden}.pswp__img,.pswp__item{position:absolute;left:0;top:0}.pswp__img{width:auto;height:auto}.pswp__img--placeholder{-webkit-backface-visibility:hidden}.pswp__img--placeholder--blank{background:#222}.pswp--ie .pswp__img{width:100%!important;height:auto!important;left:0;top:0}.pswp__error-msg{position:absolute;left:0;top:50%;width:100%;text-align:center;font-size:14px;line-height:16px;margin-top:-8px;color:#ccc}.pswp__error-msg a{color:#ccc;text-decoration:underline}", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "e46a":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("2350")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".pswp__button--rotation{background-position:50%;background-repeat:no-repeat;background-size:auto}.pswp__button--rotation.pswp__button--rotation--left,.pswp__button--rotation.pswp__button--rotation--right{background-image:url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAASBJREFUeNqk00FLAkEYxnFHuwidypQ6eOkcgVcvWtkp7CiiR+ki9AUEP0mIXf0A1SUkhEAkwnOGQaghCtJF8OD2f2UWh0Fpy4Hfws7su+8y86xyHMe3yfCvmNvGNZ4whnTooYY0lPmwsr7gDLc4wCseMEEIp4jhGTl8LCrkBVoaM7wjacybEvhEH4eL5lwqOMc3OoisKXbto4smlEy86c5TXP1S7JKGMjJy03CWY46Cx5e0cS+n8KU3sIML3Hg8wTqO/bqwjCPc/SECQ+xucSlh/o8MhSUnaoMkttH3edwwW0pvetZeiCPsMQctBMyFHQx1EhNrik90EgduEu09SKKKKF7wiBH2rH8hj679L7iCKKKOiU6pdK3hUuJrPv8jwAASlMcqHuTzOgAAAABJRU5ErkJggg==\")}.pswp__button--rotation.pswp__button--rotation--right{-webkit-transform:rotateY(180deg);transform:rotateY(180deg)}.pswp__img{-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s}", ""]);
 
 // exports
 
@@ -5546,8 +5587,8 @@ var isDef = function isDef(value) {
   return value !== undefined && value !== null;
 };
 
-var isImg = function isImg(el) {
-  return el.tagName === 'IMG';
+var isImg = function isImg(value) {
+  return value && value.tagName === 'IMG';
 };
 
 var isEle = function isEle(node) {
@@ -5777,27 +5818,31 @@ var jsonEqual = function jsonEqual(val1, val2) {
   return JSON.stringify(val1) === JSON.stringify(val2);
 };
 /**
- * set the size of specified src to target item
+ * preset loaded msrc size to PswpItem
  */
 
-var setSizeToTarget = function setSizeToTarget(item, type) {
+var presetSize = function presetSize(item) {
   /* eslint-disable no-param-reassign */
-  if ((item.w || item.h) && type !== 'src') return;
-  var src = item[type];
-  if (!src) return;
+  var src = item.src,
+      msrc = item.msrc,
+      el = item.el;
+  if (item.w || item.h || !msrc) return;
   var img = new Image();
-  img.src = src;
-  var width = img.width,
-      height = img.height;
-  item.w = width;
-  item.h = height;
+  img.src = msrc;
+  var _img = img,
+      w = _img.width,
+      h = _img.height;
 
-  if ((type === 'src' || item.src === item.msrc) && width && height) {
-    setSize(item.el, {
-      w: width,
-      h: height
+  if (w && h) {
+    item.w = w;
+    item.h = h;
+    src === msrc && setSize(el, {
+      w: w,
+      h: h
     });
   }
+
+  img = null;
 };
 /**
  * allow listen original PhotoSwipe event in Photoswipe component
@@ -5823,20 +5868,48 @@ var utils_bindEvent = function bindEvent(context, pswp) {
   });
 };
 /**
+ * set the size of the image after src is loaded
+ * @param item the item that will be proxy
+ * @param pswp original Photoswipe
+ */
+
+
+var hackItemImg = function hackItemImg(item, pswp) {
+  var img = null;
+  Object.defineProperty(item, 'img', {
+    get: function get() {
+      return img;
+    },
+    set: function set(value) {
+      if (isImg(value)) {
+        value.addEventListener('load', function () {
+          var w = value.naturalWidth,
+              h = value.naturalHeight;
+          item.w = w;
+          item.h = h;
+          setSize(item.el, {
+            w: w,
+            h: h
+          });
+          pswp.updateSize(true);
+        });
+      }
+
+      img = value;
+    }
+  });
+};
+/**
  * handle item without set size, use msrc first
  * @param pswp original PhotoSwipe
  */
 
 
 var handleWithoutSize = function handleWithoutSize(pswp) {
-  pswp.listen('imageLoadComplete', function (index, item) {
-    if (item.el.dataset.pswpSize) return;
-    setSizeToTarget(item, 'src');
-    if (pswp.getCurrentIndex() === index) pswp.invalidateCurrItems();
-    pswp.updateSize(true);
-  });
   pswp.listen('gettingData', function (index, item) {
-    setSizeToTarget(item, 'msrc');
+    presetSize(item);
+    if (item.el.dataset.pswpSize || Object.getOwnPropertyDescriptor(item, 'img')) return;
+    hackItemImg(item, pswp);
   });
 };
 /**
@@ -5850,14 +5923,14 @@ var CurrentPswp;
   /* eslint-disable no-shadow */
   var curerntPswp = null;
 
-  CurrentPswp.get = function () {
-    return curerntPswp;
-  };
-
   var setupClean = function setupClean(pswp) {
     pswp.listen('destroy', function () {
       curerntPswp = null;
     });
+  };
+
+  CurrentPswp.get = function () {
+    return curerntPswp;
   };
 
   CurrentPswp.set = function (pswp) {
@@ -5866,26 +5939,130 @@ var CurrentPswp;
   };
 })(CurrentPswp || (CurrentPswp = {}));
 /**
+ * manipulate Photoswipe default UI element
+ */
+
+
+var UI;
+
+(function (UI) {
+  UI.append = function () {
+    if (UI.el) {
+      appendOnce(UI.el);
+    }
+  };
+})(UI || (UI = {}));
+/**
  * create PhotoSwipe instance, setup listener, init PhotoSwipe
  * @return return created original PhotoSwipe instance
  */
 
 
 var utils_createPhotoSwipe = function createPhotoSwipe(_ref2) {
-  var pswpElement = _ref2.pswpElement,
-      items = _ref2.items,
+  var items = _ref2.items,
       options = _ref2.options,
       context = _ref2.context;
-  var pswp = new photoswipe_default.a(pswpElement, photoswipe_ui_default_default.a, items, options);
+  var pswp = new photoswipe_default.a(UI.el, photoswipe_ui_default_default.a, items, options);
   utils_bindEvent(context, pswp);
   handleWithoutSize(pswp);
   CurrentPswp.set(pswp);
   pswp.init();
   return pswp;
 };
+/**
+ * emulate background-size: contain, get calculated image size
+ * @param areaWidth container width
+ * @param areaHeight container height
+ * @param width image width
+ * @param height image height
+ * @return calculated image size
+ */
+
+var getContainSize = function getContainSize(areaWidth, areaHeight, width, height) {
+  if (width <= areaWidth && height <= areaHeight) return {
+    w: width,
+    h: height
+  };
+  var ratio = width / height;
+  var areaRatio = areaWidth / areaHeight;
+  return areaRatio < ratio ? {
+    w: areaWidth,
+    h: areaWidth / ratio
+  } : {
+    w: areaHeight * ratio,
+    h: areaHeight
+  };
+};
+/**
+ * get transform style according container and image
+ * @param containerSize container size
+ * @param img current image element
+ * @param transformDeg calcualted transform deg according direction
+ * @return calculated transform style string
+ */
+
+var getTransformStyle = function getTransformStyle(containerSize, img, transformDeg) {
+  var naturalWidth = img.naturalWidth,
+      naturalHeight = img.naturalHeight,
+      imgWidth = img.width,
+      imgHeight = img.height;
+  var rotate = "rotate(".concat(transformDeg, "deg)");
+  if (transformDeg % 180 === 0) return rotate;
+
+  var _getContainSize = getContainSize(containerSize.w, containerSize.h, naturalHeight, naturalWidth),
+      scaledWidth = _getContainSize.w,
+      scaledHeight = _getContainSize.h;
+
+  var requireScale = imgWidth < naturalWidth || imgHeight < naturalHeight;
+  var scale = requireScale ? "scale(".concat(scaledHeight / imgWidth, ", ").concat(scaledWidth / imgHeight, ")") : '';
+  return rotate + scale;
+};
+/**
+ * custom event
+ */
+
+var Event;
+
+(function (Event) {
+  var event = {};
+
+  Event.off = function (name, fn) {
+    if (!fn) return event[name].length = 0;
+    var pools = event[name];
+    var index = pools.indexOf(fn);
+    if (index !== -1) pools.splice(index, 1);
+  };
+
+  Event.on = function (name, fn) {
+    if (!event[name]) event[name] = [];
+    event[name].push(fn);
+    return function () {
+      return Event.off(name, fn);
+    };
+  };
+
+  Event.once = function (name, fn) {
+    var teardown = Event.on(name, function () {
+      teardown();
+      fn.apply(void 0, arguments);
+    });
+  };
+
+  Event.emit = function (name) {
+    for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+      args[_key3 - 1] = arguments[_key3];
+    }
+
+    var pools = event[name];
+    if (!Array.isArray(pools)) return;
+    pools.forEach(function (fn) {
+      return fn.apply(void 0, args);
+    });
+  };
+})(Event || (Event = {}));
 // CONCATENATED MODULE: ./src/config.ts
 
-var customEvents = ['beforeOpen'];
+var customEvents = ['beforeOpen', 'opened'];
 var defualtGlobalOption = {
   // in spa no need history mode
   history: false,
@@ -5897,24 +6074,33 @@ var defualtGlobalOption = {
     download: true
   }]
 };
-var config_getGlobalMixin = function getGlobalMixin(pswp, options) {
-  return {
-    data: function data() {
-      return {
-        globalOptions: options
-      };
-    },
-    created: function created() {
-      this.pswpElement = appendOnce(pswp.$el);
-    }
+var GlobalOption;
+
+(function (GlobalOption) {
+  var _options = defualtGlobalOption;
+
+  GlobalOption.get = function () {
+    return _options;
   };
-};
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7bf0b67a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=78d75ca6&
+
+  GlobalOption.set = function (value) {
+    _options = value;
+  };
+
+  GlobalOption.extend = function () {
+    for (var _len = arguments.length, partials = new Array(_len), _key = 0; _key < _len; _key++) {
+      partials[_key] = arguments[_key];
+    }
+
+    Object.assign.apply(Object, [_options].concat(partials));
+  };
+})(GlobalOption || (GlobalOption = {}));
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"aba14ce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/photoswipe.vue?vue&type=template&id=d6fdc85c&
 var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"gallery",staticClass:"pswipe-gallery",on:{"click":_vm.onThumbClick}},[_vm._t("default")],2)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=78d75ca6&
+// CONCATENATED MODULE: ./src/components/photoswipe.vue?vue&type=template&id=d6fdc85c&
 
 // CONCATENATED MODULE: ./node_modules/tslib/tslib.es6.js
 /*! *****************************************************************************
@@ -6303,9 +6489,7 @@ function (_Vue) {
     }
   }, {
     key: "onThumbClick",
-    value: function onThumbClick(e, skipHook) {
-      var _this2 = this;
-
+    value: function onThumbClick(e) {
       var eTarget = !this.auto && this.bubble && closest(e.target, function (el) {
         return !!el.dataset.pswpSrc;
       }) || e.target;
@@ -6315,26 +6499,6 @@ function (_Vue) {
         return el === eTarget;
       });
       if (index === -1) return;
-
-      if (this.$listeners.beforeOpen && !skipHook) {
-        var beforeOpenEvent = {
-          index: index,
-          target: eTarget
-        };
-
-        var beforeOpen = function beforeOpen() {
-          var continued = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-          if (!continued) return;
-
-          _this2.onThumbClick({
-            target: eTarget
-          }, true);
-        };
-
-        this.$emit('beforeOpen', beforeOpenEvent, beforeOpen);
-        return;
-      }
-
       this.openPhotoSwipe({
         index: index,
         thumbEls: thumbEls
@@ -6359,16 +6523,18 @@ function (_Vue) {
     value: function parseIndex(index, items, options, fromURL) {
       return fromURL ? options.galleryPIDs ? findIndex(items, function (item) {
         return item.pid === index;
-      }) : index - 1 : index;
+      }) // in URL indexes start from 1
+      : index - 1 : index;
     }
   }, {
     key: "openPhotoSwipe",
     value: function openPhotoSwipe(_ref) {
+      var _this2 = this;
+
       var index = _ref.index,
           fromURL = _ref.fromURL,
           thumbEls = _ref.thumbEls;
       var items = this.parseThumbEls(thumbEls);
-      setSizeToTarget(items[index], 'msrc');
       var options = {
         showHideOpacity: isBgImg(items[index].el),
         galleryUID: +(this.gallery.dataset.pswpUid || ''),
@@ -6378,13 +6544,39 @@ function (_Vue) {
       if (parsedIndex >= 0) options.index = parsedIndex;
       if (!isNum(options.index) || Number.isNaN(options.index)) return;
       if (fromURL) options.showAnimationDuration = 0;
-      Object.assign(options, defualtGlobalOption, this.globalOptions, this.options);
-      this.pswp = utils_createPhotoSwipe({
-        pswpElement: this.pswpElement,
-        items: items,
-        options: options,
-        context: this
-      });
+      Object.assign(options, GlobalOption.get(), this.options);
+
+      var open = function open() {
+        _this2.pswp = utils_createPhotoSwipe({
+          items: items,
+          options: options,
+          context: _this2
+        });
+
+        _this2.$emit('opened', _this2.pswp);
+
+        Event.emit('opened', _this2.$props);
+      };
+
+      if (this.$listeners.beforeOpen) {
+        var beforeOpenEvent = {
+          index: index,
+          items: items,
+          options: options,
+          target: items[index].el
+        };
+
+        var beforeOpen = function beforeOpen() {
+          var continued = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+          if (!continued) return;
+          open();
+        };
+
+        this.$emit('beforeOpen', beforeOpenEvent, beforeOpen);
+        return;
+      }
+
+      open();
     }
   }, {
     key: "initPhotoSwipeFromDOM",
@@ -6406,7 +6598,7 @@ function (_Vue) {
         // in history mode, it will be empty in first time access because cant get image size
         setTimeout(function () {
           _this3.openPhotoSwipe({
-            index: pid - 1,
+            index: pid,
             fromURL: true
           });
         });
@@ -6435,6 +6627,11 @@ function (_Vue) {
       }).map(function (thumbEl) {
         return _this4.setImageSizeSeparately(thumbEl);
       }));
+    }
+  }, {
+    key: "created",
+    value: function created() {
+      UI.append();
     }
   }, {
     key: "mounted",
@@ -6471,6 +6668,11 @@ __decorate([Prop({
     return true;
   }
 })], photoswipevue_type_script_lang_ts_Photoswipe.prototype, "filter", void 0);
+
+__decorate([Prop({
+  type: Boolean,
+  default: false
+})], photoswipevue_type_script_lang_ts_Photoswipe.prototype, "rotate", void 0);
 
 photoswipevue_type_script_lang_ts_Photoswipe = __decorate([vue_class_component_common_default.a], photoswipevue_type_script_lang_ts_Photoswipe);
 /* harmony default export */ var photoswipevue_type_script_lang_ts_ = (photoswipevue_type_script_lang_ts_Photoswipe);
@@ -6595,52 +6797,94 @@ var component = normalizeComponent(
 )
 
 /* harmony default export */ var components_photoswipe = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"7bf0b67a-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=template&id=76958fa8&
-var pswpvue_type_template_id_76958fa8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _vm._m(0)}
-var pswpvue_type_template_id_76958fa8_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})]),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('button',{staticClass:"pswp__button pswp__button--share",attrs:{"title":"Share"}}),_c('button',{staticClass:"pswp__button pswp__button--fs",attrs:{"title":"Toggle fullscreen"}}),_c('button',{staticClass:"pswp__button pswp__button--zoom",attrs:{"title":"Zoom in/out"}}),_c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])]),_c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})]),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])])])])}]
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"aba14ce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswpUI.vue?vue&type=template&id=004da668&
+var pswpUIvue_type_template_id_004da668_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp",attrs:{"tabindex":"-1","role":"dialog","aria-hidden":"true"}},[_c('div',{staticClass:"pswp__bg"}),_c('div',{staticClass:"pswp__scroll-wrap"},[_vm._m(0),_c('div',{staticClass:"pswp__ui pswp__ui--hidden"},[_c('div',{staticClass:"pswp__top-bar"},[_c('div',{staticClass:"pswp__counter"}),_c('button',{staticClass:"pswp__button pswp__button--close",attrs:{"title":"Close (Esc)"}}),_c('button',{staticClass:"pswp__button pswp__button--share",attrs:{"title":"Share"}}),_c('button',{staticClass:"pswp__button pswp__button--fs",attrs:{"title":"Toggle fullscreen"}}),_c('button',{staticClass:"pswp__button pswp__button--zoom",attrs:{"title":"Zoom in/out"}}),(_vm.rotate)?[_c('button',{staticClass:"pswp__button pswp__button--rotation pswp__button--rotation--right",attrs:{"title":"Rotate Right"},on:{"pswpTap":function($event){return _vm.handleRotate('right')}}}),_c('button',{staticClass:"pswp__button pswp__button--rotation pswp__button--rotation--left",attrs:{"title":"Rotate Left"},on:{"pswpTap":function($event){return _vm.handleRotate('left')}}})]:_vm._e(),_vm._m(1)],2),_vm._m(2),_c('button',{staticClass:"pswp__button pswp__button--arrow--left",attrs:{"title":"Previous (arrow left)"}}),_c('button',{staticClass:"pswp__button pswp__button--arrow--right",attrs:{"title":"Next (arrow right)"}}),_vm._m(3)])])])}
+var pswpUIvue_type_template_id_004da668_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp__container"},[_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"}),_c('div',{staticClass:"pswp__item"})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp__preloader"},[_c('div',{staticClass:"pswp__preloader__icn"},[_c('div',{staticClass:"pswp__preloader__cut"},[_c('div',{staticClass:"pswp__preloader__donut"})])])])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp__share-modal pswp__share-modal--hidden pswp__single-tap"},[_c('div',{staticClass:"pswp__share-tooltip"})])},function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"pswp__caption"},[_c('div',{staticClass:"pswp__caption__center"})])}]
 
 
-// CONCATENATED MODULE: ./src/components/pswp.vue?vue&type=template&id=76958fa8&
+// CONCATENATED MODULE: ./src/components/pswpUI.vue?vue&type=template&id=004da668&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswp.vue?vue&type=script&lang=ts&
-function pswpvue_type_script_lang_ts_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pswpvue_type_script_lang_ts_typeof = function _typeof(obj) { return typeof obj; }; } else { pswpvue_type_script_lang_ts_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pswpvue_type_script_lang_ts_typeof(obj); }
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--13-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/ts-loader??ref--13-3!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pswpUI.vue?vue&type=script&lang=ts&
+function pswpUIvue_type_script_lang_ts_typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { pswpUIvue_type_script_lang_ts_typeof = function _typeof(obj) { return typeof obj; }; } else { pswpUIvue_type_script_lang_ts_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return pswpUIvue_type_script_lang_ts_typeof(obj); }
 
-function pswpvue_type_script_lang_ts_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function pswpUIvue_type_script_lang_ts_classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function pswpvue_type_script_lang_ts_possibleConstructorReturn(self, call) { if (call && (pswpvue_type_script_lang_ts_typeof(call) === "object" || typeof call === "function")) { return call; } return pswpvue_type_script_lang_ts_assertThisInitialized(self); }
+function pswpUIvue_type_script_lang_ts_defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function pswpvue_type_script_lang_ts_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+function pswpUIvue_type_script_lang_ts_createClass(Constructor, protoProps, staticProps) { if (protoProps) pswpUIvue_type_script_lang_ts_defineProperties(Constructor.prototype, protoProps); if (staticProps) pswpUIvue_type_script_lang_ts_defineProperties(Constructor, staticProps); return Constructor; }
 
-function pswpvue_type_script_lang_ts_getPrototypeOf(o) { pswpvue_type_script_lang_ts_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return pswpvue_type_script_lang_ts_getPrototypeOf(o); }
+function pswpUIvue_type_script_lang_ts_possibleConstructorReturn(self, call) { if (call && (pswpUIvue_type_script_lang_ts_typeof(call) === "object" || typeof call === "function")) { return call; } return pswpUIvue_type_script_lang_ts_assertThisInitialized(self); }
 
-function pswpvue_type_script_lang_ts_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) pswpvue_type_script_lang_ts_setPrototypeOf(subClass, superClass); }
+function pswpUIvue_type_script_lang_ts_assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
-function pswpvue_type_script_lang_ts_setPrototypeOf(o, p) { pswpvue_type_script_lang_ts_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return pswpvue_type_script_lang_ts_setPrototypeOf(o, p); }
+function pswpUIvue_type_script_lang_ts_getPrototypeOf(o) { pswpUIvue_type_script_lang_ts_getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return pswpUIvue_type_script_lang_ts_getPrototypeOf(o); }
+
+function pswpUIvue_type_script_lang_ts_inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) pswpUIvue_type_script_lang_ts_setPrototypeOf(subClass, superClass); }
+
+function pswpUIvue_type_script_lang_ts_setPrototypeOf(o, p) { pswpUIvue_type_script_lang_ts_setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return pswpUIvue_type_script_lang_ts_setPrototypeOf(o, p); }
 
 
 
 
-var Pswp =
+
+var pswpUIvue_type_script_lang_ts_Pswp =
 /*#__PURE__*/
 function (_Vue) {
-  pswpvue_type_script_lang_ts_inherits(Pswp, _Vue);
+  pswpUIvue_type_script_lang_ts_inherits(Pswp, _Vue);
 
   function Pswp() {
-    pswpvue_type_script_lang_ts_classCallCheck(this, Pswp);
+    var _this;
 
-    return pswpvue_type_script_lang_ts_possibleConstructorReturn(this, pswpvue_type_script_lang_ts_getPrototypeOf(Pswp).apply(this, arguments));
+    pswpUIvue_type_script_lang_ts_classCallCheck(this, Pswp);
+
+    _this = pswpUIvue_type_script_lang_ts_possibleConstructorReturn(this, pswpUIvue_type_script_lang_ts_getPrototypeOf(Pswp).apply(this, arguments));
+    _this.rotate = false;
+    return _this;
   }
+
+  pswpUIvue_type_script_lang_ts_createClass(Pswp, [{
+    key: "handleRotate",
+    value: function handleRotate(direction) {
+      var container = this.$Pswp.container;
+      var currentItem = this.$Pswp.currItem;
+      var img = currentItem.container.lastChild;
+      if (!currentItem.loaded) return;
+      var containerWidth = container.clientWidth;
+      var containerHeight = currentItem.vGap ? container.clientHeight - currentItem.vGap.top - currentItem.vGap.bottom : container.clientHeight;
+      var deg = Number(img.dataset.rotateDeg) || 0;
+      var offsets = direction === 'left' ? -90 : 90;
+      var transformDeg = deg + offsets;
+      img.dataset.rotateDeg = "".concat(transformDeg);
+      img.style.transform = getTransformStyle({
+        w: containerWidth,
+        h: containerHeight
+      }, img, transformDeg);
+    }
+  }, {
+    key: "created",
+    value: function created() {
+      var _this2 = this;
+
+      Event.on('opened', function (pswpProps) {
+        if (pswpProps.rotate) _this2.rotate = true;
+      });
+    }
+  }]);
 
   return Pswp;
 }(external_commonjs_vue_commonjs2_vue_root_Vue_default.a);
 
-Pswp = __decorate([vue_class_component_common_default()({
+pswpUIvue_type_script_lang_ts_Pswp = __decorate([vue_class_component_common_default()({
   name: 'Pswp'
-})], Pswp);
-/* harmony default export */ var pswpvue_type_script_lang_ts_ = (Pswp);
-// CONCATENATED MODULE: ./src/components/pswp.vue?vue&type=script&lang=ts&
- /* harmony default export */ var components_pswpvue_type_script_lang_ts_ = (pswpvue_type_script_lang_ts_); 
-// CONCATENATED MODULE: ./src/components/pswp.vue
+})], pswpUIvue_type_script_lang_ts_Pswp);
+/* harmony default export */ var pswpUIvue_type_script_lang_ts_ = (pswpUIvue_type_script_lang_ts_Pswp);
+// CONCATENATED MODULE: ./src/components/pswpUI.vue?vue&type=script&lang=ts&
+ /* harmony default export */ var components_pswpUIvue_type_script_lang_ts_ = (pswpUIvue_type_script_lang_ts_); 
+// EXTERNAL MODULE: ./src/components/pswpUI.vue?vue&type=style&index=0&lang=scss&
+var pswpUIvue_type_style_index_0_lang_scss_ = __webpack_require__("45a1");
+
+// CONCATENATED MODULE: ./src/components/pswpUI.vue
+
 
 
 
@@ -6648,10 +6892,10 @@ Pswp = __decorate([vue_class_component_common_default()({
 
 /* normalize component */
 
-var pswp_component = normalizeComponent(
-  components_pswpvue_type_script_lang_ts_,
-  pswpvue_type_template_id_76958fa8_render,
-  pswpvue_type_template_id_76958fa8_staticRenderFns,
+var pswpUI_component = normalizeComponent(
+  components_pswpUIvue_type_script_lang_ts_,
+  pswpUIvue_type_template_id_004da668_render,
+  pswpUIvue_type_template_id_004da668_staticRenderFns,
   false,
   null,
   null,
@@ -6659,7 +6903,7 @@ var pswp_component = normalizeComponent(
   
 )
 
-/* harmony default export */ var components_pswp = (pswp_component.exports);
+/* harmony default export */ var pswpUI = (pswpUI_component.exports);
 // CONCATENATED MODULE: ./src/main.ts
 
 
@@ -6667,8 +6911,9 @@ var pswp_component = normalizeComponent(
 
 
 var main_install = function install(Vue, options) {
-  var pswp = new Vue(components_pswp).$mount();
-  components_photoswipe.mixin(config_getGlobalMixin(pswp, options));
+  if (options) GlobalOption.extend(options);
+  var PswpUIComponent = new Vue(pswpUI).$mount();
+  UI.el = PswpUIComponent.$el;
   Vue.component('Photoswipe', components_photoswipe);
   Vue.directive('pswp', {
     bind: function bind(el, _ref) {
@@ -6678,7 +6923,7 @@ var main_install = function install(Vue, options) {
     update: function update(el, _ref2) {
       var value = _ref2.value,
           oldValue = _ref2.oldValue;
-      if (jsonEqual(value, oldValue)) return;
+      if (value === oldValue) return;
       setPswpDataByCond(el, value);
     }
   });
