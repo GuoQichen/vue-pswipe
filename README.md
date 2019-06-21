@@ -37,11 +37,12 @@ you can set `v-pswp` directive in element to mark as clickable
 | auto | boolean | automatically collect all img tags without the need for the `v-pswp` directive | false |
 | bubble | boolean | allow click event bubbling | false |
 | lazy | boolean | lazy loading image, you can set to false to preload all image | true |
+| rotate | boolean | add a rotate action button to the top bar, allow user to rotate the current image | false |
 
 ## directive
 
 ### `v-pswp: object|string`
-use for mark current element as gallery item, accept image src or options object
+use for mark current element as gallery item, accept **image src** or **options object**
 
 Directive Options:
 ```typescript
@@ -72,7 +73,7 @@ interface PswpDirectiveOptions {
 ## event
 
 ### `beforeOpen`
-emit after click thumbnail, if listen to this event, `next` function must be called to resolve this hook
+emit after click thumbnail, if listen to this event, **`next` function must be called to resolve this hook**
 
 Parameters: 
 - `event`:
@@ -82,8 +83,16 @@ Parameters:
 
     must be called to resolve the hook. `next(false)` will abort open PhotoSwipe
 
+### `opened`
+emit after photoswipe init, you can get current active photoswipe instance by parameter
+
+Parameters:
+- `pswp`:
+
+    current photoswipe instance
+
 ### original PhotoSwipe event
-support all original PhotoSwipe events, see [original event](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#events), eg: 
+**support all original PhotoSwipe events**, see [original event](https://github.com/dimsemenov/PhotoSwipe/blob/master/website/documentation/api.md#events), eg: 
 ```vue
 <Photoswipe @beforeChange="handleBeforeChange">
     <img 
