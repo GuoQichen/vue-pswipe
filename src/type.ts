@@ -32,11 +32,12 @@ export interface PswpItem extends Item {
     src: string
     msrc?: string
     pid?: number
+    verticalRotated?: boolean
 }
 
 export interface CurrentPswpItem extends PswpItem {
     container: HTMLElement
-    loaded: Boolean
+    loaded: boolean
 }
 
 export interface PswpOptions extends Options {

@@ -317,6 +317,17 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
     })
 }
 
+const revertRotate = (pswp: Pswp) => {
+    pswp.listen('gettingData', (index, item: PswpItem) => {
+        if (!item.verticalRotated) return
+
+        const { w } = item
+        item.w = item.h
+        item.h = w
+        item.verticalRotated = false
+    })
+}
+
 /**
  * get current active PhotoSwipe, else null
  */
@@ -358,6 +369,7 @@ export const createPhotoSwipe: CreatePhotoSwipe = ({
     const pswp = new PhotoSwipe(UI.el, defaultUI, items, options)
     bindEvent(context, pswp)
     handleWithoutSize(pswp)
+    revertRotate(pswp)
     CurrentPswp.set(pswp)
     pswp.init()
     return pswp

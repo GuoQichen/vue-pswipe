@@ -113,6 +113,7 @@ export default class Pswp extends Vue {
 
         const [deg, transformDeg] = getTransformDeg(img, direction)
         const isVertical = transformDeg % 180 !== 0
+        currentItem.verticalRotated = isVertical
         const rotate = `rotate(${transformDeg}deg)`
 
         const containerSize = getContainerSize(container, currentItem)
