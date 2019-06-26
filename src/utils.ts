@@ -13,6 +13,9 @@ import {
     HandleWithoutSize,
     Pswp,
     GetContainSize,
+    RotateDirection,
+    CurrentPswpItem,
+    StyleKey,
 } from '@/type'
 import { customEvents } from '@/config'
 
@@ -380,42 +383,6 @@ export const getContainSize: GetContainSize = (
 }
 
 /**
- * get transform style according container and image
- * @param containerSize container size
- * @param img current image element
- * @param transformDeg calcualted transform deg according direction
- * @return calculated transform style string
- */
-export const getTransformStyle = (
-    containerSize: Size,
-    img: HTMLImageElement,
-    transformDeg: number,
-): string => {
-    const {
-        naturalWidth,
-        naturalHeight,
-        width: imgWidth,
-        height: imgHeight,
-    } = img
-
-    const rotate = `rotate(${transformDeg}deg)`
-    if (transformDeg % 180 === 0) return rotate
-
-    const { w: scaledWidth, h: scaledHeight } = getContainSize(
-        containerSize.w,
-        containerSize.h,
-        naturalHeight,
-        naturalWidth,
-    )
-
-    const requireScale = imgWidth < naturalWidth || imgHeight < naturalHeight
-    const scale = requireScale
-        ? `scale(${scaledHeight / imgWidth}, ${scaledWidth / imgHeight})`
-        : ''
-    return rotate + scale
-}
-
-/**
  * custom event
  */
 export namespace Event {
@@ -447,3 +414,123 @@ export namespace Event {
         pools.forEach(fn => fn(...args))
     }
 }
+
+/**
+ * get next transform degree from current image element
+ * @param img current image element
+ * @param direction rotate direction
+ * @return transform degree
+ */
+export const getTransformDeg = (img: HTMLImageElement, direction: RotateDirection) => {
+    const deg = Number(img.dataset.rotateDeg) || 0
+    const offsets = direction === 'left' ? -90 : 90
+    const transformDeg = deg + offsets
+    img.dataset.rotateDeg = `${transformDeg}`
+    return [deg, transformDeg]
+}
+
+/**
+ * get container viewport size
+ * @param container current container element
+ * @param currentItem current pswp item
+ * @return container viewport size
+ */
+export const getContainerSize = (container: HTMLElement, currentItem: CurrentPswpItem) => {
+    const containerWidth = container.clientWidth
+    const containerHeight = currentItem.vGap
+        ? container.clientHeight - currentItem.vGap.top - currentItem.vGap.bottom
+        : container.clientHeight
+    return {
+        w: containerWidth,
+        h: containerHeight,
+    }
+}
+
+/**
+ * get transform scale string
+ * @param w scale width
+ * @param h scale height
+ */
+export const getScale = (w: number, h = w) => `scale(${w}, ${h})`
+
+/**
+ * get transform scale
+ * @param containerSize container size
+ * @param img current image element
+ * @param isVertical next rotate is vertical
+ */
+export const getCalculatedScale = (
+    containerSize: Size,
+    img: HTMLImageElement,
+    isVertical: boolean,
+): string[] => {
+    const { naturalWidth, naturalHeight } = img
+
+    const { w: horizontalWidth, h: horizontalHeight } = getContainSize(
+        containerSize.w,
+        containerSize.h,
+        naturalWidth,
+        naturalHeight,
+    )
+
+    const { w: verticalWidth, h: verticalHeight } = getContainSize(
+        containerSize.w,
+        containerSize.h,
+        naturalHeight,
+        naturalWidth,
+    )
+
+    const animatedScale = isVertical
+        ? getScale(verticalHeight / horizontalWidth)
+        : getScale(horizontalWidth / verticalWidth, horizontalHeight / verticalHeight)
+
+    const verticalSilencedScale = getScale(
+        verticalHeight / verticalWidth,
+        verticalWidth / verticalHeight,
+    )
+    return [
+        animatedScale,
+        verticalSilencedScale,
+    ]
+}
+
+/**
+ * add vendor prefix to css property
+ */
+export const modernize = (() => {
+    const cache: Record<string, StyleKey> = {}
+    const detectElement = document.createElement('div')
+    const { style } = detectElement
+
+    return (styleKey: StyleKey) => {
+        const cached = cache[styleKey]
+        if (cached) return cached
+
+        let key = styleKey
+        if (!isDef(style[styleKey])) {
+            // eslint-disable-next-line array-callback-return
+            ['Moz', 'ms', 'O', 'Webkit'].some((prefix) => {
+                const prefixedStyleKey = <StyleKey>(prefix + upperFirst(styleKey))
+                if (isDef(style[prefixedStyleKey])) {
+                    return key = prefixedStyleKey
+                }
+            })
+        }
+        cache[styleKey] = key
+        return key
+    }
+})()
+
+/**
+ * get prefixed transition end event name
+ */
+export const transitionEndEventName = (() => {
+    const transitions = {
+        transition: 'transitionend',
+        OTransition: 'oTransitionEnd',
+        MozTransition: 'transitionend',
+        WebkitTransition: 'webkitTransitionEnd',
+    }
+    const detected = <keyof typeof transitions>modernize('transition')
+    return transitions[detected]
+})()

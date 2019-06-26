@@ -33,8 +33,6 @@
 
                     <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 
-                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-
                     <template v-if="rotate">
                         <button
                             class="pswp__button pswp__button--rotation pswp__button--rotation--right"
@@ -48,6 +46,9 @@
                             @pswpTap="handleRotate('left')"
                         />
                     </template>
+
+                    <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
 
                     <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
                     <!-- element will get class pswp__preloader--active when preloader is running -->
@@ -80,35 +81,65 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Pswp as PswpType, RotateDirection, CurrentPswpItem, PswpProps } from '@/type'
-import { getTransformStyle, Event } from '@/utils'
+import {
+    Event,
+    getContainSize,
+    getScale,
+    getCalculatedScale,
+    getTransformDeg,
+    getContainerSize,
+    modernize,
+    transitionEndEventName,
+} from '@/utils'
+
+const TRANSITION_CLASS = 'pswp__img--transition'
 
 @Component({ name: 'Pswp' })
 export default class Pswp extends Vue {
     $Pswp!: PswpType
 
     rotate: boolean = false
+    isRotateTransform: boolean = false
 
     handleRotate(direction: RotateDirection) {
-        const { container } = this.$Pswp
-        const currentItem = this.$Pswp.currItem as CurrentPswpItem
+        const pswp = this.$Pswp
+        const { container } = pswp
+        const currentItem = pswp.currItem as CurrentPswpItem
         const img = currentItem.container.lastChild as HTMLImageElement
 
-        if (!currentItem.loaded) return
-        const containerWidth = container.clientWidth
-        const containerHeight = currentItem.vGap
-            ? container.clientHeight - currentItem.vGap.top - currentItem.vGap.bottom
-            : container.clientHeight
+        if (!currentItem.loaded || this.isRotateTransform) return
 
-        const deg = Number(img.dataset.rotateDeg) || 0
-        const offsets = direction === 'left' ? -90 : 90
-        const transformDeg = deg + offsets
+        pswp.updateSize(false)
 
-        img.dataset.rotateDeg = `${transformDeg}`
-        img.style.transform = getTransformStyle(
-            { w: containerWidth, h: containerHeight },
-            img,
-            transformDeg,
-        )
+        const [deg, transformDeg] = getTransformDeg(img, direction)
+        const isVertical = transformDeg % 180 !== 0
+        const rotate = `rotate(${transformDeg}deg)`
+
+        const containerSize = getContainerSize(container, currentItem)
+        const [animatedScale, verticalSilencedScale] = getCalculatedScale(containerSize, img, isVertical)
+
+        const handleTransitionend = () => {
+            img.removeEventListener(transitionEndEventName, handleTransitionend)
+            img.classList.remove(TRANSITION_CLASS)
+
+            const { naturalHeight, naturalWidth } = img
+            if (isVertical) {
+                currentItem.w = naturalHeight
+                currentItem.h = naturalWidth
+                img.style[modernize('transform')] = rotate + verticalSilencedScale
+            } else {
+                currentItem.w = naturalWidth
+                currentItem.h = naturalHeight
+                img.style[modernize('transform')] = rotate
+            }
+            pswp.updateSize(false)
+            this.isRotateTransform = false
+        }
+
+        img.addEventListener(transitionEndEventName, handleTransitionend)
+        img.classList.add(TRANSITION_CLASS)
+        this.isRotateTransform = true
+        img.style[modernize('transform')] = rotate + animatedScale
     }
 
     created() {
@@ -136,7 +167,7 @@ $rotateIcon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9h
         transform: rotateY(180deg);
     }
 }
-.pswp__img {
+.pswp__img.pswp__img--transition {
    transition: transform .3s;
 }
 </style>

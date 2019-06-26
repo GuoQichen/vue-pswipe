@@ -3,10 +3,12 @@ import { isMobile } from '@/utils'
 
 export const customEvents: string[] = ['beforeOpen', 'opened']
 
+const _isMobile = isMobile()
 export const defualtGlobalOption: PswpOptions = {
     // in spa no need history mode
     history: false,
-    shareEl: !isMobile(),
+    zoomEl: !_isMobile,
+    shareEl: !_isMobile,
     shareButtons: [
         {
             id: 'download', label: 'Download image', url: '{{raw_image_url}}', download: true,

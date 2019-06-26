@@ -117,3 +117,5 @@ export type GetContainSize = (
 ) => Size
 
 export type RotateDirection = 'left' | 'right'
+
+export type StyleKey = Exclude<keyof CSSStyleDeclaration, number | 'length' | 'parentRule'>
