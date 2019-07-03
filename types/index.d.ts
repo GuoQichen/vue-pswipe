@@ -1,5 +1,5 @@
 import Vue, { PluginObject } from 'vue'
-import { PswpItem, PswpOptions, PswpDirectiveOptions } from '@/type'
+import { PswpItem, PswpOptions, PswpDirectiveOptions } from '../src/type'
 
 declare const VuePswipe: PluginObject<PswpOptions>
 

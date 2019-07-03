@@ -7,10 +7,10 @@
     "report": "npm run build -- --report"
   },
   "dependencies": {
+    "@types/photoswipe": "^4.0.29",
     "photoswipe": "^4.1.3"
   },
   "devDependencies": {
-    "@types/photoswipe": "^4.0.29",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-typescript": "^3.8.1",
