@@ -1,24 +1,33 @@
 {
   "name": "vue-pswipe",
   "version": "0.14.3",
+  "description": "a vue plugin for photoswipe",
+  "author": "guoqichen",
   "scripts": {
     "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.ts",
     "dev": "vue-cli-service serve ./example/index.ts",
-    "report": "npm run build -- --report"
+    "report": "npm run build -- --report",
+    "test:unit": "vue-cli-service test:unit"
   },
+  "main": "dist/Photoswipe.umd.min.js",
   "dependencies": {
     "@types/photoswipe": "^4.0.29",
     "photoswipe": "^4.1.3"
   },
   "devDependencies": {
+    "@types/jest": "^23.1.4",
     "@vue/cli-plugin-babel": "^3.9.2",
     "@vue/cli-plugin-eslint": "^3.9.2",
     "@vue/cli-plugin-typescript": "^3.9.0",
+    "@vue/cli-plugin-unit-jest": "^3.9.0",
     "@vue/cli-service": "^3.9.3",
     "@vue/eslint-config-airbnb": "^3.0.5",
     "@vue/eslint-config-typescript": "^3.2.1",
+    "@vue/test-utils": "1.0.0-beta.29",
+    "babel-core": "7.0.0-bridge.0",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
+    "ts-jest": "^23.0.0",
     "typescript": "^3.5.3",
     "vue": "^2.6.10",
     "vue-class-component": "^6.3.2",
@@ -39,8 +48,5 @@
     "type": "git",
     "url": "https://github.com/GuoQichen/vue-pswipe.git"
   },
-  "main": "dist/Photoswipe.umd.min.js",
-  "description": "a vue plugin for photoswipe",
-  "author": "guoqichen",
   "types": "types/index.d.ts"
 }
