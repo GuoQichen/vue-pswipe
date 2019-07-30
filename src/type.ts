@@ -31,7 +31,7 @@ export interface PswpItem extends Item {
     el: HTMLElement
     src: string
     msrc?: string
-    pid?: number
+    pid?: number | string
     verticalRotated?: boolean
 }
 
@@ -45,7 +45,7 @@ export interface PswpOptions extends Options {
 }
 
 export interface OpenPhotoSwipeArgs {
-    index: number
+    index: number | string
     fromURL?: boolean
     thumbEls?: HTMLElement[]
 }

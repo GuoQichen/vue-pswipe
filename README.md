@@ -67,6 +67,12 @@ interface PswpDirectiveOptions {
      * if you skip it, there won't be any caption
      */
     title?: string
+    /**
+     * to make URLs to a single image look like this: http://example.com/#&gid=1&pid=custom-first-id
+     * instead of: http://example.com/#&gid=1&pid=1
+     * enable options history:true, galleryPIDs:true and add pid (unique picture identifier) 
+     */
+    pid?: string | number
 }
 ```
 

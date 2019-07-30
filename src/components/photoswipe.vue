@@ -26,7 +26,6 @@ import {
     getImageSize,
     parseHash,
     querySelectorList,
-    get,
     setSize,
     getSrc,
     relevant,
@@ -36,6 +35,7 @@ import {
     createPhotoSwipe,
     UI,
     Event,
+    errorHandler,
 } from '@/utils'
 
 @Component
@@ -62,19 +62,26 @@ export default class Photoswipe extends Vue {
 
     parseThumbEls(thumbEls = this.getThumbEls()): PswpItem[] {
         return thumbEls.map((el) => {
+            const data = el.dataset
             const src = getSrc(el, this.auto) || ''
-            const size = get(el, 'dataset.pswpSize', '').split('x')
-            const title = get(el, 'dataset.pswpTitle', '')
-            const msrc = get(el, 'dataset.pswpMsrc', src)
+            const msrc = data.pswpMsrc || src
+            const size = (data.pswpSize || '').split('x')
 
-            return {
+            const item = {
                 msrc,
                 src,
                 el,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),
-                title,
-            }
+            } as PswpItem
+
+            const title = data.pswpTitle
+            const pid = data.pswpPid
+
+            if (title) item.title = title
+            if (pid) item.pid = pid
+
+            return item
         })
     }
 
@@ -108,13 +115,13 @@ export default class Photoswipe extends Vue {
         }
     }
 
-    parseIndex(index: number, items: PswpItem[], options: PswpOptions, fromURL?: boolean) {
+    parseIndex(index: number | string, items: PswpItem[], options: PswpOptions, fromURL?: boolean): number {
         return fromURL
             ? options.galleryPIDs
                 ? findIndex(items, item => item.pid === index)
                 // in URL indexes start from 1
-                : index - 1
-            : index
+                : +index - 1
+            : +index
     }
 
     openPhotoSwipe({
@@ -125,17 +132,18 @@ export default class Photoswipe extends Vue {
         const items = this.parseThumbEls(thumbEls)
 
         const options: PswpOptions = {
-            showHideOpacity: isBgImg(items[index].el),
             galleryUID: +(this.gallery.dataset.pswpUid || ''), // define gallery index (for URL)
             getThumbBoundsFn: this.getThumbBoundsFn(items),
+            ...GlobalOption.get(),
+            ...this.options,
         }
 
         const parsedIndex = this.parseIndex(index, items, options, fromURL)
-        if (parsedIndex >= 0) options.index = parsedIndex
-        if (!isNum(options.index) || Number.isNaN(options.index)) return
-        if (fromURL) options.showAnimationDuration = 0
 
-        Object.assign(options, GlobalOption.get(), this.options)
+        if (parsedIndex >= 0) options.index = parsedIndex
+        if (!isNum(options.index) || Number.isNaN(options.index)) return errorHandler('PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPID to true.')
+        if (fromURL) options.showAnimationDuration = 0
+        if (!options.showHideOpacity) options.showHideOpacity = isBgImg(items[parsedIndex].el)
 
         const open = () => {
             this.pswp = createPhotoSwipe({
@@ -149,10 +157,10 @@ export default class Photoswipe extends Vue {
 
         if (this.$listeners.beforeOpen) {
             const beforeOpenEvent: BeforeOpenEvent = {
-                index,
+                index: parsedIndex,
                 items,
                 options,
-                target: items[index].el,
+                target: items[parsedIndex].el,
             }
             const beforeOpen: BeforeOpen = (continued: boolean = true) => {
                 if (!continued) return
@@ -172,7 +180,7 @@ export default class Photoswipe extends Vue {
 
         // Parse URL and open gallery if it contains #&pid=3&gid=1
         const { pid, gid } = parseHash()
-        if (pid && gid && gid === currentGid) {
+        if (pid && gid && +gid === currentGid) {
             // in history mode, it will be empty in first time access because cant get image size
             setTimeout(() => {
                 this.openPhotoSwipe({

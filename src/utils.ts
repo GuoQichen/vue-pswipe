@@ -93,7 +93,7 @@ export const findIndex: FindIndex = (array, predicate) => {
  */
 export const parseHash = () => {
     const hash = window.location.hash.substring(1)
-    const params: Record<string, number> = {}
+    const params: Record<string, number | string> = {}
 
     if (hash.length < 5) return params
 
@@ -102,7 +102,7 @@ export const parseHash = () => {
         const pair = cur.split('=')
         if (pair.length < 2) return acc
         const [key, value] = pair
-        acc[key] = +value
+        acc[key] = value
         return acc
     }, params)
 
