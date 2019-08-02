@@ -214,4 +214,10 @@ export default class Photoswipe extends Vue {
 <style>
 @import '~photoswipe/dist/photoswipe.css';
 @import '~photoswipe/dist/default-skin/default-skin.css';
+
+.pswipe-gallery img,
+.pswipe-gallery [data-pswp-src] { /* For usage with <div> */
+  cursor: pointer; /* Fallback for unsupported browsers */
+  cursor: zoom-in;
+}
 </style>
