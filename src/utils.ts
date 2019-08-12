@@ -333,15 +333,16 @@ const revertRotate = (pswp: Pswp) => {
  */
 export namespace CurrentPswp {
     /* eslint-disable no-shadow */
-    let curerntPswp: Pswp | null = null
+    let currentPswp: Pswp | null = null
     const setupClean = (pswp: Pswp) => {
         pswp.listen('destroy', () => {
-            curerntPswp = null
+            currentPswp = null
         })
     }
-    export const get = () => curerntPswp
+    export const get = () => currentPswp
+
     export const set = (pswp: Pswp | null) => {
-        curerntPswp = pswp
+        currentPswp = pswp
         if (pswp) setupClean(pswp)
     }
 }

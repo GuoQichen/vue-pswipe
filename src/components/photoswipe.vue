@@ -141,7 +141,7 @@ export default class Photoswipe extends Vue {
         const parsedIndex = this.parseIndex(index, items, options, fromURL)
 
         if (parsedIndex >= 0) options.index = parsedIndex
-        if (!isNum(options.index) || Number.isNaN(options.index)) return errorHandler('PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPID to true.')
+        if (!isNum(options.index) || Number.isNaN(options.index)) return errorHandler('PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPIDs to true.')
         if (fromURL) options.showAnimationDuration = 0
         if (!options.showHideOpacity) options.showHideOpacity = isBgImg(items[parsedIndex].el)
 
