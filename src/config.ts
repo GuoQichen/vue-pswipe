@@ -17,11 +17,8 @@ export const defualtGlobalOption: PswpOptions = {
 }
 
 export namespace GlobalOption {
-    let _options: PswpOptions = defualtGlobalOption
+    const _options: PswpOptions = defualtGlobalOption
     export const get = () => _options
-    export const set = (value: PswpOptions) => {
-        _options = value
-    }
     export const extend = (...partials: Partial<PswpOptions>[]) => {
         Object.assign(_options, ...partials)
     }

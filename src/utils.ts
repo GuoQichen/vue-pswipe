@@ -220,7 +220,7 @@ const getPswpDataKey = (property: string) => `pswp${upperFirst(property)}`
  */
 export const setPswpData = (options: PswpDirectiveOptions, el: HTMLElement) => {
     (Object.keys(options) as (keyof PswpDirectiveOptions)[]).forEach((key) => {
-        el.dataset[getPswpDataKey(key)] = options[key] // eslint-disable-line
+        el.dataset[getPswpDataKey(key)] = `${options[key]}` // eslint-disable-line
     })
 }
 
@@ -231,11 +231,6 @@ export const setPswpDataByCond = (el: HTMLElement, value: string | PswpDirective
     if (isStr(value)) setPswpData({ src: value }, el)
     if (isObj(value)) setPswpData((value as PswpDirectiveOptions), el)
 }
-
-/**
- * JSON.stringify to determine whether it is equal
- */
-export const jsonEqual = (val1: any, val2: any) => JSON.stringify(val1) === JSON.stringify(val2)
 
 /**
  * preset loaded msrc size to PswpItem
@@ -520,6 +515,8 @@ export const modernize = (() => {
         if (cached) return cached
 
         let key = styleKey
+
+        /* istanbul ignore if */
         if (!isDef(style[styleKey])) {
             // eslint-disable-next-line array-callback-return
             ['Moz', 'ms', 'O', 'Webkit'].some((prefix) => {
