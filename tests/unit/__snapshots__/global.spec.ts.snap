@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`global function v-pswp directive transform to custom dataset 1`] = `
+<img
+  data-pswp-msrc="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+  data-pswp-pid="custom-pid"
+  data-pswp-size="1600x1600"
+  data-pswp-src="https://farm4.staticflickr.com/3894/15008518202_c265dfa55f_h.jpg"
+  data-pswp-title="this is dummy caption"
+  src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_m.jpg"
+/>
+`;
+
+exports[`global function v-pswp directive update directive value 1`] = `
+<img
+  data-pswp-msrc="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg"
+  data-pswp-pid="another-custom-pid"
+  data-pswp-size="1600x1068"
+  data-pswp-src="https://farm6.staticflickr.com/5591/15008867125_b61960af01_h.jpg"
+  data-pswp-title="this is another dummy caption"
+  src="https://farm6.staticflickr.com/5591/15008867125_68a8ed88cc_m.jpg"
+/>
+`;

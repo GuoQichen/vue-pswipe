@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`pswp.vue render PswpUI correctly 1`] = `
+exports[`pswpUI.vue render PswpUI  1`] = `
 <div tabindex="-1" role="dialog" aria-hidden="true" class="pswp">
   <div class="pswp__bg"></div>
   <div class="pswp__scroll-wrap">

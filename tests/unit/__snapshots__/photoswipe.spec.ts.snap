@@ -1,3 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`photoswipe.vue render Photoswipe correctly 1`] = `<div class="pswipe-gallery" data-pswp-uid="0"></div>`;
+exports[`photoswipe.vue :props :options render default options 1`] = `
+"{
+  \\"galleryUID\\": 0,
+  \\"history\\": false,
+  \\"zoomEl\\": true,
+  \\"shareEl\\": true,
+  \\"shareButtons\\": [
+    {
+      \\"id\\": \\"download\\",
+      \\"label\\": \\"Download image\\",
+      \\"url\\": \\"{{raw_image_url}}\\",
+      \\"download\\": true
+    }
+  ],
+  \\"index\\": 0,
+  \\"showHideOpacity\\": false
+}"
+`;
+
+exports[`photoswipe.vue render Photoswipe 1`] = `<div class="pswipe-gallery" data-pswp-uid="0"><img src="https://placeimg.com/640/480/any" data-pswp-src="https://placeimg.com/640/480/any"></div>`;
