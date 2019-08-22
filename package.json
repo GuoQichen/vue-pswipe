@@ -7,7 +7,8 @@
     "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.ts",
     "dev": "vue-cli-service serve ./example/index.ts",
     "report": "npm run build -- --report",
-    "test:unit": "vue-cli-service test:unit"
+    "test": "vue-cli-service test:unit",
+    "test:coverage": "npm test -- --coverage"
   },
   "main": "dist/Photoswipe.umd.min.js",
   "dependencies": {
@@ -25,6 +26,7 @@
     "@vue/eslint-config-typescript": "^3.2.1",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
+    "codecov": "^3.5.0",
     "sass": "^1.22.7",
     "sass-loader": "^7.1.0",
     "ts-jest": "^23.0.0",

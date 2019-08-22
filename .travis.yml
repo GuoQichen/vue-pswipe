@@ -1,4 +1,6 @@
 language: node_js
 node_js:
   - "lts/*"
-script: "npm run test:unit"
+script: "npm run test:coverage"
+after_success: 
+  - "npx codecov"
