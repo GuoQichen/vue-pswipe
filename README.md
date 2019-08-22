@@ -1,4 +1,4 @@
-# vue-pswipe
+# vue-pswipe ![npm](https://img.shields.io/npm/v/vue-pswipe) [![Build Status](https://travis-ci.com/GuoQichen/vue-pswipe.svg?branch=master)](https://travis-ci.com/GuoQichen/vue-pswipe) [![codecov](https://codecov.io/gh/GuoQichen/vue-pswipe/branch/master/graph/badge.svg)](https://codecov.io/gh/GuoQichen/vue-pswipe)
 a Vue plugin for PhotoSwipe without set image size
 
 ## online example
