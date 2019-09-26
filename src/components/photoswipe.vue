@@ -38,7 +38,9 @@ import {
     errorHandler,
 } from '@/utils'
 
-@Component
+@Component({
+    name: 'Photoswipe',
+})
 export default class Photoswipe extends Vue {
     gallery!: HTMLElement
     pswp!: PhotoSwipe<PswpOptions>
