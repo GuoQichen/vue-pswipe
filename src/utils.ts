@@ -308,6 +308,11 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
             || Object.getOwnPropertyDescriptor(item, 'img')
         ) return
 
+        // stop unexpected zoom-in animation
+        if (pswp.currItem === item) {
+            pswp.options.showAnimationDuration = 0
+        }
+
         hackItemImg(item, pswp)
     })
 }
