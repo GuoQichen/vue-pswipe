@@ -8,7 +8,7 @@ export interface PswpDirectiveOptions {
     /**
      * path to image
      */
-    src: string
+    src?: string
     /**
      * image size, 'width x height', eg: '100x100'
      */
@@ -31,6 +31,10 @@ export interface PswpDirectiveOptions {
      * enable options history:true, galleryPIDs:true and add pid (unique picture identifier)
      */
     pid?: string | number
+    /**
+     * use HTML content instead of image
+     */
+    html?: string
 }
 
 export interface PswpItem extends Item {
@@ -38,6 +42,7 @@ export interface PswpItem extends Item {
     src: string
     msrc?: string
     pid?: number | string
+    html?: string
     verticalRotated?: boolean
 }
 

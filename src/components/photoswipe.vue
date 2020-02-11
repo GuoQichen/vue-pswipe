@@ -59,7 +59,7 @@ export default class Photoswipe extends Vue {
     getThumbEls(): HTMLElement[] {
         return this.auto
             ? querySelectorList<HTMLImageElement>('img', this.gallery).filter(this.filter)
-            : querySelectorList('[data-pswp-src]', this.gallery)
+            : querySelectorList('[data-pswp-src],[data-pswp-html]', this.gallery)
     }
 
     parseThumbEls(thumbEls = this.getThumbEls()): PswpItem[] {
@@ -68,6 +68,7 @@ export default class Photoswipe extends Vue {
             const src = getSrc(el, this.auto) || ''
             const msrc = data.pswpMsrc || src
             const size = (data.pswpSize || '').split('x')
+            const html = data.pswpHtml || null
 
             const item = {
                 msrc,
@@ -75,6 +76,7 @@ export default class Photoswipe extends Vue {
                 el,
                 w: Number(size[0] || 0),
                 h: Number(size[1] || 0),
+                html,
             } as PswpItem
 
             const title = data.pswpTitle
@@ -91,7 +93,7 @@ export default class Photoswipe extends Vue {
         const eTarget = (
             !this.auto
             && this.bubble
-            && closest(e.target, el => !!el.dataset.pswpSrc)
+            && closest(e.target, el => !!el.dataset.pswpSrc || !!el.dataset.pswpHtml)
         ) || e.target
 
         if (!relevant(eTarget, this.auto, this.filter)) return

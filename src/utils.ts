@@ -202,7 +202,7 @@ export const relevant = (
 ): boolean => (
     auto
         ? isImg(el) && filter(el)
-        : !!el.dataset.pswpSrc
+        : !!el.dataset.pswpSrc || !!el.dataset.pswpHtml
 )
 
 /**
@@ -305,6 +305,7 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
 
         if (
             item.el.dataset.pswpSize
+            || item.el.dataset.pswpHtml
             || Object.getOwnPropertyDescriptor(item, 'img')
         ) return
 

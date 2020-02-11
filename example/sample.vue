@@ -19,6 +19,14 @@
                 style="display: inline-block;"
             />
 
+            <h2>use HTML content</h2>
+            <button
+                v-pswp='{
+                    html: "<div style=\"padding: 80px; color: white;\"><h1>Hello World</h1></div>"
+                }'
+                style="display: inline-block;"
+            >HTML Slide</button>
+
             <h2>use batch</h2>
             <div
                 v-for="(item, index) in getBatchImages(100)"
