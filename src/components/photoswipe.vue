@@ -36,7 +36,14 @@ import {
     UI,
     Event,
     errorHandler,
+    registerDirective,
 } from '@/utils'
+import PswpUI from './pswpUI.vue'
+
+/**
+ * for import component directly
+ */
+registerDirective()
 
 @Component({
     name: 'Photoswipe',

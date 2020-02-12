@@ -1,27 +1,15 @@
 import { PluginFunction } from 'vue' // eslint-disable-line
 import { PswpOptions } from '@/type'
 import { GlobalOption } from '@/config'
-import { setPswpDataByCond, CurrentPswp, UI } from '@/utils'
-import Photoswipe from '@/components/photoswipe.vue'
-import PswpUI from '@/components/pswpUI.vue'
+import { CurrentPswp, registerDirective } from '@/utils'
+import PhotoswipeComponent from '@/components/photoswipe.vue'
 
 const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
     if (options) GlobalOption.extend(options)
 
-    const PswpUIComponent = new Vue(PswpUI).$mount()
-    UI.el = <HTMLElement>PswpUIComponent.$el
+    registerDirective()
 
-    Vue.component('Photoswipe', Photoswipe)
-
-    Vue.directive('pswp', {
-        bind(el: HTMLElement, { value }: any) {
-            setPswpDataByCond(el, value)
-        },
-        update(el: HTMLElement, { value, oldValue }: any) {
-            if (value === oldValue) return
-            setPswpDataByCond(el, value)
-        },
-    })
+    Vue.component('Photoswipe', PhotoswipeComponent)
 
     Object.defineProperty(Vue.prototype, '$Pswp', {
         get() {
@@ -30,6 +18,6 @@ const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
     })
 }
 
-export default {
-    install,
-}
+export const Photoswipe = PhotoswipeComponent
+export default install
+

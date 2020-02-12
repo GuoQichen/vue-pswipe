@@ -18,6 +18,8 @@ import {
     StyleKey,
 } from '@/type'
 import { customEvents } from '@/config'
+import Vue from 'vue'
+import PswpUI from '@/components/pswpUI.vue'
 
 export const isMobile = (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
@@ -45,6 +47,25 @@ export const errorHandler = (hint: string): never => {
     throw new Error(
         `[vue-pswipe] ${hint}`,
     )
+}
+
+/**
+ * get current active PhotoSwipe, else null
+ */
+export namespace CurrentPswp {
+    /* eslint-disable no-shadow */
+    let currentPswp: Pswp | null = null
+    const setupClean = (pswp: Pswp) => {
+        pswp.listen('destroy', () => {
+            currentPswp = null
+        })
+    }
+    export const get = () => currentPswp
+
+    export const set = (pswp: Pswp | null) => {
+        currentPswp = pswp
+        if (pswp) setupClean(pswp)
+    }
 }
 
 /**
@@ -287,7 +308,9 @@ const hackItemImg = (item: PswpItem, pswp: Pswp) => {
                     item.w = w
                     item.h = h
                     setSize(item.el, { w, h })
-                    pswp.updateSize(true)
+                    if (CurrentPswp.get() === pswp) {
+                        pswp.updateSize(true)
+                    }
                 })
             }
             img = value
@@ -329,34 +352,20 @@ const revertRotate = (pswp: Pswp) => {
 }
 
 /**
- * get current active PhotoSwipe, else null
- */
-export namespace CurrentPswp {
-    /* eslint-disable no-shadow */
-    let currentPswp: Pswp | null = null
-    const setupClean = (pswp: Pswp) => {
-        pswp.listen('destroy', () => {
-            currentPswp = null
-        })
-    }
-    export const get = () => currentPswp
-
-    export const set = (pswp: Pswp | null) => {
-        currentPswp = pswp
-        if (pswp) setupClean(pswp)
-    }
-}
-
-/**
  * manipulate Photoswipe default UI element
  */
 export namespace UI {
     // eslint-disable-next-line import/no-mutable-exports
     export let el: HTMLElement
-    export const append = () => {
-        if (el) {
-            appendOnce(el)
+    export const mount = () => {
+        if (!el) {
+            const PswpUIComponent = new Vue(PswpUI).$mount()
+            el = <HTMLElement>PswpUIComponent.$el
         }
+    }
+    export const append = () => {
+        mount()
+        appendOnce(el)
     }
 }
 
@@ -549,3 +558,21 @@ export const transitionEndEventName = (() => {
     const detected = <keyof typeof transitions>modernize('transition')
     return transitions[detected]
 })()
+
+/**
+ * register v-pswp directive if needed
+ */
+export const registerDirective = () => {
+    const pswpDirective = Vue.directive('pswp')
+    if (!pswpDirective) {
+        Vue.directive('pswp', {
+            bind(el: HTMLElement, { value }: any) {
+                setPswpDataByCond(el, value)
+            },
+            update(el: HTMLElement, { value, oldValue }: any) {
+                if (value === oldValue) return
+                setPswpDataByCond(el, value)
+            },
+        })
+    }
+}
