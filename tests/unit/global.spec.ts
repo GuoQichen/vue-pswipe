@@ -5,6 +5,7 @@ import {
     createPswp,
     fakeSrc,
     CreatePswpOptions,
+    createProtoPswp,
 } from './util'
 
 import { createLocalVue } from '@vue/test-utils'
@@ -174,6 +175,13 @@ describe('global function', () => {
 
             vm.changePswpItem()
             expect(vm.$el).toMatchSnapshot()
+        })
+    })
+
+    describe('Vue.prototype.$Pswp', () => {
+        it('open()', () => {
+            createProtoPswp()
+            expect(PhotoSwipe).toBeCalled()
         })
     })
 })

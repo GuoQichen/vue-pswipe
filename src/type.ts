@@ -41,6 +41,14 @@ export interface PswpItem extends Item {
     verticalRotated?: boolean
 }
 
+export interface ManualImgItem extends Partial<Item> {
+    src: string
+}
+
+export interface ManualHtmlItem extends Partial<Item> {
+    html: string
+}
+
 export interface CurrentPswpItem extends PswpItem {
     container: HTMLElement
     loaded: boolean
@@ -68,10 +76,13 @@ export interface Size {
     h: number
 }
 
-interface CreatePhotoSwipeArgs {
-    items: PswpItem[]
-    options: PswpOptions
-    context: Vue
+export interface ManualCreateArgs {
+    items: ManualOpenItem[]
+    options?: PswpOptions
+}
+
+interface CreatePhotoSwipeArgs extends ManualCreateArgs {
+    context?: Vue
 }
 
 export interface PswpProps {
@@ -110,7 +121,7 @@ export type Get = <T>(
 
 export type Single = <T>(fn: Function) => (...args: any[]) => T
 
-export type BindEvent = (context: Vue, pswp: Pswp) => void
+export type BindEvent = (pswp: Pswp, context?: Vue) => void
 
 export type CreatePhotoSwipe = (arg: CreatePhotoSwipeArgs) => Pswp
 
@@ -126,3 +137,5 @@ export type GetContainSize = (
 export type RotateDirection = 'left' | 'right'
 
 export type StyleKey = Exclude<keyof CSSStyleDeclaration, number | 'length' | 'parentRule'>
+
+export type ManualOpenItem = ManualImgItem | ManualHtmlItem

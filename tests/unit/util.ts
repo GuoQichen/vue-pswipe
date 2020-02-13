@@ -107,3 +107,25 @@ const getRandomImgSrc = () => {
 
 export const getFakeImages = (length: number = 1): string[] =>
     [...Array(length).keys()].map(() => getRandomImgSrc())
+
+export const createProtoPswp = () => {
+    const buttonTemplate = '<button @click="handleClick">open</button>'
+    const slideHtml = '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>'
+
+    const wrapper = mount({
+        template: buttonTemplate,
+        methods: {
+            handleClick() {
+                this.$Pswp.open({
+                    items: [{ html: slideHtml }],
+                })
+            },
+        },
+    }, {
+        localVue: commonLocalVue,
+    })
+
+    wrapper.find('button').trigger('click')
+
+    return wrapper
+}

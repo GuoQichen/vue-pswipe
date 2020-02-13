@@ -74,6 +74,9 @@
                 />
             </a>
         </Photoswipe>
+
+        <h2>manual open</h2>
+        <button @click="handleClick">manual open</button>
     </div>
 </template>
 <script lang="ts">
@@ -154,5 +157,31 @@ export default class Sample extends Vue {
         }))
         return results
     }
+
+    handleClick() {
+        this.$Pswp.open({
+            items: [
+                {
+                    html: '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>',
+                },
+                {
+                    src: 'https://farm4.staticflickr.com/3902/14985871946_24f47d4b53_h.jpg',
+                },
+            ],
+        })
+    }
 }
 </script>
+<style lang="scss">
+.hello-slide {
+    width: 100%;
+    max-width: 400px;
+    color: #FFF;
+    margin: 120px auto 0;
+    text-align: center;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+}
+.hello-slide a {
+    color: #B5AEF7 !important;
+}
+</style>

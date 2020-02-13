@@ -16,8 +16,10 @@ import {
     RotateDirection,
     CurrentPswpItem,
     StyleKey,
+    ManualCreateArgs,
+    ManualOpenItem,
 } from '@/type'
-import { customEvents } from '@/config'
+import { customEvents, GlobalOption } from '@/config'
 import Vue from 'vue'
 import PswpUI from '@/components/pswpUI.vue'
 
@@ -200,7 +202,12 @@ export const appendOnce = single<HTMLElement>(append)
  * @param el the element to set data-pswp-size
  * @param size the size object contains w and h property
  */
-export const setSize = (el: HTMLElement, { w, h }: Size) => el.dataset.pswpSize = `${w}x${h}` // eslint-disable-line
+export const setSize = (el: HTMLElement, { w, h }: Size) => {
+    if (el && el.dataset) {
+        // eslint-disable-next-line no-param-reassign
+        el.dataset.pswpSize = `${w}x${h}`
+    }
+}
 
 /**
  * get the image src according to auto
@@ -274,10 +281,11 @@ export const presetSize = (item: PswpItem): void => {
 
 /**
  * allow listen original PhotoSwipe event in Photoswipe component
- * @param context Photoswipe component
  * @param pswp original PhotoSwipe
+ * @param context Photoswipe component
  */
-const bindEvent: BindEvent = (context, pswp) => {
+const bindEvent: BindEvent = (pswp, context) => {
+    if (!context) return
     Object.keys(context.$listeners)
         .filter(event => !customEvents.includes(event))
         .forEach((event) => {
@@ -327,7 +335,7 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
         presetSize(item)
 
         if (
-            item.el.dataset.pswpSize
+            (item.el && item.el.dataset.pswpSize)
             || Object.getOwnPropertyDescriptor(item, 'img')
         ) return
 
@@ -370,6 +378,18 @@ export namespace UI {
 }
 
 /**
+ * define item.w/item.h if needed
+ * @param items
+ */
+const defineSize = (items: ManualOpenItem[]) =>
+    items.map((item) => {
+        if (!isDef(item.w)) item.w = 0
+        if (!isDef(item.h)) item.h = 0
+        return item
+    })
+
+
+/**
  * create PhotoSwipe instance, setup listener, init PhotoSwipe
  * @return return created original PhotoSwipe instance
  */
@@ -377,13 +397,31 @@ export const createPhotoSwipe: CreatePhotoSwipe = ({
     items, options, context,
 }) => {
     const pswp = new PhotoSwipe(UI.el, defaultUI, items, options)
-    bindEvent(context, pswp)
+    bindEvent(pswp, context)
     handleWithoutSize(pswp)
     revertRotate(pswp)
     CurrentPswp.set(pswp)
     pswp.init()
     return pswp
 }
+
+/**
+ * used for this.$Pswp.open()
+ */
+export const manualCreate = ({
+    items, options,
+}: ManualCreateArgs) => createPhotoSwipe({
+    items: defineSize(items),
+    options: {
+        ...GlobalOption.get(),
+        // disable transition entirely
+        hideAnimationDuration: 0,
+        showAnimationDuration: 0,
+        ...options,
+        // avoid refresh cant find match gallery
+        history: false,
+    },
+})
 
 /**
  * emulate background-size: contain, get calculated image size

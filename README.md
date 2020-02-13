@@ -108,6 +108,50 @@ Parameters:
 </Photoswipe>
 ```
 
+## custom html
+In addition to using the `<Photoswipe>` tag, you can also use `Vue.prototype.$Pswp.open(params)` to directly open a PhotoSwipe. This is especially useful in the case of [Custom HTML Content in Slides](https://photoswipe.com/documentation/custom-html-in-slides.html).
+```vue
+<template>
+    <button @click="handleClick">open</button>
+</template>
+<script>
+export default {
+    methods: {
+        handleClick() {
+            this.$Pswp.open({
+                items: [
+                    {
+                        html: '<div>hello vue-pswipe</div>'
+                    }
+                ]
+            })
+        }
+    }
+}
+</script>
+```
+
+`Vue.prototyp.$Pswp.open`:
+```typescript
+type Open = (params: {
+    items: PswpItem[],
+    options?: PswpOptions
+}) => pswp
+```
+
+## dynamic import
+**But cannot use `vue.prototype.$Pswp.open()`**
+```vue
+<script>
+export default {
+    components: {
+        Photoswipe: () => improt('vue-pswipe')
+            .then(({ Photoswipe }) => Photoswipe)
+    } 
+}
+</script>
+```
+
 ## example
 ```
 npm run dev
