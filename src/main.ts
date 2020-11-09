@@ -1,7 +1,7 @@
 import { PluginFunction } from 'vue' // eslint-disable-line
 import { PswpOptions, ManualCreateArgs } from '@/type'
 import { GlobalOption } from '@/config'
-import { CurrentPswp, registerDirective, manualCreate, UI } from '@/utils'
+import { registerDirective, manualCreate, UI } from '@/utils'
 import PhotoswipeComponent from '@/components/photoswipe.vue'
 
 const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
@@ -15,10 +15,8 @@ const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
     Vue.prototype.$Pswp = {
         open(args: ManualCreateArgs) {
             UI.append()
-            manualCreate(args)
+            return manualCreate(args)
         },
-        current: CurrentPswp.get(),
-
     }
 }
 
