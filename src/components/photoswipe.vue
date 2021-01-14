@@ -218,10 +218,11 @@ export default class Photoswipe extends Vue {
     }
 
     created() {
-        UI.append()
+        UI.mount()
     }
 
     mounted() {
+        UI.append()
         this.gallery = this.$refs.gallery
         if (!this.lazy) this.setImageSize()
         this.openPswp()
