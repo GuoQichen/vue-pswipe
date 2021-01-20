@@ -46,7 +46,7 @@ export interface ManualImgItem extends Partial<Item> {
 }
 
 export interface ManualHtmlItem extends Partial<Item> {
-    html: string
+    html: string | Element
 }
 
 export interface CurrentPswpItem extends PswpItem {

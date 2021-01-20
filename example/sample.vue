@@ -83,6 +83,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Vue, Component } from 'vue-property-decorator'
 import { BeforeOpenEvent, BeforeOpen, Pswp } from '@/type'
+import VideoPlayer from './video.vue'
 
 const getRandomSize = () => Math.floor((Math.random() * 1e3) + 1e2)
 
@@ -162,12 +163,20 @@ export default class Sample extends Vue {
         this.$Pswp.open({
             items: [
                 {
+                    html: new Vue(VideoPlayer).$mount().$el,
+                },
+                {
                     html: '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>',
                 },
                 {
                     src: 'https://farm4.staticflickr.com/3902/14985871946_24f47d4b53_h.jpg',
                 },
             ],
+            options: {
+                getDoubleTapZoom(isMouseClick: any, item: any) {
+                    return 1
+                },
+            },
         })
     }
 }
