@@ -145,7 +145,7 @@ type Open = (params: {
 <script>
 export default {
     components: {
-        Photoswipe: () => improt('vue-pswipe')
+        Photoswipe: () => import('vue-pswipe')
             .then(({ Photoswipe }) => Photoswipe)
     } 
 }
