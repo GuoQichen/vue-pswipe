@@ -55,7 +55,7 @@ export interface CurrentPswpItem extends PswpItem {
 }
 
 export interface PswpOptions extends Options {
-    galleryPIDs?: number
+    galleryPIDs?: boolean
 }
 
 export interface OpenPhotoSwipeArgs {
