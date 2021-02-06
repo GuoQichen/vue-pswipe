@@ -12,7 +12,7 @@
   },
   "main": "dist/Photoswipe.umd.min.js",
   "dependencies": {
-    "@types/photoswipe": "^4.0.29",
+    "@types/photoswipe": "^4.1.1",
     "photoswipe": "^4.1.3"
   },
   "devDependencies": {
