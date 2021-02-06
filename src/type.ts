@@ -45,18 +45,14 @@ export interface ManualImgItem extends Partial<Item> {
     src: string
 }
 
-export interface ManualHtmlItem extends Partial<Item> {
-    html: string | Element
-}
+export type ManualHtmlItem = Partial<Item> 
 
 export interface CurrentPswpItem extends PswpItem {
     container: HTMLElement
     loaded: boolean
 }
 
-export interface PswpOptions extends Options {
-    galleryPIDs?: number
-}
+export type PswpOptions = Options
 
 export interface OpenPhotoSwipeArgs {
     index: number | string
