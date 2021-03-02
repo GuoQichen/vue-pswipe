@@ -163,6 +163,7 @@ export default class Sample extends Vue {
         this.$Pswp.open({
             items: [
                 {
+                    // @ts-ignore: unreommend usage.
                     html: new Vue(VideoPlayer).$mount().$el,
                 },
                 {

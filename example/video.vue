@@ -1,6 +1,6 @@
 <template>
     <div class="wrap">
-        <video ref="videoPlayer" class="video-js" playsInline webkit-playsinline="true"></video>
+        <video ref="videoPlayer" class="video-js vjs-big-play-centered" playsInline webkit-playsinline="true"></video>
     </div>
 </template>
 
