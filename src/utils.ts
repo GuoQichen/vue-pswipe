@@ -238,8 +238,8 @@ const getPswpDataKey = (property: string) => `pswp${upperFirst(property)}`
  * Set pswp data to the data attribute of the specified element
  */
 export const setPswpData = (options: PswpDirectiveOptions, el: HTMLElement) => {
-    ;(Object.keys(options) as keyof PswpDirectiveOptions[]).forEach((key) => {
-        el.dataset[getPswpDataKey(key)] = `${options[key]}` // eslint-disable-line
+    Object.keys(options).forEach((key) => {
+        el.dataset[getPswpDataKey(key)] = `${options[key as keyof PswpDirectiveOptions]}` // eslint-disable-line
     })
 }
 
