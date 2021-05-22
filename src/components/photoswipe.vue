@@ -186,13 +186,15 @@ export default class Photoswipe extends Vue {
         // Parse URL and open gallery if it contains #&pid=3&gid=1
         const { pid, gid } = parseHash()
         if (pid && gid && +gid === currentGid) {
-            // in history mode, it will be empty in first time access because cant get image size
-            setTimeout(() => {
+            const invokeOpen = () =>
                 this.openPhotoSwipe({
                     index: pid,
                     fromURL: true,
                 })
-            })
+
+            // in history mode, it will be empty in first time access because cant get image size
+            /* istanbul ignore next */
+            process.env.NODE_ENV === 'test' ? invokeOpen() : setTimeout(invokeOpen)
         }
     }
 

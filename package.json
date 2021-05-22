@@ -7,8 +7,8 @@
         "build": "vue-cli-service build --target lib --name Photoswipe ./src/main.ts",
         "dev": "vue-cli-service serve ./example/index.ts",
         "report": "npm run build -- --report",
-        "test": "vue-cli-service test:unit",
-        "test:coverage": "npm test -- --coverage"
+        "test": "vue-cli-service test:unit --silent",
+        "test:coverage": "npm test -- --coverage --silent"
     },
     "main": "dist/Photoswipe.umd.min.js",
     "dependencies": {

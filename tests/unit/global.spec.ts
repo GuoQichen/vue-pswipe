@@ -69,17 +69,14 @@ describe('global function', () => {
             return wrapper
         }
 
-        it('with history hash', (done) => {
+        it('with history hash', () => {
             const wrapper = createHashPswp('/#&gid=1&pid=1')
 
-            setTimeout(() => {
-                expect(PhotoSwipe).toBeCalled()
-                wrapper.destroy()
-                done()
-            })
+            expect(PhotoSwipe).toBeCalled()
+            wrapper.destroy()
         })
 
-        it('with custom hash', (done) => {
+        it('with custom hash', () => {
             const customPid = 'custom-first-id'
 
             const wrapper = createHashPswp(`/#&gid=1&pid=${customPid}`, {
@@ -98,11 +95,24 @@ describe('global function', () => {
                 },
             })
 
-            setTimeout(() => {
-                expect(PhotoSwipe).toBeCalled()
-                wrapper.destroy()
-                done()
-            })
+            expect(PhotoSwipe).toBeCalled()
+            wrapper.destroy()
+        })
+
+        it('with custom hash and set options.galleryPIDs to false', () => {
+            const customPid = 'custom-first-id'
+
+            expect(() => {
+                createHashPswp(`/#&gid=1&pid=${customPid}`, {
+                    propsData: {
+                        options: {
+                            galleryPIDs: false,
+                        },
+                    },
+                })
+            }).toThrowError(
+                '[vue-pswipe] PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPIDs to true.'
+            )
         })
     })
 
