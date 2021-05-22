@@ -11,7 +11,6 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import PhotoSwipe from 'photoswipe'
-import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
 import { GlobalOption } from '@/config'
 import {
     PswpOptions,
@@ -38,7 +37,6 @@ import {
     errorHandler,
     registerDirective,
 } from '@/utils'
-import PswpUI from './pswpUI.vue'
 
 /**
  * for import component directly
@@ -124,7 +122,12 @@ export default class Photoswipe extends Vue {
         }
     }
 
-    parseIndex(index: number | string, items: PswpItem[], options: PswpOptions, fromURL?: boolean): number {
+    parseIndex(
+        index: number | string,
+        items: PswpItem[],
+        options: PswpOptions,
+        fromURL?: boolean,
+    ): number {
         return fromURL
             ? options.galleryPIDs
                 ? findIndex(items, item => item.pid === index)
