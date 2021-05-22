@@ -542,9 +542,9 @@ export const modernize = (() => {
     const detectElement = document.createElement('div')
     const { style } = detectElement
 
-    return (styleKey: StyleKey) => {
+    return <T extends StyleKey>(styleKey: T): T => {
         const cached = cache[styleKey]
-        if (cached) return cached
+        if (cached) return cached as T
 
         let key = styleKey
 
@@ -552,7 +552,7 @@ export const modernize = (() => {
         if (!isDef(style[styleKey])) {
             // eslint-disable-next-line array-callback-return
             ;['Moz', 'ms', 'O', 'Webkit'].some((prefix) => {
-                const prefixedStyleKey = <StyleKey>(prefix + upperFirst(styleKey))
+                const prefixedStyleKey = <T>(prefix + upperFirst(styleKey))
                 if (isDef(style[prefixedStyleKey])) {
                     return (key = prefixedStyleKey)
                 }
@@ -573,7 +573,7 @@ export const transitionEndEventName = (() => {
         MozTransition: 'transitionend',
         WebkitTransition: 'webkitTransitionEnd',
     }
-    const detected = <keyof typeof transitions>modernize('transition')
+    const detected = modernize('transition')
     return transitions[detected]
 })()
 

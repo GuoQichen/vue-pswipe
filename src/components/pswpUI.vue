@@ -130,11 +130,11 @@ export default class Pswp extends Vue {
             if (isVertical) {
                 currentItem.w = naturalHeight
                 currentItem.h = naturalWidth
-                img.style[modernize('transform') as 'transform'] = rotate + verticalSilencedScale
+                img.style[modernize('transform')] = rotate + verticalSilencedScale
             } else {
                 currentItem.w = naturalWidth
                 currentItem.h = naturalHeight
-                img.style[modernize('transform') as 'transform'] = rotate
+                img.style[modernize('transform')] = rotate
             }
             pswp.updateSize(false)
             this.isRotateTransform = false
@@ -143,7 +143,7 @@ export default class Pswp extends Vue {
         img.addEventListener(transitionEndEventName, handleTransitionend)
         img.classList.add(TRANSITION_CLASS)
         this.isRotateTransform = true
-        img.style[modernize('transform') as 'transform'] = rotate + animatedScale
+        img.style[modernize('transform')] = rotate + animatedScale
     }
 
     created() {
