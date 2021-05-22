@@ -45,7 +45,7 @@ export interface ManualImgItem extends Partial<Item> {
     src: string
 }
 
-export type ManualHtmlItem = Partial<Item> 
+export type ManualHtmlItem = Partial<Item>
 
 export interface CurrentPswpItem extends PswpItem {
     container: HTMLElement
@@ -99,21 +99,14 @@ export type BeforeOpen = (continued?: boolean) => void
 
 export type Filter = (img: HTMLImageElement) => boolean
 
-export type FindIndex = <T>(
-    array: T[],
-    predicate: (item: T, idx: number) => boolean
-) => number
+export type FindIndex = <T>(array: T[], predicate: (item: T, idx: number) => boolean) => number
 
 export type Closest = (
     el: Node | null,
     predicate: (el: HTMLElement) => boolean
 ) => HTMLElement | false
 
-export type Get = <T>(
-    context: Record<string, any>,
-    path: string,
-    defaultValue: T
-) => T
+export type Get = <T>(context: Record<string, any>, path: string, defaultValue: T) => T
 
 export type Single = <T>(fn: Function) => (...args: any[]) => T
 

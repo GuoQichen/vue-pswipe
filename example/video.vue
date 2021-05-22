@@ -1,6 +1,11 @@
 <template>
     <div class="wrap">
-        <video ref="videoPlayer" class="video-js vjs-big-play-centered" playsInline webkit-playsinline="true"></video>
+        <video
+            ref="videoPlayer"
+            class="video-js vjs-big-play-centered"
+            playsInline
+            webkit-playsinline="true"
+        ></video>
     </div>
 </template>
 
@@ -24,18 +29,25 @@ export default {
         }
     },
     mounted() {
-        this.player = videojs(this.$refs.videoPlayer, {
-            fluid: true,
-            controls: true,
-            sources: [{
-                src: 'http://vjs.zencdn.net/v/oceans.mp4',
-                type: 'video/mp4',
-
-            }],
-        }, () => {
-            // prevent swipe conflict
-            this.player.getChild('controlBar').el_.addEventListener('pointerdown', e => e.stopPropagation())
-        })
+        this.player = videojs(
+            this.$refs.videoPlayer,
+            {
+                fluid: true,
+                controls: true,
+                sources: [
+                    {
+                        src: 'http://vjs.zencdn.net/v/oceans.mp4',
+                        type: 'video/mp4',
+                    },
+                ],
+            },
+            () => {
+                // prevent swipe conflict
+                this.player
+                    .getChild('controlBar')
+                    .el_.addEventListener('pointerdown', (e) => e.stopPropagation())
+            }
+        )
     },
     beforeDestroy() {
         if (this.player) {

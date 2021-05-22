@@ -23,17 +23,20 @@ import { customEvents, GlobalOption } from '@/config'
 import Vue from 'vue'
 import PswpUI from '@/components/pswpUI.vue'
 
-export const isMobile = (): boolean => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+export const isMobile = (): boolean =>
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
 export const isNum = (value: any): value is number => typeof value === 'number'
 
 export const isStr = (value: any): value is string => typeof value === 'string'
 
-export const isObj = (value: any): value is object => Object.prototype.toString.call(value) === '[object Object]'
+export const isObj = (value: any): value is object =>
+    Object.prototype.toString.call(value) === '[object Object]'
 
-export const isFunction = (value: any): value is Function => Object.prototype.toString.call(value) === '[object Function]'
+export const isFunction = (value: any): value is Function =>
+    Object.prototype.toString.call(value) === '[object Function]'
 
-const isDef = (value: any): boolean => (value !== undefined) && (value !== null)
+const isDef = (value: any): boolean => value !== undefined && value !== null
 
 export const isImg = (value: any): value is HTMLImageElement => value && value.tagName === 'IMG'
 
@@ -46,9 +49,7 @@ export const isBgImg = (el: HTMLElement): boolean => !isImg(el) && !!el.dataset.
  * @param hint error hint
  */
 export const errorHandler = (hint: string): never => {
-    throw new Error(
-        `[vue-pswipe] ${hint}`,
-    )
+    throw new Error(`[vue-pswipe] ${hint}`)
 }
 
 /**
@@ -75,24 +76,25 @@ export namespace CurrentPswp {
  * @param path the image src to get size
  * @return return promise
  */
-export const getImageSize = (path: string) => new Promise<Size>((resolve) => {
-    const img = new Image()
-    let timer: number
-    img.src = path
-    img.addEventListener('error', () => {
-        clearTimeout(timer)
-    })
-    const check = () => {
-        if (img.width > 0 || img.height > 0) {
-            return resolve({
-                w: img.width,
-                h: img.height,
-            })
+export const getImageSize = (path: string) =>
+    new Promise<Size>((resolve) => {
+        const img = new Image()
+        let timer: number
+        img.src = path
+        img.addEventListener('error', () => {
+            clearTimeout(timer)
+        })
+        const check = () => {
+            if (img.width > 0 || img.height > 0) {
+                return resolve({
+                    w: img.width,
+                    h: img.height,
+                })
+            }
+            timer = window.setTimeout(check, 40)
         }
-        timer = window.setTimeout(check, 40)
-    }
-    check()
-})
+        check()
+    })
 
 /**
  * returns the index of the first element predicate returns truthy
@@ -140,7 +142,7 @@ export const parseHash = () => {
  */
 export const querySelectorList = <T extends HTMLElement>(
     selector: string,
-    context: HTMLElement | Document = document,
+    context: HTMLElement | Document = document
 ) => [...context.querySelectorAll(selector)] as T[]
 
 /**
@@ -150,9 +152,7 @@ export const querySelectorList = <T extends HTMLElement>(
  * @returns return the found element or false
  */
 export const closest: Closest = (el, predicate) =>
-    !!el &&
-    isEle(el) &&
-    (predicate(el) ? el : closest(el.parentNode, predicate))
+    !!el && isEle(el) && (predicate(el) ? el : closest(el.parentNode, predicate))
 
 /**
  * gets the property value at path of object
@@ -164,9 +164,7 @@ export const closest: Closest = (el, predicate) =>
 export const get: Get = (context, path, defaultValue) => {
     try {
         const result = path.split('.').reduce<any>((acc, cur) => acc[cur], context)
-        return isDef(result)
-            ? result
-            : defaultValue
+        return isDef(result) ? result : defaultValue
     } catch (err) {
         return defaultValue
     }
@@ -180,7 +178,7 @@ export const get: Get = (context, path, defaultValue) => {
 export const single: Single = (fn) => {
     let result: any
     // eslint-disable-next-line func-names
-    return function (this: any, ...args: any[]) {
+    return function(this: any, ...args: any[]) {
         return result || (result = fn.apply(this, args))
     }
 }
@@ -214,11 +212,8 @@ export const setSize = (el: HTMLElement, { w, h }: Size) => {
  * @param target the element to get the src
  * @param auto is it in auto mode
  */
-export const getSrc = (target: HTMLImageElement | HTMLElement, auto: boolean): string => (
-    auto && isImg(target)
-        ? target.src
-        : target.dataset.pswpSrc || ''
-)
+export const getSrc = (target: HTMLImageElement | HTMLElement, auto: boolean): string =>
+    auto && isImg(target) ? target.src : target.dataset.pswpSrc || ''
 
 /**
  * determine whether el is a valid element based on auto and filter
@@ -226,17 +221,13 @@ export const getSrc = (target: HTMLImageElement | HTMLElement, auto: boolean): s
 export const relevant = (
     el: HTMLElement,
     auto: boolean,
-    filter: (el: HTMLImageElement) => boolean,
-): boolean => (
-    auto
-        ? isImg(el) && filter(el)
-        : !!el.dataset.pswpSrc
-)
+    filter: (el: HTMLImageElement) => boolean
+): boolean => (auto ? isImg(el) && filter(el) : !!el.dataset.pswpSrc)
 
 /**
  * Convert the first letter to uppercase
  */
-const upperFirst = (str: string) => str.replace(/^\S/, match => match.toUpperCase())
+const upperFirst = (str: string) => str.replace(/^\S/, (match) => match.toUpperCase())
 
 /**
  * convert property to pswp property, eg: src => pswpSrc
@@ -247,7 +238,7 @@ const getPswpDataKey = (property: string) => `pswp${upperFirst(property)}`
  * Set pswp data to the data attribute of the specified element
  */
 export const setPswpData = (options: PswpDirectiveOptions, el: HTMLElement) => {
-    (Object.keys(options) as (keyof PswpDirectiveOptions)[]).forEach((key) => {
+    ;(Object.keys(options) as keyof PswpDirectiveOptions[]).forEach((key) => {
         el.dataset[getPswpDataKey(key)] = `${options[key]}` // eslint-disable-line
     })
 }
@@ -257,7 +248,7 @@ export const setPswpData = (options: PswpDirectiveOptions, el: HTMLElement) => {
  */
 export const setPswpDataByCond = (el: HTMLElement, value: string | PswpDirectiveOptions) => {
     if (isStr(value)) setPswpData({ src: value }, el)
-    if (isObj(value)) setPswpData((value as PswpDirectiveOptions), el)
+    if (isObj(value)) setPswpData(value as PswpDirectiveOptions, el)
 }
 
 /**
@@ -287,7 +278,7 @@ export const presetSize = (item: PswpItem): void => {
 const bindEvent: BindEvent = (pswp, context) => {
     if (!context) return
     Object.keys(context.$listeners)
-        .filter(event => !customEvents.includes(event))
+        .filter((event) => !customEvents.includes(event))
         .forEach((event) => {
             const fn = context.$listeners[event]
             if (isFunction(fn)) {
@@ -334,10 +325,8 @@ const handleWithoutSize: HandleWithoutSize = (pswp) => {
     pswp.listen('gettingData', (index, item: PswpItem) => {
         presetSize(item)
 
-        if (
-            (item.el && item.el.dataset.pswpSize)
-            || Object.getOwnPropertyDescriptor(item, 'img')
-        ) return
+        if ((item.el && item.el.dataset.pswpSize) || Object.getOwnPropertyDescriptor(item, 'img'))
+            return
 
         // stop unexpected zoom-in animation
         if (pswp.currItem === item) {
@@ -388,14 +377,11 @@ const defineSize = (items: ManualOpenItem[]) =>
         return item
     })
 
-
 /**
  * create PhotoSwipe instance, setup listener, init PhotoSwipe
  * @return return created original PhotoSwipe instance
  */
-export const createPhotoSwipe: CreatePhotoSwipe = ({
-    items, options, context,
-}) => {
+export const createPhotoSwipe: CreatePhotoSwipe = ({ items, options, context }) => {
     const pswp = new PhotoSwipe(UI.el, defaultUI, items, options)
     bindEvent(pswp, context)
     handleWithoutSize(pswp)
@@ -408,20 +394,19 @@ export const createPhotoSwipe: CreatePhotoSwipe = ({
 /**
  * used for this.$Pswp.open()
  */
-export const manualCreate = ({
-    items, options,
-}: ManualCreateArgs) => createPhotoSwipe({
-    items: defineSize(items),
-    options: {
-        ...GlobalOption.get(),
-        // disable transition entirely
-        hideAnimationDuration: 0,
-        showAnimationDuration: 0,
-        ...options,
-        // avoid refresh cant find match gallery
-        history: false,
-    },
-})
+export const manualCreate = ({ items, options }: ManualCreateArgs) =>
+    createPhotoSwipe({
+        items: defineSize(items),
+        options: {
+            ...GlobalOption.get(),
+            // disable transition entirely
+            hideAnimationDuration: 0,
+            showAnimationDuration: 0,
+            ...options,
+            // avoid refresh cant find match gallery
+            history: false,
+        },
+    })
 
 /**
  * emulate background-size: contain, get calculated image size
@@ -431,9 +416,7 @@ export const manualCreate = ({
  * @param height image height
  * @return calculated image size
  */
-export const getContainSize: GetContainSize = (
-    areaWidth, areaHeight, width, height,
-) => {
+export const getContainSize: GetContainSize = (areaWidth, areaHeight, width, height) => {
     if (width <= areaWidth && height <= areaHeight) return { w: width, h: height }
     const ratio = width / height
     const areaRatio = areaWidth / areaHeight
@@ -449,7 +432,7 @@ export namespace Event {
     const event: Record<string, Function[]> = {}
 
     export const off = (name: string, fn?: Function) => {
-        if (!fn) return event[name].length = 0
+        if (!fn) return (event[name].length = 0)
         const pools = event[name]
         const index = pools.indexOf(fn)
         if (index !== -1) pools.splice(index, 1)
@@ -471,7 +454,7 @@ export namespace Event {
     export const emit = (name: string, ...args: any[]) => {
         const pools = event[name]
         if (!Array.isArray(pools)) return
-        pools.forEach(fn => fn(...args))
+        pools.forEach((fn) => fn(...args))
     }
 }
 
@@ -522,7 +505,7 @@ export const getScale = (w: number, h = w) => `scale(${w}, ${h})`
 export const getCalculatedScale = (
     containerSize: Size,
     img: HTMLImageElement,
-    isVertical: boolean,
+    isVertical: boolean
 ): string[] => {
     const { naturalWidth, naturalHeight } = img
 
@@ -530,14 +513,14 @@ export const getCalculatedScale = (
         containerSize.w,
         containerSize.h,
         naturalWidth,
-        naturalHeight,
+        naturalHeight
     )
 
     const { w: verticalWidth, h: verticalHeight } = getContainSize(
         containerSize.w,
         containerSize.h,
         naturalHeight,
-        naturalWidth,
+        naturalWidth
     )
 
     const animatedScale = isVertical
@@ -546,12 +529,9 @@ export const getCalculatedScale = (
 
     const verticalSilencedScale = getScale(
         verticalHeight / verticalWidth,
-        verticalWidth / verticalHeight,
+        verticalWidth / verticalHeight
     )
-    return [
-        animatedScale,
-        verticalSilencedScale,
-    ]
+    return [animatedScale, verticalSilencedScale]
 }
 
 /**
@@ -571,10 +551,10 @@ export const modernize = (() => {
         /* istanbul ignore if */
         if (!isDef(style[styleKey])) {
             // eslint-disable-next-line array-callback-return
-            ['Moz', 'ms', 'O', 'Webkit'].some((prefix) => {
+            ;['Moz', 'ms', 'O', 'Webkit'].some((prefix) => {
                 const prefixedStyleKey = <StyleKey>(prefix + upperFirst(styleKey))
                 if (isDef(style[prefixedStyleKey])) {
-                    return key = prefixedStyleKey
+                    return (key = prefixedStyleKey)
                 }
             })
         }

@@ -6,12 +6,12 @@ import Vue from 'vue'
 import { Pswp, ManualCreateArgs } from '../src/type'
 
 interface $Pswp {
-    open: (args: ManualCreateArgs) => Pswp,
+    open: (args: ManualCreateArgs) => Pswp
     current: Pswp
 }
 
 declare module 'vue/types/vue' {
-  interface Vue {
-    $Pswp: $Pswp
-  }
+    interface Vue {
+        $Pswp: $Pswp
+    }
 }

@@ -22,4 +22,3 @@ const install: PluginFunction<PswpOptions> = (Vue, options?: PswpOptions) => {
 
 export const Photoswipe = PhotoswipeComponent
 export default install
-

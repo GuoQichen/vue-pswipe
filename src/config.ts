@@ -11,7 +11,10 @@ export const defualtGlobalOption: PswpOptions = {
     shareEl: !_isMobile,
     shareButtons: [
         {
-            id: 'download', label: 'Download image', url: '{{raw_image_url}}', download: true,
+            id: 'download',
+            label: 'Download image',
+            url: '{{raw_image_url}}',
+            download: true,
         },
     ],
 }

@@ -1,9 +1,5 @@
 <template>
-    <div
-        class="pswipe-gallery"
-        ref="gallery"
-        @click="onThumbClick"
-    >
+    <div class="pswipe-gallery" ref="gallery" @click="onThumbClick">
         <slot></slot>
     </div>
 </template>
@@ -93,23 +89,21 @@ export default class Photoswipe extends Vue {
     }
 
     onThumbClick(e: { target: HTMLElement }) {
-        const eTarget = (
-            !this.auto
-            && this.bubble
-            && closest(e.target, el => !!el.dataset.pswpSrc)
-        ) || e.target
+        const eTarget =
+            (!this.auto && this.bubble && closest(e.target, (el) => !!el.dataset.pswpSrc)) ||
+            e.target
 
         if (!relevant(eTarget, this.auto, this.filter)) return
 
         const thumbEls = this.getThumbEls()
-        const index = findIndex(thumbEls, el => el === eTarget)
+        const index = findIndex(thumbEls, (el) => el === eTarget)
         if (index === -1) return
 
         this.openPhotoSwipe({ index, thumbEls })
     }
 
     getThumbBoundsFn(parsedItems: PswpItem[]) {
-        return (index: number): { x: number, y: number, w: number } => {
+        return (index: number): { x: number; y: number; w: number } => {
             const thumbEl = parsedItems[index].el
             const pageYScroll = window.pageYOffset || document.documentElement.scrollTop
             const rect = thumbEl.getBoundingClientRect()
@@ -126,21 +120,16 @@ export default class Photoswipe extends Vue {
         index: number | string,
         items: PswpItem[],
         options: PswpOptions,
-        fromURL?: boolean,
+        fromURL?: boolean
     ): number {
         return fromURL
             ? options.galleryPIDs
-                ? findIndex(items, item => item.pid === index)
-                // in URL indexes start from 1
-                : +index - 1
+                ? findIndex(items, (item) => item.pid === index)
+                : +index - 1 // in URL indexes start from 1
             : +index
     }
 
-    openPhotoSwipe({
-        index,
-        fromURL,
-        thumbEls,
-    }: OpenPhotoSwipeArgs) {
+    openPhotoSwipe({ index, fromURL, thumbEls }: OpenPhotoSwipeArgs) {
         const items = this.parseThumbEls(thumbEls)
 
         const options: PswpOptions = {
@@ -153,7 +142,11 @@ export default class Photoswipe extends Vue {
         const parsedIndex = this.parseIndex(index, items, options, fromURL)
 
         if (parsedIndex >= 0) options.index = parsedIndex
-        if (!isNum(options.index) || Number.isNaN(options.index)) return errorHandler('PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPIDs to true.')
+        if (!isNum(options.index) || Number.isNaN(options.index)) {
+            return errorHandler(
+                'PhotoSwipe cannot be opened because the index is invalid. If you use a custom pid, set options.galleryPIDs to true.'
+            )
+        }
         if (fromURL) options.showAnimationDuration = 0
         if (!options.showHideOpacity) options.showHideOpacity = isBgImg(items[parsedIndex].el)
 
@@ -186,7 +179,7 @@ export default class Photoswipe extends Vue {
 
     initPhotoSwipeFromDOM(gallerySelector: string) {
         const galleryEls = querySelectorList(gallerySelector)
-        const galleryIndex = findIndex(galleryEls, el => el === this.gallery)
+        const galleryIndex = findIndex(galleryEls, (el) => el === this.gallery)
         const currentGid = galleryIndex + 1
         this.gallery.dataset.pswpUid = `${currentGid}`
 
@@ -208,15 +201,14 @@ export default class Photoswipe extends Vue {
     }
 
     setImageSizeSeparately(thumbEl: HTMLElement) {
-        return getImageSize(getSrc(thumbEl, this.auto))
-            .then(size => setSize(thumbEl, size))
+        return getImageSize(getSrc(thumbEl, this.auto)).then((size) => setSize(thumbEl, size))
     }
 
     setImageSize(thumbEls = this.getThumbEls()) {
         return Promise.all(
             thumbEls
-                .filter(thumbEl => !thumbEl.dataset.pswpSize)
-                .map(thumbEl => this.setImageSizeSeparately(thumbEl)),
+                .filter((thumbEl) => !thumbEl.dataset.pswpSize)
+                .map((thumbEl) => this.setImageSizeSeparately(thumbEl))
         )
     }
 

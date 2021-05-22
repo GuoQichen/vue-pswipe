@@ -5,11 +5,6 @@ import './vue.d'
 
 declare const VuePswipe: PluginFunction<PswpOptions>
 
-export {
-    PswpItem,
-    PswpOptions,
-    PswpDirectiveOptions,
-    Photoswipe,
-}
+export { PswpItem, PswpOptions, PswpDirectiveOptions, Photoswipe }
 
 export default VuePswipe

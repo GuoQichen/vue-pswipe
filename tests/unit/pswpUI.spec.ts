@@ -1,11 +1,5 @@
 /* eslint-disable import/first */
-import {
-    PhotoSwipe,
-    PhotoSwipeMock,
-    createPswp,
-    createPswpUI,
-    mockImageOnload,
-} from './util'
+import { PhotoSwipe, PhotoSwipeMock, createPswp, createPswpUI, mockImageOnload } from './util'
 
 import '@/config'
 import { transitionEndEventName } from '@/utils'

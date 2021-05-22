@@ -83,10 +83,9 @@ describe('global function', () => {
             const customPid = 'custom-first-id'
 
             const wrapper = createHashPswp(`/#&gid=1&pid=${customPid}`, {
-                defaultSlots:
-                `
-                    <img 
-                        src="${fakeSrc}" 
+                defaultSlots: `
+                    <img
+                        src="${fakeSrc}"
                         data-pswp-src="${fakeSrc}"
                         data-pswp-pid="${customPid}"
                     />
@@ -125,8 +124,7 @@ describe('global function', () => {
                     data: () => ({
                         pswpItem,
                     }),
-                    template:
-                    `
+                    template: `
                         <img
                             :src="pswpItem.msrc"
                             v-pswp="pswpItem"
@@ -135,7 +133,6 @@ describe('global function', () => {
                     ...slotOptions,
                 },
             })
-
 
         it('transform to custom dataset', () => {
             const wrapper = createDirectivePswp()

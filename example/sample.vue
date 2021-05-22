@@ -29,18 +29,12 @@
             />
 
             <h2>use bubble mode</h2>
-            <div
-                v-pswp="imageList[0]"
-                style="display: inline-block;"
-            >
+            <div v-pswp="imageList[0]" style="display: inline-block;">
                 <button>click to preview (button inside element with v-pswp directive)</button>
             </div>
 
             <h2>dynamic property</h2>
-            <div
-                :style="getImageItemStyle(dynamicSrc)"
-                v-pswp="dynamicSrc"
-            />
+            <div :style="getImageItemStyle(dynamicSrc)" v-pswp="dynamicSrc" />
             <button @click="changeSrc">change src</button>
 
             <h2>use msrc option</h2>
@@ -68,10 +62,7 @@
 
             <h2>use beforeOpen hook</h2>
             <a href="javascipt: void(0)">
-                <img
-                    :src="imageList[0]"
-                    style="width: 200px;"
-                />
+                <img :src="imageList[0]" style="width: 200px;" />
             </a>
         </Photoswipe>
 
@@ -85,7 +76,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { BeforeOpenEvent, BeforeOpen, Pswp } from '@/type'
 import VideoPlayer from './video.vue'
 
-const getRandomSize = () => Math.floor((Math.random() * 1e3) + 1e2)
+const getRandomSize = () => Math.floor(Math.random() * 1e3 + 1e2)
 
 const getRandomImgSrc = () => {
     const width: number = getRandomSize()
@@ -138,9 +129,7 @@ export default class Sample extends Vue {
         this.htmlTemplate = '<img src="https://placeimg.com/640/480/any" style="width: 200px;"/>'
     }
 
-    handleBeforeOpen({
-        index, target,
-    }: BeforeOpenEvent, next: BeforeOpen) {
+    handleBeforeOpen({ index, target }: BeforeOpenEvent, next: BeforeOpen) {
         if (target.parentElement && target.parentElement.tagName !== 'A') {
             next()
         }
@@ -152,10 +141,12 @@ export default class Sample extends Vue {
 
     getBatchImages(length: number) {
         const msrc = getRandomImgSrc()
-        const results = Array(length).fill('').map(() => ({
-            src: getRandomImgSrc(),
-            msrc: this.imageList[0],
-        }))
+        const results = Array(length)
+            .fill('')
+            .map(() => ({
+                src: getRandomImgSrc(),
+                msrc: this.imageList[0],
+            }))
         return results
     }
 
@@ -167,7 +158,8 @@ export default class Sample extends Vue {
                     html: new Vue(VideoPlayer).$mount().$el,
                 },
                 {
-                    html: '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>',
+                    html:
+                        '<div class="hello-slide"><h1>Hello world <a href="http://example.com">example.com</a></h1></div>',
                 },
                 {
                     src: 'https://farm4.staticflickr.com/3902/14985871946_24f47d4b53_h.jpg',
@@ -186,12 +178,12 @@ export default class Sample extends Vue {
 .hello-slide {
     width: 100%;
     max-width: 400px;
-    color: #FFF;
+    color: #fff;
     margin: 120px auto 0;
     text-align: center;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 .hello-slide a {
-    color: #B5AEF7 !important;
+    color: #b5aef7 !important;
 }
 </style>

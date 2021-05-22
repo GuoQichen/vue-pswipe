@@ -21,9 +21,11 @@ describe('photoswipe.vue', () => {
     })
 
     it('render Photoswipe', () => {
-        expect(createPswp({
-            withClick: false,
-        })).toMatchSnapshot()
+        expect(
+            createPswp({
+                withClick: false,
+            })
+        ).toMatchSnapshot()
     })
 
     describe(':props', () => {
@@ -76,8 +78,7 @@ describe('photoswipe.vue', () => {
         describe(':bubble', () => {
             const createBubblePswp = (bubble: boolean) => {
                 createPswp({
-                    defaultSlots:
-                    `
+                    defaultSlots: `
                         <div v-pswp="'${fakeSrc}'">
                             <img src="${fakeSrc}" />
                         </div>
@@ -125,8 +126,7 @@ describe('photoswipe.vue', () => {
                                 src,
                             },
                         }),
-                        template:
-                        `
+                        template: `
                             <img
                                 id="img-${index}"
                                 :src="pswpItem.src"
@@ -160,15 +160,17 @@ describe('photoswipe.vue', () => {
                 wrapper.find('#img-5').trigger('click')
                 const shouldLoadedIndex = [4, 5, 6]
 
-                expect(mockImageOnload.isLoaded(
-                    shouldLoadedIndex.map(i => fakeImages[i]),
-                )).toBe(true)
+                expect(mockImageOnload.isLoaded(shouldLoadedIndex.map((i) => fakeImages[i]))).toBe(
+                    true
+                )
 
-                expect(mockImageOnload.isLoaded(
-                    [...Array(len).keys()]
-                        .filter(i => !shouldLoadedIndex.includes(i))
-                        .map(i => fakeImages[i]),
-                )).toBe(false)
+                expect(
+                    mockImageOnload.isLoaded(
+                        [...Array(len).keys()]
+                            .filter((i) => !shouldLoadedIndex.includes(i))
+                            .map((i) => fakeImages[i])
+                    )
+                ).toBe(false)
             })
 
             it('preload all image', () => {
@@ -177,24 +179,23 @@ describe('photoswipe.vue', () => {
 
                 wrapper.find('#img-5').trigger('click')
 
-                expect(mockImageOnload.isLoaded(
-                    [...Array(len).keys()].map(i => fakeImages[i]),
-                )).toBe(true)
+                expect(
+                    mockImageOnload.isLoaded([...Array(len).keys()].map((i) => fakeImages[i]))
+                ).toBe(true)
             })
         })
     })
 
     describe('@event', () => {
         describe('@beforeOpen', () => {
-            const getMock = (continued: boolean) => jest.fn(
-                (target: BeforeOpenEvent, next: BeforeOpen) => {
+            const getMock = (continued: boolean) =>
+                jest.fn((target: BeforeOpenEvent, next: BeforeOpen) => {
                     next(continued)
 
                     continued
                         ? expect(PhotoSwipe).toBeCalled()
                         : expect(PhotoSwipe).not.toBeCalled()
-                },
-            )
+                })
 
             const createBeforeOpenPswp = (continued: boolean) => {
                 const mock = getMock(continued)
