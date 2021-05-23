@@ -108,6 +108,16 @@ Parameters:
 </Photoswipe>
 ```
 
+WARNING: If you using Photoswipe component in HTML, not in a SFC, use `v-on` instead, because HTML tag and attributes are case insensitive
+```vue
+<Photoswipe v-on ="{ beforeChange: handleBeforeChange }">
+    <img 
+        :src="imageSrc"
+        v-pswp="imageSrc"
+    />
+</Photoswipe>
+```
+
 ## custom html
 In addition to using the `<Photoswipe>` tag, you can also use `Vue.prototype.$Pswp.open(params)` to directly open a PhotoSwipe. This is especially useful in the case of [Custom HTML Content in Slides](https://photoswipe.com/documentation/custom-html-in-slides.html).
 ```vue
