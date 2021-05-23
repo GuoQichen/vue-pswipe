@@ -133,7 +133,7 @@ export default class Photoswipe extends Vue {
         const items = this.parseThumbEls(thumbEls)
 
         const options: PswpOptions = {
-            galleryUID: +(this.gallery.dataset.pswpUid || ''), // define gallery index (for URL)
+            galleryUID: +this.gallery.dataset.pswpUid!, // define gallery index (for URL)
             getThumbBoundsFn: this.getThumbBoundsFn(items),
             ...GlobalOption.get(),
             ...this.options,

@@ -7,7 +7,7 @@ import {
     fakeSrc,
     mockImageOnload,
     getFakeImages,
-    expectWithItems,
+    CreatePswpOptions,
 } from './util'
 
 import { BeforeOpenEvent, BeforeOpen } from '@/type'
@@ -55,7 +55,7 @@ describe('photoswipe.vue', () => {
                 expect(options.bgOpacity).toBe(bgOpacity)
             })
 
-            it('set showHideOpacity options', () => {
+            it('set options.showHideOpacity', () => {
                 const options = createOptionsPswp({
                     showHideOpacity: true,
                 })
@@ -65,12 +65,13 @@ describe('photoswipe.vue', () => {
         })
 
         describe(':auto', () => {
-            const createAutoPswp = (auto: boolean, emptyImg?: boolean) =>
+            const createAutoPswp = (auto: boolean, options?: CreatePswpOptions) =>
                 createPswp({
-                    defaultSlots: emptyImg ? `<img />` : `<img src="${fakeSrc}" />`,
+                    defaultSlots: `<img src="${fakeSrc}" />`,
                     propsData: {
                         auto,
                     },
+                    ...options,
                 })
 
             it('without auto', () => {
@@ -84,8 +85,11 @@ describe('photoswipe.vue', () => {
             })
 
             it('with auto and empty img', () => {
-                createAutoPswp(true, true)
-                expectWithItems([
+                createAutoPswp(true, {
+                    defaultSlots: `<img />`,
+                })
+
+                expect(PhotoSwipeMock.getReceiveItems()).toEqual([
                     expect.objectContaining({
                         msrc: '',
                         src: '',

@@ -28,6 +28,7 @@ export { PhotoSwipe }
  * handy methods
  */
 export namespace PhotoSwipeMock {
+    export const getReceiveItems = () => PhotoSwipe.mock.calls[0][2]
     export const getReceiveOptions = () => PhotoSwipe.mock.calls[0][3]
     export const getPswp = () => (PhotoSwipe.mock.results[0].value as any) as Pswp
 }
@@ -147,13 +148,4 @@ export const createProtoPswp = () => {
     wrapper.find('button').trigger('click')
 
     return wrapper
-}
-
-export const expectWithItems = (expectItems: any[]) => {
-    expect(PhotoSwipe).toBeCalledWith(
-        UI.el,
-        defaultUI,
-        expectItems,
-        PhotoSwipeMock.getReceiveOptions()
-    )
 }
