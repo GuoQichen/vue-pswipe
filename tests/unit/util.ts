@@ -1,4 +1,5 @@
 import PhotoSwipe from 'photoswipe'
+import defaultUI from 'photoswipe/dist/photoswipe-ui-default'
 import {
     mount,
     createLocalVue,
@@ -9,6 +10,7 @@ import {
 import Photoswipe from '@/components/photoswipe.vue'
 import PswpUI from '@/components/pswpUI.vue'
 import VuePswipe from '@/main'
+import { UI } from '@/utils'
 import { Pswp } from '@/type'
 import { Component } from 'vue'
 
@@ -138,4 +140,8 @@ export const createProtoPswp = () => {
     wrapper.find('button').trigger('click')
 
     return wrapper
+}
+
+export const expectWithItems = (expectItems: any[]) => {
+    expect(PhotoSwipe).toBeCalledWith(UI.el, defaultUI, expectItems, expect.any(Object))
 }
