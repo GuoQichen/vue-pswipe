@@ -79,14 +79,21 @@ export namespace mockImageOnload {
     const originalImgProtoDesc = Object.getOwnPropertyDescriptor(
         window.Image.prototype,
         'src'
-    ) as PropertyDecorator
+    ) as PropertyDescriptor
 
     const mockImgProtoDesc = {
         set(this: HTMLImageElement, value: string) {
+            if (originalImgProtoDesc.set) {
+                originalImgProtoDesc.set.call(this, value)
+            }
             loadedImgs.add(value)
             this.dispatchEvent(new CustomEvent('load'))
+            const [, width = 0, height = 0] =
+                value.match(/https:\/\/placeimg.com\/(\d+)\/(\d+)\/any/) || []
+            this.width = +width
+            this.height = +height
         },
-    }
+    } as PropertyDescriptor
 
     const setImgProtoSrc = (enableMock: boolean) => {
         const desc = enableMock ? mockImgProtoDesc : originalImgProtoDesc
