@@ -54,6 +54,14 @@ describe('photoswipe.vue', () => {
 
                 expect(options.bgOpacity).toBe(bgOpacity)
             })
+
+            it('set showHideOpacity options', () => {
+                const options = createOptionsPswp({
+                    showHideOpacity: true,
+                })
+
+                expect(options.showHideOpacity).toBe(true)
+            })
         })
 
         describe(':auto', () => {
