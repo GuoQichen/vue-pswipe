@@ -150,5 +150,10 @@ export const createProtoPswp = () => {
 }
 
 export const expectWithItems = (expectItems: any[]) => {
-    expect(PhotoSwipe).toBeCalledWith(UI.el, defaultUI, expectItems, expect.any(Object))
+    expect(PhotoSwipe).toBeCalledWith(
+        UI.el,
+        defaultUI,
+        expectItems,
+        PhotoSwipeMock.getReceiveOptions()
+    )
 }
