@@ -106,8 +106,6 @@ export type Closest = (
     predicate: (el: HTMLElement) => boolean
 ) => HTMLElement | false
 
-export type Get = <T>(context: Record<string, any>, path: string, defaultValue: T) => T
-
 export type Single = <T>(fn: Function) => (...args: any[]) => T
 
 export type BindEvent = (pswp: Pswp, context?: Vue) => void

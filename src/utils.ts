@@ -5,7 +5,6 @@ import {
     Size,
     FindIndex,
     Closest,
-    Get,
     Single,
     PswpDirectiveOptions,
     CreatePhotoSwipe,
@@ -153,22 +152,6 @@ export const querySelectorList = <T extends HTMLElement>(
  */
 export const closest: Closest = (el, predicate) =>
     !!el && isEle(el) && (predicate(el) ? el : closest(el.parentNode, predicate))
-
-/**
- * gets the property value at path of object
- * @param context the object to query
- * @param path the path of the property to get
- * @param defaultValue the value returned if the resolved value is undefined or cant resolved
- * @return return the resolved value.
- */
-export const get: Get = (context, path, defaultValue) => {
-    try {
-        const result = path.split('.').reduce<any>((acc, cur) => acc[cur], context)
-        return isDef(result) ? result : defaultValue
-    } catch (err) {
-        return defaultValue
-    }
-}
 
 /**
  * singleton pattern
